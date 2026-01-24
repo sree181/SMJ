@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area, PieChart, Pie, Cell } from 'recharts';
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area, PieChart, Pie, Cell, ComposedChart } from 'recharts';
 import { MessageCircle, X, TrendingUp, BookOpen, Lightbulb, BarChart3, Sparkles, ArrowRight, Calendar, Target } from 'lucide-react';
 import Loading from '../common/Loading';
 import ChatInterface from '../ChatInterface';
@@ -233,6 +233,43 @@ const AdvancedAnalyticsDashboard = () => {
     diversity: (interval.diversity * 100).toFixed(1),
     stability: interval.stability ? (interval.stability * 100).toFixed(1) : 0
   })) || [];
+
+  // Prepare topics per period data for visualization
+  const topicsPerPeriodData = topicEvolution?.intervals?.map(interval => {
+    const data = {
+      interval: interval.interval,
+      totalPapers: interval.total_papers || 0
+    };
+    
+    // Add each topic as a separate data point with its paper count
+    if (interval.topics && Array.isArray(interval.topics)) {
+      interval.topics.forEach((topic, index) => {
+        data[`Topic ${index + 1}`] = topic.paper_count || 0;
+      });
+    }
+    
+    return data;
+  }) || [];
+
+  // Get all unique topic keys for stacked bar chart
+  const topicKeys = topicEvolution?.intervals?.reduce((keys, interval) => {
+    if (interval.topics && Array.isArray(interval.topics)) {
+      interval.topics.forEach((_, index) => {
+        const key = `Topic ${index + 1}`;
+        if (!keys.includes(key)) {
+          keys.push(key);
+        }
+      });
+    }
+    return keys;
+  }, []) || [];
+
+  // Generate colors for topics
+  const topicColors = [
+    '#8B5CF6', '#3B82F6', '#10B981', '#F59E0B', '#EF4444',
+    '#EC4899', '#06B6D4', '#84CC16', '#F97316', '#6366F1',
+    '#A855F7', '#14B8A6', '#F43F5E', '#8B5CF6', '#6366F1'
+  ];
 
   const theoryEvolutionChartData = theoryEvolution?.intervals?.map(interval => {
     // Ensure we're using the correct field name (fragmentation_index from backend)
@@ -550,6 +587,115 @@ const AdvancedAnalyticsDashboard = () => {
                 </AreaChart>
               </ResponsiveContainer>
             </div>
+
+            {/* Topics Per Period Chart */}
+            {topicEvolution?.intervals && topicEvolution.intervals.length > 0 && (
+              <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <Sparkles size={20} className="text-purple-600" />
+                  <h2 className="text-lg font-bold text-gray-900">Topics by Period</h2>
+                </div>
+                <p className="text-sm text-gray-600 mb-4">
+                  Shows the distribution of papers across topics for each 5-year period. Each segment represents a topic cluster.
+                </p>
+                <ResponsiveContainer width="100%" height={400}>
+                  <BarChart 
+                    data={topicsPerPeriodData} 
+                    margin={{ top: 20, right: 30, left: 20, bottom: 80 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <XAxis 
+                      dataKey="interval" 
+                      angle={-45} 
+                      textAnchor="end" 
+                      height={100}
+                      tick={{ fill: '#6b7280', fontSize: 11 }}
+                    />
+                    <YAxis 
+                      label={{ value: 'Number of Papers', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle', fill: '#6b7280', fontSize: 11 } }}
+                      tick={{ fill: '#6b7280', fontSize: 11 }}
+                    />
+                    <Tooltip 
+                      contentStyle={{ 
+                        backgroundColor: '#fff', 
+                        border: '1px solid #e5e7eb',
+                        borderRadius: '8px',
+                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+                      }}
+                      formatter={(value, name) => {
+                        if (name === 'totalPapers') return [value, 'Total Papers'];
+                        return [value, name];
+                      }}
+                    />
+                    <Legend 
+                      wrapperStyle={{ paddingTop: '20px', fontSize: '11px' }}
+                      iconType="square"
+                    />
+                    {topicKeys.slice(0, 10).map((key, index) => (
+                      <Bar 
+                        key={key}
+                        dataKey={key}
+                        stackId="topics"
+                        fill={topicColors[index % topicColors.length]}
+                        name={key}
+                      />
+                    ))}
+                  </BarChart>
+                </ResponsiveContainer>
+                {topicKeys.length > 10 && (
+                  <p className="text-xs text-gray-500 mt-2 text-center">
+                    Showing top 10 topics. Total topics vary by period.
+                  </p>
+                )}
+                
+                {/* Detailed Topics Table */}
+                <div className="mt-6 border-t border-gray-200 pt-6">
+                  <h3 className="text-md font-semibold text-gray-900 mb-4">Topic Details by Period</h3>
+                  <div className="space-y-4 max-h-96 overflow-y-auto">
+                    {topicEvolution.intervals.map((interval) => (
+                      <div key={interval.interval} className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                        <div className="flex items-center justify-between mb-3">
+                          <h4 className="font-semibold text-gray-900">{interval.interval}</h4>
+                          <span className="text-sm text-gray-600">
+                            {interval.topic_count} topics • {interval.total_papers || 0} papers
+                          </span>
+                        </div>
+                        {interval.topics && interval.topics.length > 0 ? (
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                            {interval.topics.map((topic, idx) => (
+                              <div 
+                                key={idx} 
+                                className="bg-white rounded-lg p-3 border border-gray-200 shadow-sm"
+                                style={{ borderLeft: `4px solid ${topicColors[idx % topicColors.length]}` }}
+                              >
+                                <div className="flex items-center justify-between mb-2">
+                                  <span className="text-sm font-semibold text-gray-900">
+                                    Topic {idx + 1}
+                                  </span>
+                                  <span className="text-xs text-gray-600">
+                                    {topic.paper_count} papers
+                                  </span>
+                                </div>
+                                <div className="text-xs text-gray-600 mb-2">
+                                  Coherence: {(topic.coherence * 100).toFixed(1)}%
+                                </div>
+                                {topic.representative_paper && (
+                                  <div className="text-xs text-gray-500 italic truncate" title={topic.representative_paper.title}>
+                                    📄 {topic.representative_paper.title || topic.representative_paper.paper_id}
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <p className="text-sm text-gray-500">No topics identified for this period</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Theory Evolution Chart */}
             <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
