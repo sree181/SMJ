@@ -1,1 +1,1 @@
-web: npx serve -s build -l $PORT --single
+web: python api_server.py
