@@ -1,0 +1,549 @@
+{
+  "test_info": {
+    "bucket": "2025-2029",
+    "total_papers": 10,
+    "test_timestamp": "2025-10-18T11:03:19.673646",
+    "approach": "llm_based_only"
+  },
+  "papers": [
+    {
+      "paper_id": "2025_4359",
+      "pdf_path": "2025-2029/2025_4359.pdf",
+      "extraction_results": {
+        "llm_methodology": {
+          "methodology_type": "quantitative",
+          "design": [],
+          "quant_methods": [
+            "parametric proportional hazards model regressions"
+          ],
+          "qual_methods": [],
+          "software": [],
+          "sample_size": "",
+          "data_sources": [
+            "archival qualitative material and interviews with New York City restaurateurs"
+          ],
+          "analysis_techniques": [
+            "robustness checks",
+            "supplemental analyses"
+          ],
+          "statistical_tests": [],
+          "confidence": 0.0,
+          "extraction_notes": "The raw data alone point to notable rates of exit for Michelin-starred restaurants—more than 40% of the first ten cohorts of Michelin-starred restaurants in New York City had closed by the end of 2019.",
+          "success": true
+        },
+        "metadata": {
+          "title": "Double-edged stars: Michelin stars, reactivity, and restaurant exits in New York City",
+          "abstract": "This article develops a theoreti-cal framework to explicate how third parties, who are not transactionally involved in a given exchange relationship, can promote or impede the creation and capture of value by influencing market actor beliefs and behaviors. I investigate these issues empirically through an abductive mixed-method case study of the Michelin Guide's entry into New York City. An examination of two decades of the openings and closings of New York City's elite restaurants indicates that receiving a Michelin star corresponded to an increased likelihood of restaurant exit. Michelin stars appear to have fostered disruptions at recipients' upstream and downstream interfaces, which inhibited their ability to capture value. This ultimately underscores how value network reactivity to third-party evaluations may lead to unintended consequences for firms.",
+          "authors": [
+            "Daniel B. Sands"
+          ],
+          "year": 2025,
+          "email": "daniel.sands@ucl.ac.uk",
+          "journal": "Strategic Management Journal",
+          "doi": "10.1002/smj.3651",
+          "keywords": [
+            "evaluations",
+            "reactivity",
+            "restaurant industry"
+          ],
+          "success": true
+        }
+      },
+      "text_length": 110943,
+      "analysis": {
+        "has_methodology": true,
+        "has_quant_methods": true,
+        "has_qual_methods": false,
+        "has_software": false,
+        "confidence": 0.0,
+        "extraction_quality": "low"
+      }
+    },
+    {
+      "paper_id": "2025_4573",
+      "pdf_path": "2025-2029/2025_4573.pdf",
+      "extraction_results": {
+        "llm_methodology": {
+          "methodology_type": "qualitative",
+          "design": [],
+          "quant_methods": [],
+          "qual_methods": [
+            "longitudinal, inductive field study"
+          ],
+          "software": [],
+          "sample_size": "",
+          "data_sources": [],
+          "analysis_techniques": [],
+          "statistical_tests": [],
+          "confidence": 0.0,
+          "extraction_notes": "My analysis revealed that devising strategies for social innovation involved the interplay of the central and local leadership. The central leadership was responsible for articulating the organizational purpose in a formal mission. Local leaders crafted mission-oriented local initiatives based on their understanding of local resources and needs and then bundled local initiatives into strategies that reflected local interpretations of the mission. In turn, the central leadership legitimized these emergent strategies (Mintzberg, 1978; Mintzberg & Waters, 1985) and curated a repertoire of strategies for social innovation. The national organization distributed a formal strategy tool kit among existing and prospective local leaders through strategizing episodes (Hendry & Seidl, 2003), such as leader retreats and masterclasses. The tool kit gave existing and prospective leaders an opportunity to borrow and recombine initiatives while consolidating their own local strategies. Because the national leadership celebrated the diversity of local strategies, local leaders accepted pluralistic strategies as part of the mission.",
+          "success": true
+        },
+        "metadata": {
+          "title": "Curating 1000 flowers as they bloom: Leveraging pluralistic initiatives to diffuse social innovations",
+          "abstract": "Research Summary: Social and environmental challenges in our society offer opportunities for innovation. Having a strong mission can enhance both opportunity recognition and strategic alignment; however, aligning strategy and mission can be challenging when an organization pursues its social mission in pluralistic ways. How can mission-driven organizations manage pluralistic local initiatives while cohering to their missions? Using an inductive field study, I trace how Slow Money, a nonprofit supporting sustainable local food systems by connecting food entrepreneurs with local investors, translated its core mission into different mission-oriented local initiatives. I find that mission-oriented local initiatives were recombined to create novel strategies curated and diffused by the central leadership, and I show how, rather than derail an organization's mission, pluralistic local initiatives can foster strategies for social innovation.",
+          "authors": [
+            "Esther Leibel"
+          ],
+          "year": 2025,
+          "email": "eleibel@ivey.ca",
+          "journal": "Strategic Management Journal",
+          "doi": "10.1002/smj.3656",
+          "keywords": [
+            "mission alignment",
+            "purpose",
+            "social innovation",
+            "strategy formation",
+            "strategy process"
+          ],
+          "success": true
+        }
+      },
+      "text_length": 121155,
+      "analysis": {
+        "has_methodology": true,
+        "has_quant_methods": false,
+        "has_qual_methods": true,
+        "has_software": false,
+        "confidence": 0.0,
+        "extraction_quality": "low"
+      }
+    },
+    {
+      "paper_id": "2025_4488",
+      "pdf_path": "2025-2029/2025_4488.pdf",
+      "extraction_results": {
+        "llm_methodology": {
+          "methodology_type": "quantitative/qualitative/mixed/other",
+          "design": [],
+          "quant_methods": [],
+          "qual_methods": [],
+          "software": [],
+          "sample_size": "",
+          "data_sources": [],
+          "analysis_techniques": [],
+          "statistical_tests": [],
+          "confidence": 0.0,
+          "extraction_notes": "What you actually found in the paper",
+          "success": true
+        },
+        "metadata": {
+          "title": "Organizational adaptation in dynamic environments: Disentangling the effects of how much to explore versus where to explore",
+          "abstract": "Research Summary: There is considerable debate about how firms should adapt to environmental dyna-mism. Theoretically, some scholars suggest that with increasing dynamism, firms should explore more, whereas others argue that firms should explore less. Empirical evidence remains mixed. We attempt to rec-oncile these mixed findings by (a) distinguishing between two facets of exploration—exploration propen-sity versus exploration breadth, and (b) recognizing that firms may make these two decisions using different decision-making processes.",
+          "authors": [
+            "Kannan Srikanth",
+            "Tiberiu Ungureanu"
+          ],
+          "year": 2025,
+          "email": "srikanth.18@osu.edu",
+          "journal": "Strategic Management Journal",
+          "doi": "10.1002/smj.3646",
+          "keywords": [
+            "computational model",
+            "decision-making",
+            "environmental turbulence",
+            "exploration-exploitation",
+            "organizational adaptation"
+          ],
+          "success": true
+        }
+      },
+      "text_length": 104857,
+      "analysis": {
+        "has_methodology": true,
+        "has_quant_methods": false,
+        "has_qual_methods": false,
+        "has_software": false,
+        "confidence": 0.0,
+        "extraction_quality": "low"
+      }
+    },
+    {
+      "paper_id": "2025_4098",
+      "pdf_path": "2025-2029/2025_4098.pdf",
+      "extraction_results": {
+        "llm_methodology": {
+          "methodology_type": "other",
+          "design": [],
+          "quant_methods": [],
+          "qual_methods": [],
+          "software": [],
+          "sample_size": "",
+          "data_sources": [],
+          "analysis_techniques": [],
+          "statistical_tests": [],
+          "confidence": 0.0,
+          "extraction_notes": "JSON parsing failed: Invalid control character at: line 14 column 453 (char 813)",
+          "success": true
+        },
+        "metadata": {
+          "title": "R E S E A R C H A R T I C L E",
+          "abstract": "Research Summary: The knowledge-based view (KBV) claims that knowledge is the most important strategic resource because it is the strongest determinant of firm competitive advantage and the glue that pulls resources together. We examine this assertion through a meta-analysis of the accumulated evidence on the relationships among strategic resources and firm performance (stock market, financial performance, and growth). Findings from 348 samples reporting 248,136 firm-level observations show that knowledge resources have the highest positive association with all three performance dimensions, with the highest positive relationship with growth, followed by market and then financial performance. Further, knowledge may serve as a foundational resource by augmenting other strategic resources and helping make firms different. These findings support the KBV's core prediction that knowledge resources offer superior strategic value.",
+          "authors": [
+            "Donald D. Bergh",
+            "Laura D'Oria",
+            "T. Russell Crook",
+            "Ashley Roccapriore"
+          ],
+          "year": 2025,
+          "email": "dbergh@du.edu",
+          "journal": "Strategic Management Journal",
+          "doi": "10.1002/smj.3645",
+          "keywords": [
+            "knowledge-based view",
+            "meta-analysis",
+            "strategic resources"
+          ],
+          "success": true
+        }
+      },
+      "text_length": 54213,
+      "analysis": {
+        "has_methodology": false,
+        "has_quant_methods": false,
+        "has_qual_methods": false,
+        "has_software": false,
+        "confidence": 0.0,
+        "extraction_quality": "low"
+      }
+    },
+    {
+      "paper_id": "2025_4260",
+      "pdf_path": "2025-2029/2025_4260.pdf",
+      "extraction_results": {
+        "llm_methodology": {
+          "methodology_type": "quantitative/qualitative/mixed/other",
+          "design": [],
+          "quant_methods": [],
+          "qual_methods": [],
+          "software": [],
+          "sample_size": "",
+          "data_sources": [],
+          "analysis_techniques": [],
+          "statistical_tests": [],
+          "confidence": 0.0,
+          "extraction_notes": "No methodology section found in the paper",
+          "success": true
+        },
+        "metadata": {
+          "title": "R E S E A R C H A R T I C L E Identifying microfoundations of dynamic managerial capabilities for business model innovation",
+          "abstract": "Research Summary: Although business model inno- vation (BMI) is said to be underpinned by managerial capabilities, there is a lack of studies that delve into the mechanisms through which these capabilities support BMI. In this study, we highlight internal and external advice seeking as underlying microfoundations of dynamic managerial capabilities for BMI and examine the mediating role of coordination flexibility capabili- ties (CFCs). With a survey dataset of 254 senior managers, our research reveals that external advice seeking capabilities positively influence BMI. Interestingly, the impact of internal advice seeking on BMI is fully mediated by CFC. Furthermore, our results indicate that the extent to which internal advice seeking impacts CFC is strengthened in firms with high levels of digitalization. Managerial Summary: While business model innova- tion (BMI) is often linked to the skills of managers, there is a lack of research exploring which particular skills actually drive BMI. In our study, we focus on how Received: 10 February 2019 Revised: 2 August 2024 Accepted: 7 August 2024 DOI: 10.1002/smj.3663 This is an open access article under the terms of the Creative Commons Attribution License, which permits use, distribution and reproduction in any medium, provided the original work is properly cited. © 2024 The Author(s). Strategic Management Journal published by John Wiley & Sons Ltd. 470 Strat Mgmt J. 2025;46:470–501. wileyonlinelibrary.com/journal/smj seek- ing advice internally and externally are crucial skills for managers in contributing to BMI, with coordination flexibility capabilities (CFCs) playing a mediating role. Using data from a survey of 254 senior managers, we found that seeking external advice has a positive impact on BMI. Surprisingly, the influence of seeking internal advice on BMI is only significant when firms have high CFC at the organizational level. Additionally, we discovered that the relationship between internal advice seeking and CFC is stronger in highly digitalized firms.",
+          "authors": [
+            "Hock-Doepgen",
+            "Heaton",
+            "Clauss",
+            "Block"
+          ],
+          "year": 2025,
+          "email": "sohvi_heaton@baylor.edu",
+          "journal": "Strat Mgmt J",
+          "doi": "10.1002/smj.3663",
+          "keywords": [
+            "advice seeking capabilities",
+            "business model innovation",
+            "dynamic managerial capabilities",
+            "managerial social capabilities",
+            "structural equation modeling"
+          ],
+          "success": true
+        }
+      },
+      "text_length": 109584,
+      "analysis": {
+        "has_methodology": true,
+        "has_quant_methods": false,
+        "has_qual_methods": false,
+        "has_software": false,
+        "confidence": 0.0,
+        "extraction_quality": "low"
+      }
+    },
+    {
+      "paper_id": "2025_4478",
+      "pdf_path": "2025-2029/2025_4478.pdf",
+      "extraction_results": {
+        "llm_methodology": {
+          "methodology_type": "qualitative",
+          "design": [],
+          "quant_methods": [],
+          "qual_methods": [
+            "fuzzy-set qualitative comparative analysis (fsQCA)"
+          ],
+          "software": [],
+          "sample_size": "",
+          "data_sources": [
+            "1395 crowdfunding campaigns launched on kickstarter.com"
+          ],
+          "analysis_techniques": [
+            "abductive theory-building approach",
+            "qualitative data analysis"
+          ],
+          "statistical_tests": [],
+          "confidence": 0.0,
+          "extraction_notes": "Draw on Clough et al.'s (2019) organizing framework to identify venture attributes that are most salient and publicly available to resource holders, particularly in the crowdfunding context. Use fsQCA to identify the configurations of venture attributes consistently linked with positive and negative reactions from resource holders.",
+          "success": true
+        },
+        "metadata": {
+          "title": "Seeing the whole: Configurational cognition and new venture resource mobilization",
+          "abstract": "Research Summary: Research is scant on how multi-ple venture attributes combine as “whole packages” of signals (or cognitive configurations) in resource holders’ eyes, shaping a venture's ability to mobilize resources. Drawing on a qualitative comparative analysis of 1,395 crowdfunding campaigns, we identified different configurations of signals for high and low resource mobilization, theorizing abductively their underlying mechanisms through the analysis of case-level qualitative data. Our results explain some past mixed findings, such as the contradictory effects of social value and entrepreneurial narratives, showing that these narratives can instead be successfully combined in the presence of signals of venture quality and community embeddedness. We show that there is no single best way to impress resource holders, but multiple recipes to holistically communicate a venture's value.",
+          "authors": [
+            "Goran Calic",
+            "François Neville",
+            "Santi Furnari",
+            "C. S. Richard Chan"
+          ],
+          "year": 2025,
+          "email": "calicg@mcmaster.ca",
+          "journal": "Strategic Management Journal",
+          "doi": "10.1002/smj.3654",
+          "keywords": [
+            "behavioral theory",
+            "configurational perspective",
+            "entrepreneurship",
+            "fuzzy-set qualitative comparative analysis (fsQCA)",
+            "resource mobilization"
+          ],
+          "success": true
+        }
+      },
+      "text_length": 135910,
+      "analysis": {
+        "has_methodology": true,
+        "has_quant_methods": false,
+        "has_qual_methods": true,
+        "has_software": false,
+        "confidence": 0.0,
+        "extraction_quality": "low"
+      }
+    },
+    {
+      "paper_id": "2025_4533",
+      "pdf_path": "2025-2029/2025_4533.pdf",
+      "extraction_results": {
+        "llm_methodology": {
+          "methodology_type": "quantitative",
+          "design": [],
+          "quant_methods": [
+            "descriptive, question-driven approach"
+          ],
+          "qual_methods": [],
+          "software": [],
+          "sample_size": "",
+          "data_sources": [
+            "all US employer firms over 2004–2013 (61 million firm-year observations)"
+          ],
+          "analysis_techniques": [
+            "granular decomposition of firm growth"
+          ],
+          "statistical_tests": [],
+          "confidence": 0,
+          "extraction_notes": "We use a descriptive, question-driven approach rather than a conventional hypothesis-based exposition. As the foundational tool for our analyses, we develop a granular decomposition of firm growth, which we apply to all US employer firms over 2004–2013 (61 million firm-year observations). Starting with the employment growth decomposition in HJM as the baseline, we split organic modes into growth from new establishments (or units), growth from existing units, and closures. We then make the decomposition more strategy-relevant by adding transactional modes (i.e., acquisitions and selloffs) and by decomposing growth from existing units further into growth from old units, recently set-up units, and recently acquired units. As a result, our decomposition measures seven growth modes in total.",
+          "success": true
+        },
+        "metadata": {
+          "title": "R E S E A R C H A R T I C L E How do US firms grow? New evidence from a growth decomposition",
+          "abstract": "Research Summary: Firm growth and its underlying modes are rarely examined on their own, which impedes our understanding of their relative importance, correlations among them and their associations with competition and future performance. We address these using a comprehensive seven-mode decomposition of employment growth in all US firms (2004–2013). We find that organic modes such as opening or closing plants contribute more than transactional modes such as acquisitions and selloffs, and that growth modes exhibit age-size differences and are generally positively correlated within firms. Trade competition in manufacturing increased closures and decreased acquisitions but had no effect on new units. Transac-tional growth positively correlates with future survival, unlike organic growth. Together, our findings expand our understanding of firm growth as a composite of multiple growth modes.",
+          "authors": [
+            "Jagadeesh Sivadasan",
+            "Natarajan Balasubramanian",
+            "Ravi Dharwadkar",
+            "Charlotte Ren"
+          ],
+          "year": 2025,
+          "email": "nabalasu@syr.edu",
+          "journal": "Strategic Management Journal",
+          "doi": "10.1002/smj.3641",
+          "keywords": [
+            "age-size growth heterogeneity",
+            "firm growth",
+            "firm performance",
+            "growth modes",
+            "organic growth and acquisitions"
+          ],
+          "success": true
+        }
+      },
+      "text_length": 124248,
+      "analysis": {
+        "has_methodology": true,
+        "has_quant_methods": true,
+        "has_qual_methods": false,
+        "has_software": false,
+        "confidence": 0,
+        "extraction_quality": "low"
+      }
+    },
+    {
+      "paper_id": "2025_4346",
+      "pdf_path": "2025-2029/2025_4346.pdf",
+      "extraction_results": {
+        "llm_methodology": {
+          "methodology_type": "quantitative",
+          "design": [],
+          "quant_methods": [
+            "Data was analyzed using statistical methods to identify patterns and trends."
+          ],
+          "qual_methods": [],
+          "software": [],
+          "sample_size": "",
+          "data_sources": [],
+          "analysis_techniques": [],
+          "statistical_tests": [],
+          "confidence": 0.0,
+          "extraction_notes": "What you actually found in the paper",
+          "success": true
+        },
+        "metadata": {
+          "title": "Economic nationalism and the home court advantage",
+          "abstract": "Research Summary: Political and regulatory actors routinely adopt or enforce policies to protect domestic firms at the expense of foreign firms. However, since courts are expected to be neutral and act independently, a question arises whether (and why) they discriminate against foreign firms. We argue that the courts are nationalistic, which emanates from judges differentiating between in-group (domestic) and out-group (foreign) members. In a sample of 58,754 patent disputes adjudicated by US federal district courts between 1983 and 2016, we find domestic patent holders and challengers are more successful than their foreign counterparts. Rulings involving foreign firms are more likely to exhibit nationalistic rhetoric. Judicial ideology moderates the differential odds of success between domestic and foreign firms. Thus, the legal system is another source of economic nationalism.",
+          "authors": [
+            "Arnab Choudhury",
+            "Srividya Jandhyala",
+            "Anand Nandkumar"
+          ],
+          "year": 2025,
+          "email": "srividya.jandhyala@essec.edu",
+          "journal": "Strat Mgmt J.",
+          "doi": "10.1002/smj.3658",
+          "keywords": [
+            "intellectual property",
+            "multinational corporations",
+            "nationalism",
+            "nonmarket strategy",
+            "patent disputes"
+          ],
+          "success": true
+        }
+      },
+      "text_length": 101453,
+      "analysis": {
+        "has_methodology": true,
+        "has_quant_methods": true,
+        "has_qual_methods": false,
+        "has_software": false,
+        "confidence": 0.0,
+        "extraction_quality": "low"
+      }
+    },
+    {
+      "paper_id": "2025_2079",
+      "pdf_path": "2025-2029/2025_2079.pdf",
+      "extraction_results": {
+        "llm_methodology": {
+          "methodology_type": "quantitative/qualitative/mixed/other",
+          "design": [],
+          "quant_methods": [],
+          "qual_methods": [],
+          "software": [],
+          "sample_size": "",
+          "data_sources": [],
+          "analysis_techniques": [],
+          "statistical_tests": [],
+          "confidence": 0.0,
+          "extraction_notes": "No methodology section found in the paper.",
+          "success": true
+        },
+        "metadata": {
+          "title": "The Impact of External Technology Sourcing on Innovation and Financial Performance in the Biopharmaceutical Industry",
+          "abstract": "Research Summary: When established firms source technology from specialized technology firms, extant research has typically assumed that this in-sourced technology is novel. We test this assumption by modeling in-sourcing decisions using a problem-solution lens wherein firms choose from available external technical solutions to solve their market problems. Since the locus of identification, evaluation, and selection of external solutions remains internal to the firm's R&D personnel, we argue that they frequently prefer familiar over novel solutions. We identify two factors that help firms overcome this preference for familiarity: when top managers focus their attention on the market problem or when they receive feedback from unexpected failures to solve that problem. Our case control analysis of 715 in-sourced emerging technological solutions in the biopharmaceutical industry offers broad support to our theoretical framework.",
+          "authors": [
+            "Thomas Klueter",
+            "Anindya Ghosh",
+            "Lori Rosenkopf"
+          ],
+          "year": 2025,
+          "email": "TMKlueter@iese.edu",
+          "journal": "Strategic Management Journal",
+          "doi": "10.1002/smj.3670",
+          "keywords": [
+            "partnering",
+            "problems and solutions",
+            "technology sourcing",
+            "top management attention",
+            "unexpected failure experiences"
+          ],
+          "success": true
+        }
+      },
+      "text_length": 113297,
+      "analysis": {
+        "has_methodology": true,
+        "has_quant_methods": false,
+        "has_qual_methods": false,
+        "has_software": false,
+        "confidence": 0.0,
+        "extraction_quality": "low"
+      }
+    },
+    {
+      "paper_id": "2025_4431",
+      "pdf_path": "2025-2029/2025_4431.pdf",
+      "extraction_results": {
+        "llm_methodology": {
+          "methodology_type": "other",
+          "design": [],
+          "quant_methods": [],
+          "qual_methods": [],
+          "software": [],
+          "sample_size": "",
+          "data_sources": [],
+          "analysis_techniques": [],
+          "statistical_tests": [],
+          "confidence": 0.0,
+          "extraction_notes": "No specific methodology section found - analyze the full paper",
+          "success": true
+        },
+        "metadata": {
+          "title": "Can boards harness the benefits of overconfident CEOs to increase breakthrough innovation for their firms? We examine this question using a longitudinal dataset of US high-tech firms and find that board expertise and power enable firms to benefit from CEO overconfidence in the context of breakthrough innovations.",
+          "abstract": "Research Summary: While prior upper echelon research has shown that overconfident CEOs are beneficial for innovation, less is known about how firms can harness the benefits of these CEOs for breakthrough innovations. To extend this stream of research, we identify crucial board characteristics that enable firms to benefit from their CEO's overconfidence in the context of promoting breakthrough innovations.",
+          "authors": [
+            "Priscilla S. Kraft",
+            "Teresa A. Dickler",
+            "Michael C. Withers"
+          ],
+          "year": 2025,
+          "email": "priscilla.kraft@whu.edu",
+          "journal": "Strat Mgmt J.",
+          "doi": "10.1002/smj.3657",
+          "keywords": [
+            "board expertise",
+            "board power",
+            "breakthrough innovation",
+            "CEO overconfidence",
+            "corporate governance"
+          ],
+          "success": true
+        }
+      },
+      "text_length": 113773,
+      "analysis": {
+        "has_methodology": false,
+        "has_quant_methods": false,
+        "has_qual_methods": false,
+        "has_software": false,
+        "confidence": 0.0,
+        "extraction_quality": "low"
+      }
+    }
+  ],
+  "summary": {
+    "total_papers": 10,
+    "successful_extractions": 10,
+    "success_rate": 100.0,
+    "has_methodology_rate": 80.0,
+    "has_quant_methods_rate": 30.0,
+    "has_qual_methods_rate": 20.0,
+    "has_software_rate": 0.0,
+    "quality_distribution": {
+      "high": 0,
+      "medium": 0,
+      "low": 10
+    },
+    "methodology_types": {
+      "quantitative/qualitative/mixed/other": 3,
+      "quantitative": 3,
+      "qualitative": 2,
+      "other": 2
+    }
+  }
+}

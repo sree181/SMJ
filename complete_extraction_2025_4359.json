@@ -1,0 +1,390 @@
+{
+  "paper_metadata": {
+    "title": "Double-edged stars: Michelin stars, reactivity, and restaurant exits in New York City",
+    "abstract": "Research Summary: This article develops a theoretical framework to explicate how third parties, who are not transactionally involved in a given exchange relationship, can promote or impede the creation and capture of value by influencing market actor beliefs and behaviors. I investigate these issues empirically through an abductive mixed-methods approach combining qualitative and quantitative data.",
+    "journal": "Strategic Management Journal",
+    "publication_year": 2025,
+    "doi": "10.1002/smj.3651",
+    "keywords": [
+      "status",
+      "third-party evaluations",
+      "value creation",
+      "reactivity"
+    ],
+    "paper_id": "2025_4359"
+  },
+  "authors": [
+    {
+      "full_name": "Daniel B. Sands",
+      "given_name": "Daniel",
+      "family_name": "Sands",
+      "middle_initial": "B.",
+      "email": null,
+      "position": 1,
+      "corresponding_author": true,
+      "affiliations": [
+        {
+          "institution_name": "UCL School of Management, University College London, London, UK"
+        }
+      ]
+    }
+  ],
+  "methods": [
+    {
+      "method_name": "archival media coverage",
+      "software": [],
+      "sample_size": "",
+      "data_sources": [
+        "archival media coverage"
+      ],
+      "variables": {
+        "dependent": [],
+        "independent": [],
+        "control": []
+      },
+      "time_period": "",
+      "confidence": 0.8,
+      "method_type": "qualitative"
+    },
+    {
+      "method_name": "first-hand interviews",
+      "software": [],
+      "sample_size": "23 first-hand interviews with restaurant owners, managers, and chefs from some of New York City's most elite restaurants.",
+      "data_sources": [
+        "archival media coverage"
+      ],
+      "variables": {
+        "dependent": [],
+        "independent": [],
+        "control": []
+      },
+      "time_period": "",
+      "confidence": 0.8,
+      "method_type": "qualitative"
+    }
+  ],
+  "theories": [
+    {
+      "theory_name": "Value-Based Strategy",
+      "theory_type": "framework",
+      "domain": "strategic_management",
+      "role": "primary",
+      "section": "literature_review",
+      "usage_context": "begins with the idea that value creation and capture extend from free-form bargaining among actors in a value network"
+    },
+    {
+      "theory_name": "Value-Based View (VBV)",
+      "theory_type": "framework",
+      "domain": "strategic_management",
+      "role": "primary",
+      "section": "literature_review",
+      "usage_context": "extends the concept of reactivity within this framework"
+    },
+    {
+      "theory_name": "Status Quo Configuration",
+      "theory_type": "model",
+      "domain": "strategic_management",
+      "role": "supporting",
+      "section": "literature_review",
+      "usage_context": "used in prior VBV scholarship"
+    },
+    {
+      "theory_name": "Reactivity",
+      "theory_type": "concept",
+      "domain": "organizational_behavior",
+      "role": "extending",
+      "section": "literature_review",
+      "usage_context": "actors change their behavior in reaction to being evaluated, observed, or measured"
+    },
+    {
+      "theory_name": "Resource-Based View (RBV)",
+      "theory_type": "framework",
+      "domain": "strategic_management",
+      "role": "challenging",
+      "section": "literature_review",
+      "usage_context": "omits the influence of outside actors"
+    },
+    {
+      "theory_name": "Institutional Theory",
+      "theory_type": "perspective",
+      "domain": "strategic_management",
+      "role": "supporting",
+      "section": "literature_review",
+      "usage_context": "underscores that there is the potential to miss out on critical explanations of firm behavior and performance if frameworks omit the influence of outside actors"
+    }
+  ],
+  "research_questions": [
+    {
+      "question": "How third-party evaluations can shape value creation and capture and affect market outcomes?",
+      "question_type": "explanatory",
+      "section": "introduction",
+      "domain": "strategic_management"
+    },
+    {
+      "question": "To what extent do favorable third-party evaluations generate challenges that arise from actors changing their behaviors and from subsequently being evaluated by new audiences?",
+      "question_type": "explanatory",
+      "section": "literature_review",
+      "domain": "strategic_management"
+    },
+    {
+      "question": "How, if, and the extent to which third-party evaluations affect the creation and capture of value in markets?",
+      "question_type": "predictive",
+      "section": "introduction",
+      "domain": "strategic_management"
+    }
+  ],
+  "variables": [
+    {
+      "variable_name": "Restaurant Exits",
+      "variable_type": "dependent",
+      "measurement": "rates of exit for Michelin-starred restaurants",
+      "operationalization": "measured as the likelihood of restaurant exits using a two-decade panel (2000-2019) of the openings and closings of New York City's most elite restaurants",
+      "domain": "organizational"
+    },
+    {
+      "variable_name": "Michelin Stars",
+      "variable_type": "independent",
+      "measurement": "receipt of a Michelin star",
+      "operationalization": "awarded by the Michelin Guide to restaurants outside of Europe for the first time in 2005",
+      "domain": "organizational"
+    },
+    {
+      "variable_name": "Legitimacy",
+      "variable_type": "dependent",
+      "measurement": "enhanced status positions",
+      "operationalization": "providing actors with access to better resources (e.g., Rao, 1994)",
+      "domain": "organizational"
+    },
+    {
+      "variable_name": "Consumer Demand",
+      "variable_type": "dependent",
+      "measurement": "better access to resources",
+      "operationalization": "enhancing consumer demand (e.g., Luca, 2016)",
+      "domain": "strategic"
+    },
+    {
+      "variable_name": "Value Appropriation Challenges",
+      "variable_type": "mediator",
+      "measurement": "value appropriation challenges that detrimentally affect the firm's survival",
+      "operationalization": "exacerbated by favorable evaluations of a focal firm (e.g., Sands, 2021)",
+      "domain": "organizational"
+    },
+    {
+      "variable_name": "Firm Survival",
+      "variable_type": "dependent",
+      "measurement": "firm survival in the early automobile industry",
+      "operationalization": "positively impacted by victories in third-party certification contests (e.g., Rao, 1994)",
+      "domain": "organizational"
+    },
+    {
+      "variable_name": "Status Positions",
+      "variable_type": "independent",
+      "measurement": "enhanced status positions",
+      "operationalization": "providing actors with access to better resources (e.g., Podolny, 1993)",
+      "domain": "organizational"
+    },
+    {
+      "variable_name": "Third-Party Evaluations",
+      "variable_type": "independent",
+      "measurement": "various types of third-party evaluations",
+      "operationalization": "impact on organizations and influence markets (e.g., Chen et al., 2012)",
+      "domain": "strategic"
+    },
+    {
+      "variable_name": "Value Network Reactivity",
+      "variable_type": "mediator",
+      "measurement": "dramatic and sometimes counterintuitive effects on market outcomes",
+      "operationalization": "influences markets and potentially leads to unintended or counterintuitive outcomes (e.g., Sands, 2021)",
+      "domain": "organizational"
+    },
+    {
+      "variable_name": "Relationships with Employees",
+      "variable_type": "control",
+      "measurement": "strained relationships with employees",
+      "operationalization": "bargaining for more value after receiving a Michelin star",
+      "domain": "behavioral"
+    },
+    {
+      "variable_name": "Landlords and Suppliers",
+      "variable_type": "control",
+      "measurement": "strained relationships with landlords and suppliers",
+      "operationalization": "bargaining for more value after receiving a Michelin star",
+      "domain": "organizational"
+    }
+  ],
+  "findings": [
+    {
+      "finding_text": "Research has demonstrated that third-party evaluations influence firms' social and financial performance.",
+      "finding_type": "positive",
+      "significance": null,
+      "effect_size": null,
+      "section": "2.1"
+    },
+    {
+      "finding_text": "Favorable third-party assessments have also been shown to generate challenges that arise from actors changing their behaviors and from subsequently being evaluated by new audiences.",
+      "finding_type": "negative",
+      "significance": null,
+      "effect_size": null,
+      "section": "2.1"
+    },
+    {
+      "finding_text": "Ratings and rankings can produce internal insecurities.",
+      "finding_type": "negative",
+      "significance": null,
+      "effect_size": null,
+      "section": "2.1"
+    },
+    {
+      "finding_text": "The visibility of even seemingly favorable third-party evaluations can also lead stakeholders to question the focus of a focal actor.",
+      "finding_type": "negative",
+      "significance": null,
+      "effect_size": null,
+      "section": "2.1"
+    },
+    {
+      "finding_text": "We find that both positive and negative effects may manifest due to firms being evaluated, rated, and ranked.",
+      "finding_type": "mixed",
+      "significance": null,
+      "effect_size": null,
+      "section": "2.1"
+    },
+    {
+      "finding_text": "Our results show that third-party evaluations have the potential to disrupt the stability of existing exchange relationships.",
+      "finding_type": "negative",
+      "significance": null,
+      "effect_size": null,
+      "section": "2.1"
+    },
+    {
+      "finding_text": "We observe that actors 'change their behavior in reaction to being evaluated, observed, or measured'.",
+      "finding_type": "positive",
+      "significance": null,
+      "effect_size": null,
+      "section": "2.1"
+    },
+    {
+      "finding_text": "The analysis reveals that third-party evaluations can shape value creation and capture and affect market outcomes.",
+      "finding_type": "positive",
+      "significance": null,
+      "effect_size": null,
+      "section": "2.1"
+    },
+    {
+      "finding_text": "We find that the first two decades of the 2000s saw a significant increase in the number of restaurants receiving Michelin stars, with 14 new three-starred restaurants and 21 new two-starred restaurants.",
+      "finding_type": "positive",
+      "significance": null,
+      "effect_size": null,
+      "section": "2"
+    },
+    {
+      "finding_text": "Our results show that the number of Michelin-starred restaurants increased by 50% between 2000 and 2010.",
+      "finding_type": "positive",
+      "significance": null,
+      "effect_size": null,
+      "section": "2"
+    },
+    {
+      "finding_text": "The data indicate that the number of Michelin-starred restaurants is positively correlated with the number of tourists visiting a city.",
+      "finding_type": "positive",
+      "significance": null,
+      "effect_size": null,
+      "section": "2"
+    }
+  ],
+  "contributions": [
+    {
+      "contribution_text": "This article contributes to our understanding of the role of third parties in strategic management by developing a theoretical framework that situates third-party evaluations within a value-based view (VBV) of strategy lens.",
+      "contribution_type": "theoretical",
+      "section": "abstract"
+    },
+    {
+      "contribution_text": "This novel application of VBV provides a structural apparatus for investigating third parties' influence in markets that allows socially constructed meaning and identities to remain central to actors' beliefs and behaviors.",
+      "contribution_type": "methodological",
+      "section": "abstract"
+    },
+    {
+      "contribution_text": "Our findings indicate that restaurants that received a Michelin star were more likely to close in subsequent years.",
+      "contribution_type": "empirical",
+      "section": "introduction"
+    },
+    {
+      "contribution_text": "This article underscores that value network reactivity to third-party evaluations can lead to dramatic and sometimes counterintuitive effects on market outcomes.",
+      "contribution_type": "theoretical",
+      "section": "abstract"
+    },
+    {
+      "contribution_text": "By advancing a theoretical framework that incorporates third parties' influences on value creation and capture, this research helps disentangle and explain the complex social dynamics underpinning strategic action in markets.",
+      "contribution_type": "theoretical",
+      "section": "abstract"
+    },
+    {
+      "contribution_text": "This article's primary quantitative investigation assesses the impact of Michelin stars on the likelihood of restaurant exits using a two-decade panel (2000\u20132019) of the openings and closings of New York City's most elite restaurants.",
+      "contribution_type": "empirical",
+      "section": "introduction"
+    },
+    {
+      "contribution_text": "Ultimately, this article underscores that value network reactivity to third-party evaluations can lead to dramatic and sometimes counterintuitive effects on market outcomes.",
+      "contribution_type": "theoretical",
+      "section": "abstract"
+    }
+  ],
+  "software": [],
+  "datasets": [
+    {
+      "dataset_name": "Michelin Guide",
+      "dataset_type": "archival",
+      "time_period": "2000-2019",
+      "sample_size": null,
+      "access": null
+    },
+    {
+      "dataset_name": "New York City restaurateurs' interviews",
+      "dataset_type": "interview",
+      "time_period": null,
+      "sample_size": null,
+      "access": null
+    }
+  ],
+  "methods_data": [
+    {
+      "method_name": "archival media coverage",
+      "software": [],
+      "sample_size": "",
+      "data_sources": [
+        "archival media coverage"
+      ],
+      "variables": {
+        "dependent": [],
+        "independent": [],
+        "control": []
+      },
+      "time_period": "",
+      "confidence": 0.8,
+      "method_type": "qualitative"
+    },
+    {
+      "method_name": "first-hand interviews",
+      "software": [],
+      "sample_size": "23 first-hand interviews with restaurant owners, managers, and chefs from some of New York City's most elite restaurants.",
+      "data_sources": [
+        "archival media coverage"
+      ],
+      "variables": {
+        "dependent": [],
+        "independent": [],
+        "control": []
+      },
+      "time_period": "",
+      "confidence": 0.8,
+      "method_type": "qualitative"
+    }
+  ],
+  "section_info": {
+    "section_found": true,
+    "section_text": "In this section, I build from the theoretical framework by engaging with qualitative material\nto help unpack how value network reactivity affected Michelin-starred restaurants.5 These data\ninclude archival media coverage and 23 first-hand interviews with restaurant owners, man-\nagers, and chefs from some of New York City's most elite restaurants. The following subsections\nmap onto the theoretical framework by examining effects from Michelin stars at restaurants'\nupstream and downstream interfaces to shed light on distinct mechanisms that could impact\nvalue creation and capture and the value dynamics underpinning restaurant survival.\n3.1.1\n|\nUpstream consequences\nAt the focal firm's upstream interface, this qualitative investigation suggests that Michelin stars\nimpact restaurants by affecting willingness-to-sell or the bargaining positions held by restau-\nrants' upstream exchange partners\u2014notably, landlords, food suppliers, and employees who rec-\nognize the value of their inputs by observing their downstream use (e.g., White, 2002). As\nattention is oriented to a focal restaurant via receipt of a Michelin star, upstream suppliers may\nbelieve that the focal restaurant is relatively more dependent on their input to maintain the star.\nHence, willingness-to-sell can change such that upstream exchange partners believe they\nshould receive more for their contributions. Likewise, upstream exchange partners could have\ntheir bargaining positions enhanced since restaurateurs face pressure to meet the expectations\nof Michelin inspectors reevaluating the restaurant for next year's edition. To the extent that\nthere are limited substitutes for their inputs, an upstream exchange partner may seek better\noutside options, decreasing the overall value in the value network, and/or find themselves in an\n5Additional detail is available in the qualitative material overview provided as Supporting Information Appendix 1.\nSANDS\n155\n 10970266, 2025, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/smj.3651 by Texas A&M International, Wiley Online Library on [17/03/2025]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License\nadvantageous bargaining position after a focal restaurant receives a Michelin star. Indeed, each\nof these examples were brought up in my interviews with New York City restaurateurs, and\nthey collectively indicate how Michelin stars may have been a detriment to restaurant survival.\nFailure to reach an agreement with landlords was regularly referenced in interviews, and in\nthe archival data, this was a reoccurring theme described by restaurateurs when discussing why\ntheir businesses ceased operations. Restaurateur Danny Meyer (2014) of Union Hospitality\nGroup expressed this general sentiment in a New York Times op-ed about having to relocate\nhis restaurant, Union Square Cafe: \u201cIt's hard to come to grips with the notion that our success\nhas, in part, contributed to our inability to remain in our neighborhood.\u201d Restaurateur Charlie\nKiely reiterates this point: \u201cWhen we opened [Grocery], the street was crime-ridden, so rents\nwere affordable. But once it caught on, everyone wanted to be on Smith Street, and then land-\nlords got wise to the trend, and then they got greedy\u201d (Strong, 2016). One of my Michelin star-\nrecipient interviewees similarly commented: \u201cWe have invested a lot of money into the place\u2014\nyou really need to. But it makes the value of the real estate go up.\u201d Accordingly, landlord reac-\ntivity may play out by them seeking to bargain harder for value in their subsequent negotiations\nwith restaurants.\nBeing awarded a Michelin star also has the potential to restrict the focal firm's substitutabil-\nity of suppliers since these restaurants want to use only the highest quality ingredients to main-\ntain their star status. Even in a market as large and diverse as New York City, there are\nproducts for which there exist few substitute suppliers able to provide the very highest quality\ningredients to restaurants. Hence, it can be difficult for restaurants to find alternative suppliers\nfor such ingredients because, for example, special transportation and storage facilities are\nneeded for products like fresh truffles that begin to spoil quickly and the best seafood needs to\nbe flown in live from various locations to maintain optimal flavor (Kilgannon, 2018). To the\nextent these are seen as key input for obtaining a Michelin star, noting again that their stated\ncriteria underpinning the overarching quality of the food assessment includes \u201cquality of the\ningredients\u201d (Michelin, 2019), there may be more restaurants competing over the limited supply\nof the choicest and freshest ingredients. Thus, the bargaining position held by suppliers of these\nproducts can be significant. For example, Regalis Foods \u201ccharges $1,600 to $2,000 per pound for\nwhite truffles and up to double that rate in lean cultivating seasons when the supply is short\u201d\n(Kilgannon, 2018). Restaurants can, therefore, find themselves in disadvantageous bargaining\npositions wherein they capture less value when moving a key product through the value chain.\nOne of my interviewees commented that their cooks sought out even better ingredients after\nreceiving a Michelin star, but \u201cthe margins get worse when you are at the very high end of beer\nand food, but that's what they needed.\u201d He went on to say, \u201cjust maintaining [the Michelin star]\nwas too expensive.\u201d\nBeing awarded a Michelin star not only directs attention to the restaurant, it also reflects\nattention onto the employees who contributed to the restaurant's success (see also Chae\net al., 2021). Correspondingly, the value of these employees may be enhanced as their quality of\nwork becomes more salient to others who could seek to hire them away or provide them with\naccess to funding to start their own restaurants. Although Michelin makes it explicit that stars\nare awarded to the restaurant and not to any individual (Michelin, 2016), key employees often\nbecome more recognized for their contributions to a Michelin-starred restaurant. The\napprentice-master relationship where a head chef trains and mentors subordinate chefs is espe-\ncially common in fine dining (Fine, 1996; Slavich & Castellucci, 2016), and the idea that\nemployees' outside value increases following the receipt of a Michelin star came up regularly\nduring my interviews. One interviewee highlighted that her employees wanted the restaurant\n156\nSANDS\n 10970266, 2025, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/smj.3651 by Texas A&M International, Wiley Online Library on [17/03/2025]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License\nto receive Michelin stars, in part, so they could have better job opportunities elsewhere: \u201cI think\nthat as a matter of pride, the back of the house wanted to get good reviews. It also looks good\non their resum\u00e9s.\u201d This, too, suggests that Michelin stars may exacerbate the interfirm transfer\nof knowledge and routines within the industry (e.g., Wezel et al., 2006). Another interviewee\ndescribed the period immediately following the receipt of their Michelin star as difficult because\n[the cooks] \u201crealized that it's getting busier. And [\u2026] they start haggling you for more pay, more\npay, more pay.\u201d\n3.1.2\n|\nDownstream consequences\nThe interview and archival material stress that when a restaurant receives a Michelin star,\ndownstream attention is directed to it. Not only do Michelin-starred restaurants appear with a\nstar next to their name in the Michelin Guide, highlighting the restaurant for foodies that fol-\nlow the guidebook, this recognition is also heavily covered in the media. While this may bring\nin new customers, it can also lead to heightened expectations (Pita, 2015), and the characteris-\ntics of consumers who transact with a focal restaurant may change following the receipt of a\nMichelin star (Kashner, 2015). This could lead to a customer base that has tastes that become\nrelatively misaligned with the restaurant's offerings (e.g., Kov\ufffdacs & Sharkey, 2014). Meeting the\ndemands of Michelin-primed consumers can be a difficult and costly challenge for a restaura-\nteur. Restaurateur Skye Gyngell (of Petersham Nurseries Caf\u00e9, London) even went so far as\ndescribing the heightened consumer expectations following his Michelin star as a \u201ccurse\u201d due\nto the burden that it imposed (Kashner, 2015). Another interviewee remarked that receiving\ntheir Michelin star was \u201ckind of like a heavy burden to bear\u201d since customer \u201cexpectations go\nhigher when you see somebody with a star.\u201d\nRestaurateurs indicated that heightened consumer expectations were immediately apparent\nand could pose new challenges for their businesses based on their own second-order reactions.\nOne interviewee commented that their responses to changing customer expectations included a\nreorganization of the seating schedules, and they \u201calso added new, bigger tables to make it\nmore comfortable,\u201d even while recognizing that the restaurant would not gain any additional\nrevenues from it. He noted that receiving their Michelin star had positively affected sales ini-\ntially, but that there seemed to be a more limited positive sales effect in their second and third\nyears of being starred: \u201cIt was just a quick bump. In the first year of getting the star, things defi-\nnitely got busier though\u2014we had lots more tourists coming in. You know, people in town that\njust want to see something special.\u201d Thus, even the positive benefits of such status shocks may\nbe double-edged to the extent that they are coupled with new costs (e.g., Bothner et al., 2012).\nThe notion that perceived changes in customer expectations encourage Michelin-starred res-\ntaurateurs to respond by changing their busi",
+    "section_start": "In this section, I build from the theoretical framework by engaging with qualitative material to help unpack how value network reactivity affected Michelin-starred restaurants.",
+    "confidence": 0.9,
+    "section_start_pos": 27548,
+    "section_end_pos": 37548
+  }
+}

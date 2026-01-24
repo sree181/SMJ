@@ -1,0 +1,58 @@
+{
+  "processed_papers": [
+    "2025_4488",
+    "2025_4346",
+    "2025_4431",
+    "2025_4260",
+    "2025_4098",
+    "2025_4478",
+    "2025_4533"
+  ],
+  "timestamp": "2026-01-17T09:34:22.025871",
+  "stats": {
+    "total_papers": 10,
+    "processed": 0,
+    "failed": 3,
+    "skipped": 7,
+    "in_progress": 0,
+    "start_time": "2026-01-17T09:34:05.882607",
+    "end_time": "2026-01-17T09:34:22.025864",
+    "total_extraction_time": 0.0,
+    "total_normalization_time": 0.0,
+    "total_ingestion_time": 0.0,
+    "total_theories": 0,
+    "total_phenomena": 0,
+    "total_methods": 0,
+    "total_variables": 0,
+    "total_findings": 0,
+    "normalization_hits": 0,
+    "normalization_misses": 0,
+    "embedding_normalizations": 0,
+    "errors": [
+      {
+        "paper_id": "2025_4573",
+        "error": "'NoneType' object is not iterable",
+        "attempt": 1,
+        "timestamp": "2026-01-17T09:34:19.437138"
+      },
+      {
+        "paper_id": "2025_2079",
+        "error": "'NoneType' object is not iterable",
+        "attempt": 1,
+        "timestamp": "2026-01-17T09:34:20.637912"
+      },
+      {
+        "paper_id": "2025_4359",
+        "error": "'NoneType' object is not iterable",
+        "attempt": 1,
+        "timestamp": "2026-01-17T09:34:22.025487"
+      }
+    ],
+    "papers_per_hour": 0.0,
+    "success_rate": 0.0,
+    "avg_extraction_time": 0,
+    "avg_normalization_time": 0,
+    "avg_ingestion_time": 0,
+    "normalization_coverage": 0
+  }
+}

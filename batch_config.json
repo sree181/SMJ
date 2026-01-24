@@ -1,0 +1,37 @@
+{
+  "processing": {
+    "start_year": 1985,
+    "end_year": 1994,
+    "max_workers": 3,
+    "window_size": 5,
+    "retry_attempts": 3,
+    "retry_delay": 5
+  },
+  "extraction": {
+    "max_text_length": 15000,
+    "chunk_size": 3000,
+    "enable_parallel_processing": true,
+    "extract_all_sections": true,
+    "sections": [
+      "abstract",
+      "introduction", 
+      "literature_review",
+      "methodology",
+      "results",
+      "discussion",
+      "conclusion"
+    ]
+  },
+  "quality_control": {
+    "min_entities_per_paper": 5,
+    "validate_extractions": true,
+    "log_detailed_errors": true,
+    "save_intermediate_results": true
+  },
+  "output": {
+    "save_reports": true,
+    "report_format": "json",
+    "include_raw_data": false,
+    "compress_output": false
+  }
+}

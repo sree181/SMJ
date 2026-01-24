@@ -1,0 +1,217 @@
+================================================================================
+ANALYTICS CHARTS TAB - DETAILED CALCULATION VERIFICATION REPORT
+================================================================================
+
+SECTION 1: RESEARCH VOLUME EVOLUTION (Paper Counts by 5-Year Intervals)
+--------------------------------------------------------------------------------
+
+Calculation Logic:
+  Query: MATCH (p:Paper) WHERE p.year >= $start_year AND p.year < $end_year AND p.year > 0
+  Returns: count(p) and collect(p.paper_id)
+  Intervals: 5-year periods (1985-1989, 1990-1994, etc.)
+  Filter: Excludes papers with year = 0 or NULL
+
+Database Results (Verified):
+
+  1985-1989: 10 papers
+    Paper IDs sample (first 5): 1988_310, 1988_305, 1989_308, 1989_253, 1989_304
+  1990-1994: 85 papers
+    Paper IDs sample (first 5): 1990_295, 1990_379, 1990_319, 1990_357, 1990_358
+  1995-1999: 106 papers
+    Paper IDs sample (first 5): 1995_1219, 1995_1878, 1995_1989, 1995_1078, 1995_1245
+  2000-2004: 127 papers
+    Paper IDs sample (first 5): 2000_103, 2000_137, 2000_1036, 2000_1295, 2000_1261
+  2005-2009: 99 papers
+    Paper IDs sample (first 5): 2005_1179, 2005_1125, 2005_1043, 2005_1266, 2005_1643
+  2010-2014: 149 papers
+    Paper IDs sample (first 5): 2010_1391, 2010_1398, 2010_1662, 2010_1671, 2010_1533
+  2015-2019: 159 papers
+    Paper IDs sample (first 5): 2015_1149, 2015_1265, 2015_1246, 2015_1059, 2015_2417
+  2020-2024: 16 papers
+    Paper IDs sample (first 5): 2020_2359, 2020_4253, 2020_4286, 2020_1103, 2020_1779
+
+SECTION 2: SUMMARY METRICS (Top Cards)
+--------------------------------------------------------------------------------
+
+Calculation Logic:
+  1. Total Papers = sum(count) for all intervals
+  2. Avg per Interval = Total Papers / Number of Intervals
+  3. Peak Period = interval with maximum count
+
+Verified Calculations:
+  Total Papers: 751
+    Calculation: sum([10, 85, 106, 127, 99, 149, 159, 16]) = 751
+
+  Avg per Interval: 93.9
+    Calculation: 751 / 8 = 93.9
+
+  Peak Period: 2015-2019 with 159 papers
+    Verification: max([10, 85, 106, 127, 99, 149, 159, 16]) = 159
+
+SECTION 3: THEORETICAL EVOLUTION & DIVERGENCE
+--------------------------------------------------------------------------------
+
+Calculation Logic:
+
+3.1 Theory Diversity (Normalized Shannon Entropy):
+  Formula: Diversity = -Σ(p_i * log(p_i)) / log(n)
+  where: p_i = proportion of theory i usage = count_i / total_usage
+         n = number of theories
+  Range: [0, 1] where 1.0 = perfect diversity, 0.0 = no diversity
+
+3.2 Theory Concentration (Gini Coefficient):
+  Formula: Gini = (ΣΣ |x_i - x_j|) / (2 * n² * x̄)
+  where: x_i = sorted theory counts (descending)
+         n = number of theories
+         x̄ = mean of theory counts
+  Range: [0, 1] where 0.0 = equal usage, 1.0 = one theory dominates
+
+3.3 Fragmentation Index:
+  Formula: Fragmentation = 1 - Gini_Coefficient
+  Range: [0, 1] where 1.0 = highly fragmented, 0.0 = concentrated
+
+Verified Calculations by Interval:
+
+  Interval: 1985-1989
+    Papers: 10
+    Theories: 21
+    Total Theory Usage: 21
+    Diversity: 1.0000 (100.00%)
+    Concentration: 0.0000 (0.00%)
+    Fragmentation: 1.0000 (100.00%)
+    Top 5 Theories:
+      - Market For Corporate Control: 1 uses (4.8%)
+      - Uncertainty And Turnover Intent: 1 uses (4.8%)
+      - Organizational Culture Shock: 1 uses (4.8%)
+      - Organizational Ecology: 1 uses (4.8%)
+      - Upper-Echelon Theory: 1 uses (4.8%)
+
+  Interval: 1990-1994
+    Papers: 85
+    Theories: 190
+    Total Theory Usage: 222
+    Diversity: 0.9793 (97.93%)
+    Concentration: 0.1367 (13.67%)
+    Fragmentation: 0.8633 (86.33%)
+    Top 5 Theories:
+      - Agency Theory: 8 uses (3.6%)
+      - Transaction Cost Economics: 5 uses (2.3%)
+      - Miles And Snow Typology: 4 uses (1.8%)
+      - Organizational Learning Theory: 4 uses (1.8%)
+      - Market For Corporate Control: 3 uses (1.4%)
+
+  Interval: 1995-1999
+    Papers: 106
+    Theories: 224
+    Total Theory Usage: 281
+    Diversity: 0.9566 (95.66%)
+    Concentration: 0.1948 (19.48%)
+    Fragmentation: 0.8052 (80.52%)
+    Top 5 Theories:
+      - Resource-Based View: 15 uses (5.3%)
+      - Resource-Based View Of The Firm: 11 uses (3.9%)
+      - Agency Theory: 9 uses (3.2%)
+      - Transaction Cost Economics: 7 uses (2.5%)
+      - Organizational Learning Theory: 5 uses (1.8%)
+
+  Interval: 2000-2004
+    Papers: 127
+    Theories: 188
+    Total Theory Usage: 243
+    Diversity: 0.9438 (94.38%)
+    Concentration: 0.2186 (21.86%)
+    Fragmentation: 0.7814 (78.14%)
+    Top 5 Theories:
+      - Resource-Based View: 19 uses (7.8%)
+      - Agency Theory: 12 uses (4.9%)
+      - Dynamic Capabilities Theory: 6 uses (2.5%)
+      - Resource-Based View Of The Firm: 6 uses (2.5%)
+      - Organizational Learning Theory: 5 uses (2.1%)
+
+  Interval: 2005-2009
+    Papers: 99
+    Theories: 162
+    Total Theory Usage: 227
+    Diversity: 0.9317 (93.17%)
+    Concentration: 0.2718 (27.18%)
+    Fragmentation: 0.7282 (72.82%)
+    Top 5 Theories:
+      - Resource-Based View: 21 uses (9.3%)
+      - Agency Theory: 10 uses (4.4%)
+      - Transaction Cost Economics: 9 uses (4.0%)
+      - Dynamic Capabilities Theory: 5 uses (2.2%)
+      - Stakeholder Theory: 5 uses (2.2%)
+
+  Interval: 2010-2014
+    Papers: 149
+    Theories: 181
+    Total Theory Usage: 267
+    Diversity: 0.9183 (91.83%)
+    Concentration: 0.3052 (30.52%)
+    Fragmentation: 0.6948 (69.48%)
+    Top 5 Theories:
+      - Resource-Based View: 25 uses (9.4%)
+      - Agency Theory: 18 uses (6.7%)
+      - Upper Echelons Theory: 7 uses (2.6%)
+      - Institutional Theory: 7 uses (2.6%)
+      - Stakeholder Theory: 6 uses (2.2%)
+
+  Interval: 2015-2019
+    Papers: 159
+    Theories: 222
+    Total Theory Usage: 310
+    Diversity: 0.9459 (94.59%)
+    Concentration: 0.2643 (26.43%)
+    Fragmentation: 0.7357 (73.57%)
+    Top 5 Theories:
+      - Resource-Based View: 16 uses (5.2%)
+      - Agency Theory: 16 uses (5.2%)
+      - Stakeholder Theory: 8 uses (2.6%)
+      - Upper Echelons Theory: 7 uses (2.3%)
+      - Knowledge-Based View: 5 uses (1.6%)
+
+  Interval: 2020-2024
+    Papers: 16
+    Theories: 20
+    Total Theory Usage: 20
+    Diversity: 1.0000 (100.00%)
+    Concentration: 0.0000 (0.00%)
+    Fragmentation: 1.0000 (100.00%)
+    Top 5 Theories:
+      - Hypercompetition: 1 uses (5.0%)
+      - Entrenchment And Increased Inequality: 1 uses (5.0%)
+      - Mueller Persistence: 1 uses (5.0%)
+      - Rank Friction: 1 uses (5.0%)
+      - Upper Echelons Theory: 1 uses (5.0%)
+
+Summary Averages:
+  Avg Diversity: 0.9595 (95.95%)
+  Avg Concentration: 0.1739 (17.39%)
+  Avg Fragmentation: 0.8261 (82.61%)
+
+SECTION 4: TOPIC LANDSCAPE EVOLUTION
+--------------------------------------------------------------------------------
+
+Note: Topic evolution uses K-means clustering on paper embeddings.
+This requires the 'all-MiniLM-L6-v2' model and paper embeddings.
+Full verification requires running the actual clustering algorithm.
+
+Calculation Logic (from code):
+  1. Get paper embeddings for each interval
+  2. Perform K-means clustering (optimal_k = min(10, papers/3))
+  3. Calculate coherence = average cosine similarity within clusters
+  4. Calculate diversity = normalized Shannon entropy of cluster sizes
+  5. Calculate stability = similarity of centroids across intervals
+
+Database Query for Embeddings:
+  MATCH (p:Paper) WHERE p.paper_id IN $paper_ids AND p.embedding IS NOT NULL
+  RETURN p.paper_id, p.embedding, p.title, p.abstract
+
+Embedding Availability:
+  Papers with embeddings: 1029
+  Total papers (year > 0): 753
+  Coverage: 136.7%
+
+================================================================================
+END OF VERIFICATION REPORT
+================================================================================

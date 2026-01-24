@@ -1,0 +1,13 @@
+{
+  "response": {
+    "theories": [
+      {
+        "theory_name": "Resource-Based View"
+      }
+    ]
+  },
+  "prompt_type": "theory",
+  "prompt_version": "2.0",
+  "cached_at": "2025-12-04T13:33:05.126467",
+  "text_hash": "c85c0b9c52a39c77c01cddb48353a3e0"
+}

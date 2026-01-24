@@ -1,0 +1,60 @@
+{
+  "paper_id": "2025_4359",
+  "research_questions": [
+    {
+      "question": "How third parties affect firms' ability to create and capture value?",
+      "question_type": "explanatory",
+      "section": "introduction",
+      "domain": "strategic_management"
+    },
+    {
+      "question": "To what extent do third-party evaluations influence the creation and capture of value in markets?",
+      "question_type": "predictive",
+      "section": "literature_review",
+      "domain": "strategic_management"
+    },
+    {
+      "question": "How do firms change their behavior in reaction to being evaluated, observed, or measured?",
+      "question_type": "explanatory",
+      "section": "literature_review",
+      "domain": "organizational_behavior"
+    }
+  ],
+  "variables": [
+    {
+      "variable_name": "Restaurant Exits",
+      "variable_type": "dependent",
+      "measurement": "rates of exit for Michelin-starred restaurants",
+      "operationalization": "measured as the likelihood of restaurant exits using a two-decade panel (2000-2019) of the openings and closings of New York City's most elite restaurants",
+      "domain": "organizational"
+    },
+    {
+      "variable_name": "Michelin Stars",
+      "variable_type": "independent",
+      "measurement": "receipt of a Michelin star",
+      "operationalization": "awarded by the Michelin Guide to restaurants outside of Europe for the first time in 2005",
+      "domain": "organizational"
+    },
+    {
+      "variable_name": "Legitimacy",
+      "variable_type": "dependent",
+      "measurement": "enhanced status positions",
+      "operationalization": "providing actors with access to better resources (e.g., Rao, 1994)",
+      "domain": "organizational"
+    },
+    {
+      "variable_name": "Value Appropriation Challenges",
+      "variable_type": "dependent",
+      "measurement": "anxieties, risky behavior, or product-consumer misalignments",
+      "operationalization": "exacerbated by favorable evaluations of a focal firm (e.g., Favaron et al., 2022)",
+      "domain": "organizational"
+    },
+    {
+      "variable_name": "Consumer Demand",
+      "variable_type": "dependent",
+      "measurement": "enhanced consumer demand",
+      "operationalization": "resulting from favorable evaluations (e.g., Luca, 2016)",
+      "domain": "strategic"
+    }
+  ]
+}

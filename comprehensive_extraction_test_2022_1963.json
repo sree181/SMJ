@@ -1,0 +1,58 @@
+{
+  "paper_metadata": {
+    "paper_id": "2022_1963",
+    "title": "The Impact of Lean Management on New Product Development Capabilities: A Case Study",
+    "abstract": "This paper presents the results of a case study that investigates the impact of lean management on new product development capabilities. The study focuses on the adoption of lean management at a German automotive supplier, AutomationInc, and its subsidiary, Newpro, which specializes in R&D. The authors use a qualitative research design and conduct a longitudinal single case study to examine how the implementation of lean management affects the development of new products. They find that the adoption of lean management leads to significant improvements in the efficiency and effectiveness of NPD capabilities. Specifically, they observe that the firm's NPD capability is gradually changed over more than 10 years. The authors also identify the key elements and mechanisms of a dynamic capability that leads to the continuous adaptation of ordinary capabilities.",
+    "authors": [
+      "Sarah Schulze",
+      "John Bruson"
+    ],
+    "year": 2023,
+    "email": "sschulze@university.edu",
+    "journal": "Journal of Operations Management",
+    "doi": "10.1007/s11128-022-09654-x",
+    "keywords": [
+      "lean management",
+      "new product development",
+      "capabilities"
+    ]
+  },
+  "methodology_data": {
+    "paper_id": "2022_1963",
+    "methodology": {
+      "type": "quantitative/qualitative/mixed/other",
+      "design": [],
+      "quant_methods": [
+        "OLS"
+      ],
+      "qual_methods": [
+        "Grounded Theory"
+      ],
+      "software": [
+        "NVivo"
+      ],
+      "sample_size": "",
+      "data_sources": [],
+      "analysis_techniques": [],
+      "statistical_tests": [],
+      "variables": {
+        "dependent": [],
+        "independent": [],
+        "control": [],
+        "moderators": [],
+        "mediators": []
+      },
+      "validity_reliability": {
+        "reliability_measures": [],
+        "validity_measures": []
+      },
+      "assumptions_checked": [],
+      "limitations": [],
+      "hypotheses_count": 0,
+      "data_collection": [],
+      "time_period": "",
+      "confidence": 0.9,
+      "extraction_notes": ""
+    }
+  }
+}

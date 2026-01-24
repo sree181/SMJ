@@ -1,0 +1,243 @@
+================================================================================
+THEORY BETWEENNESS TAB - DETAILED CALCULATION VERIFICATION REPORT
+================================================================================
+
+OVERVIEW
+--------------------------------------------------------------------------------
+
+The Theory Betweenness tab identifies 'bridge theories' - theories that
+connect multiple phenomena and research domains. This metric measures:
+  - Cross-Topic Reach: Number of distinct phenomena each theory explains
+  - Betweenness Score: Normalized measure of how theories connect domains
+  - Bridge Theories: Theories explaining at least 2 phenomena (default)
+
+SECTION 1: DATABASE VERIFICATION
+--------------------------------------------------------------------------------
+
+1.1 Relationship Count:
+  Total EXPLAINS_PHENOMENON relationships: 3643
+  Distinct theories with relationships: 808
+  Distinct phenomena explained: 1244
+
+SECTION 2: CALCULATION LOGIC
+--------------------------------------------------------------------------------
+
+2.1 Database Query:
+  Query: MATCH (t:Theory)-[:EXPLAINS_PHENOMENON]->(ph:Phenomenon)
+         WITH t, count(DISTINCT ph) as phenomenon_count,
+              collect(DISTINCT ph.phenomenon_name) as phenomena
+         WHERE phenomenon_count >= $min_phenomena
+         RETURN t.name, phenomenon_count, phenomena
+         ORDER BY phenomenon_count DESC
+         LIMIT 100
+
+2.2 Cross-Topic Reach Calculation:
+  Cross-Topic Reach = count(DISTINCT ph) for each theory
+  This counts how many distinct phenomena each theory explains
+
+2.3 Betweenness Score Calculation:
+  Step 1: Find maximum cross-topic reach: max_reach = max(all cross_topic_reach)
+  Step 2: Normalize each theory: betweenness_score = cross_topic_reach / max_reach
+  Range: [0, 1] where 1.0 = theory with maximum reach
+
+2.4 Paper Count Calculation:
+  Query: MATCH (p:Paper)-[:USES_THEORY]->(t:Theory)
+         WHERE t.name IN $theory_names
+         RETURN t.name, count(DISTINCT p) as paper_count
+
+2.5 Summary Statistics:
+  - Total Bridge Theories: count(theories with cross_topic_reach >= min_phenomena)
+  - Avg Cross-Topic Reach: mean(cross_topic_reach) for all bridge theories
+  - Max Cross-Topic Reach: max(cross_topic_reach) across all theories
+
+SECTION 3: VERIFIED CALCULATIONS
+--------------------------------------------------------------------------------
+
+3.1 Summary Statistics:
+  Total Bridge Theories: 100
+  Average Cross-Topic Reach: 15.93
+  Maximum Cross-Topic Reach: 201
+
+3.2 Top 20 Bridge Theories (for bar chart):
+
+   1. Resource-Based View
+      Cross-Topic Reach: 201 phenomena
+      Paper Count: 119 papers
+      Betweenness Score: 1.0000 (100.00%)
+      Calculation: 201 / 201 = 1.0000
+      Phenomena: Firm Growth, Firm Performance, Strategic Change, Firm Performance Variation By Owner Type, Regional Differences In Ownership Effects...
+
+   2. Agency Theory
+      Cross-Topic Reach: 156 phenomena
+      Paper Count: 99 papers
+      Betweenness Score: 0.7761 (77.61%)
+      Calculation: 156 / 201 = 0.7761
+      Phenomena: Firm Performance, Top Executive Pay, Pay Dispersion, Politically Connected Boards, Pay-Performance Link...
+
+   3. Transaction Cost Economics
+      Cross-Topic Reach: 79 phenomena
+      Paper Count: 38 papers
+      Betweenness Score: 0.3930 (39.30%)
+      Calculation: 79 / 201 = 0.3930
+      Phenomena: Firm Performance, Firm Performance Variation By Owner Type, Regional Differences In Ownership Effects, Privatization And Foreign Entry Effects, Supplier Performance...
+
+   4. Resource-Based View Of The Firm
+      Cross-Topic Reach: 78 phenomena
+      Paper Count: 23 papers
+      Betweenness Score: 0.3881 (38.81%)
+      Calculation: 78 / 201 = 0.3881
+      Phenomena: Asset Specificity, Firm Heterogeneity, Corporate Acquisition, Preferences For Resource Similarity And Complementarity In Acquisition Choice, Organizational Performance...
+
+   5. Organizational Learning Theory
+      Cross-Topic Reach: 60 phenomena
+      Paper Count: 24 papers
+      Betweenness Score: 0.2985 (29.85%)
+      Calculation: 60 / 201 = 0.2985
+      Phenomena: Strategic Change, Geographic Diversification And Firm Profitability, Development Of Strategic Factor Markets, Collaborative Innovation Within Novice Firms, Internal Collaboration Among Inventors...
+
+   6. Dynamic Capabilities Theory
+      Cross-Topic Reach: 57 phenomena
+      Paper Count: 32 papers
+      Betweenness Score: 0.2836 (28.36%)
+      Calculation: 57 / 201 = 0.2836
+      Phenomena: Firm Performance, Strategic Change, Heterogeneity Of Dynamic Managerial Capabilities, Investment Speed Tradeoff, Intrinsic Speed Capability...
+
+   7. Contingency Theory
+      Cross-Topic Reach: 55 phenomena
+      Paper Count: 22 papers
+      Betweenness Score: 0.2736 (27.36%)
+      Calculation: 55 / 201 = 0.2736
+      Phenomena: Firm Performance, Strategic Change, Firm Heterogeneity, Strategic Alliance Partner Reconfiguration, Unplanned Termination Of Complex Projects...
+
+   8. Upper Echelons Theory
+      Cross-Topic Reach: 42 phenomena
+      Paper Count: 31 papers
+      Betweenness Score: 0.2090 (20.90%)
+      Calculation: 42 / 201 = 0.2090
+      Phenomena: Firm Performance, Executive Succession, Strategic Change, Post-Succession Strategic Change, Corporate Social Responsibility (CSR)...
+
+   9. Stakeholder Theory
+      Cross-Topic Reach: 36 phenomena
+      Paper Count: 22 papers
+      Betweenness Score: 0.1791 (17.91%)
+      Calculation: 36 / 201 = 0.1791
+      Phenomena: Competitive Dynamics Expansion, Action/Reaction Dyads, Relational Competition, Corporate Social Performance (CSP) Influence On Corporate Financial Performance (CFP), Analyst Stock Recommendations...
+
+  10. Institutional Theory
+      Cross-Topic Reach: 35 phenomena
+      Paper Count: 24 papers
+      Betweenness Score: 0.1741 (17.41%)
+      Calculation: 35 / 201 = 0.1741
+      Phenomena: Firm Performance, Firm Performance Variation By Owner Type, Regional Differences In Ownership Effects, Privatization And Foreign Entry Effects, Ecological Uncertainty...
+
+  11. Organizational Ecology
+      Cross-Topic Reach: 31 phenomena
+      Paper Count: 12 papers
+      Betweenness Score: 0.1542 (15.42%)
+      Calculation: 31 / 201 = 0.1542
+      Phenomena: New Venture Strategic Adaptation, Industry Growth, Firm Heterogeneity, Persistence Of Inefficient Firms, Spin-Offs...
+
+  12. Behavioral Theory of the Firm
+      Cross-Topic Reach: 29 phenomena
+      Paper Count: 22 papers
+      Betweenness Score: 0.1443 (14.43%)
+      Calculation: 29 / 201 = 0.1443
+      Phenomena: Firm Performance, Firms' Responses To Performance Assessments Relative To Multiple Aspiration Levels, Ambiguity In Performance Feedback, Inconsistent And Consistent Performance Feedback, Non-Location-Specific Knowledge Transfer (N-Lskt) Effects On Acquired Firm Performance...
+
+  13. Absorptive Capacity
+      Cross-Topic Reach: 27 phenomena
+      Paper Count: 8 papers
+      Betweenness Score: 0.1343 (13.43%)
+      Calculation: 27 / 201 = 0.1343
+      Phenomena: Innovation Generation Based On External Knowledge, Knowledge Sharing In Organizations, Organizational Failure, R&D Expenditure Volatility, Exploration And Exploitation...
+
+  14. Resource Dependence Theory
+      Cross-Topic Reach: 25 phenomena
+      Paper Count: 14 papers
+      Betweenness Score: 0.1244 (12.44%)
+      Calculation: 25 / 201 = 0.1244
+      Phenomena: Firm Performance, Firm Innovative Performance, Innovative Productivity, Innovative Leadership, Firm Heterogeneity...
+
+  15. Knowledge-Based View
+      Cross-Topic Reach: 24 phenomena
+      Paper Count: 10 papers
+      Betweenness Score: 0.1194 (11.94%)
+      Calculation: 24 / 201 = 0.1194
+      Phenomena: Exploitative Product Innovation, Exploratory Product Innovation, Industrial Clusters' Influence On Innovation, Firm Innovative Performance, Innovative Productivity...
+
+  16. Game Theory
+      Cross-Topic Reach: 20 phenomena
+      Paper Count: 6 papers
+      Betweenness Score: 0.0995 (9.95%)
+      Calculation: 20 / 201 = 0.0995
+      Phenomena: Competitive Dynamics Expansion, Action/Reaction Dyads, Relational Competition, Trade-Off Between Long-Term Commitment And Wait-And-See Flexibility, Strategic Decision Making Under Uncertainty And Competitive Rivalry...
+
+  17. Knowledge-Based View Of The Firm
+      Cross-Topic Reach: 18 phenomena
+      Paper Count: 7 papers
+      Betweenness Score: 0.0896 (8.96%)
+      Calculation: 18 / 201 = 0.0896
+      Phenomena: Racial Diversity And Firm Performance Relationship, Value Congruence And Organizational Performance, Knowledge Transfer In Strategic Alliances, Causal Ambiguity, Knowledge Diffusion Within Toyota'S Production Network...
+
+  18. Signaling Theory
+      Cross-Topic Reach: 17 phenomena
+      Paper Count: 15 papers
+      Betweenness Score: 0.0846 (8.46%)
+      Calculation: 17 / 201 = 0.0846
+      Phenomena: Organizational Status Benefits, Wage Dynamics, Career Advancement, Voluntary Executive Turnover, Positive Voluntary Public Disclosures...
+
+  19. Human Capital Theory
+      Cross-Topic Reach: 16 phenomena
+      Paper Count: 15 papers
+      Betweenness Score: 0.0796 (7.96%)
+      Calculation: 16 / 201 = 0.0796
+      Phenomena: Motivation Of Knowledge Workers, Allocation Of Decision Rights, Project Closeness To Core Business, Employee Mobility, Firm Innovative Performance...
+
+  20. Market For Corporate Control
+      Cross-Topic Reach: 15 phenomena
+      Paper Count: 5 papers
+      Betweenness Score: 0.0746 (7.46%)
+      Calculation: 15 / 201 = 0.0746
+      Phenomena: Target Company Top Management Turnover, Merger And Acquisition Negotiations, Top Management Turnover, Company Performance History, Market Reaction To Acquisition Announcements...
+
+3.3 All Bridge Theories (for table):
+
+  Total theories returned: 100
+
+   1. Resource-Based View: 201 phenomena, 119 papers, 100.0%
+   2. Agency Theory: 156 phenomena, 99 papers, 77.6%
+   3. Transaction Cost Economics: 79 phenomena, 38 papers, 39.3%
+   4. Resource-Based View Of The Firm: 78 phenomena, 23 papers, 38.8%
+   5. Organizational Learning Theory: 60 phenomena, 24 papers, 29.9%
+   6. Dynamic Capabilities Theory: 57 phenomena, 32 papers, 28.4%
+   7. Contingency Theory: 55 phenomena, 22 papers, 27.4%
+   8. Upper Echelons Theory: 42 phenomena, 31 papers, 20.9%
+   9. Stakeholder Theory: 36 phenomena, 22 papers, 17.9%
+  10. Institutional Theory: 35 phenomena, 24 papers, 17.4%
+  ... and 90 more theories
+
+SECTION 4: VERIFICATION CHECKS
+--------------------------------------------------------------------------------
+
+4.1 Minimum Reach Check:
+  Minimum cross_topic_reach: 5
+  Expected: >= 2
+  Status: ✅ PASS
+
+4.2 Betweenness Score Normalization:
+  Maximum betweenness_score: 1.0000
+  Expected: 1.0 (theory with max reach)
+  Status: ✅ PASS
+
+4.3 Summary Statistics Verification:
+  Calculated Avg Reach: 15.93
+  Reported Avg Reach: 15.93
+  Status: ✅ PASS
+
+  Calculated Max Reach: 201
+  Reported Max Reach: 201
+  Status: ✅ PASS
+
+================================================================================
+END OF VERIFICATION REPORT
+================================================================================

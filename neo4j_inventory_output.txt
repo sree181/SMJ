@@ -1,0 +1,113 @@
+WARNING:neo4j.notifications:Received notification from DBMS server: {severity: WARNING} {code: Neo.ClientNotification.Statement.UnknownRelationshipTypeWarning} {category: UNRECOGNIZED} {title: The provided relationship type is not in the database.} {description: One of the relationship types in your query is not available in the database, make sure you didn't misspell it or that the label is available when you run this statement in your application (the missing relationship type is: AUTHORED)} {position: line: 3, column: 34, offset: 66} for query: '\n                MATCH (p:Paper)\n                WHERE NOT (p)<-[:AUTHORED]-() AND NOT (p)-[:AUTHORED_BY]->()\n                RETURN count(p) as count\n            '
+WARNING:neo4j.notifications:Received notification from DBMS server: {severity: WARNING} {code: Neo.ClientNotification.Statement.UnknownRelationshipTypeWarning} {category: UNRECOGNIZED} {title: The provided relationship type is not in the database.} {description: One of the relationship types in your query is not available in the database, make sure you didn't misspell it or that the label is available when you run this statement in your application (the missing relationship type is: AUTHORED_BY)} {position: line: 3, column: 61, offset: 93} for query: '\n                MATCH (p:Paper)\n                WHERE NOT (p)<-[:AUTHORED]-() AND NOT (p)-[:AUTHORED_BY]->()\n                RETURN count(p) as count\n            '
+WARNING:neo4j.notifications:Received notification from DBMS server: {severity: WARNING} {code: Neo.ClientNotification.Statement.UnknownRelationshipTypeWarning} {category: UNRECOGNIZED} {title: The provided relationship type is not in the database.} {description: One of the relationship types in your query is not available in the database, make sure you didn't misspell it or that the label is available when you run this statement in your application (the missing relationship type is: HAS_FINDING)} {position: line: 3, column: 33, offset: 65} for query: '\n                MATCH (p:Paper)\n                WHERE NOT (p)-[:HAS_FINDING]->()\n                RETURN count(p) as count\n            '
+WARNING:neo4j.notifications:Received notification from DBMS server: {severity: WARNING} {code: Neo.ClientNotification.Statement.UnknownRelationshipTypeWarning} {category: UNRECOGNIZED} {title: The provided relationship type is not in the database.} {description: One of the relationship types in your query is not available in the database, make sure you didn't misspell it or that the label is available when you run this statement in your application (the missing relationship type is: HAS_CONTRIBUTION)} {position: line: 3, column: 33, offset: 65} for query: '\n                MATCH (p:Paper)\n                WHERE NOT (p)-[:HAS_CONTRIBUTION]->()\n                RETURN count(p) as count\n            '
+================================================================================
+NEO4J DATABASE INVENTORY
+================================================================================
+
+================================================================================
+NODE LABELS
+================================================================================
+
+Author: 0 nodes
+
+Contribution: 807 nodes
+  Properties: contribution_id, contribution_text, contribution_type, section
+  Sample: {'contribution_id': '2025_4346_contrib_4808', 'contribution_type': 'Theoretical contributions', 'section': 'discussion', 'contribution_text': 'Identify economic nationalism as an important factor driving judicial decisions in favor of domestic firms and provide empirical evidence of the underlying mechanism.'}
+
+Finding: 946 nodes
+  Properties: effect_size, finding_id, finding_text, finding_type, section, significance
+  Sample: {'finding_id': '2025_4346_finding_5976', 'section': 'results', 'effect_size': '10%', 'finding_type': 'Hypothesis test result', 'finding_text': 'Domestic patent holders are 10% more likely to successfully defend their patents in lawsuits against foreign firms compared to similar disputes against other domestic firms.'}
+
+Method: 154 nodes
+  Properties: confidence, data_sources, name, original_name, sample_size, software, time_period, type, updated_at
+  Sample: {'updated_at': neo4j.time.DateTime(2026, 1, 17, 15, 57, 43, 549000000, tzinfo=<UTC>), 'software': ['N', 'O', 'T', '', 'S', 'P', 'E', 'C', 'I', 'F', 'I', 'E', 'D'], 'sample_size': '58,754', 'original_name': 'Instrumental Variables', 'confidence': 0.8, 'name': 'Instrumental Variables', 'type': 'Primary analytical method', 'data_sources': ['US federal district courts records'], 'time_period': '1983 to 2016'}
+
+Paper: 1029 nodes
+  Properties: abstract, journal, keywords, paper_id, title, updated_at, year
+  Sample: {'journal': '', 'keywords': [], 'updated_at': neo4j.time.DateTime(2026, 1, 17, 18, 59, 58, 758000000, tzinfo=<UTC>), 'year': 0, 'abstract': '', 'title': '', 'paper_id': '2025_4346'}
+
+Phenomenon: 1407 nodes
+  Properties: context, description, domain, phenomenon_name, phenomenon_type
+  Sample: {'phenomenon_name': 'Economic Nationalism', 'domain': 'Strategic management', 'context': 'Economic nationalism encompasses actions by political and regulatory actors to favor domestic firms over foreign firms, including in judicial decisions.', 'description': 'Government policies and actions that protect and bolster domestic interests at the expense of foreign entities.', 'phenomenon_type': 'Observable behavior'}
+
+ResearchQuestion: 1221 nodes
+  Properties: domain, question, question_id, question_type, section
+  Sample: {'question': 'What characteristics of top management teams (TMTs) determine which firms are likely to grow and dominate in an industry?', 'question_type': 'explanatory', 'domain': 'strategic_management', 'section': 'introduction', 'question_id': '2020_1313_rq_3548'}
+
+Software: 10 nodes
+  Properties: software_name
+  Sample: {'software_name': 'N'}
+
+Theory: 1019 nodes
+  Properties: created_at, description, domain, name, original_name, theory_type, updated_at
+  Sample: {'updated_at': neo4j.time.DateTime(2026, 1, 17, 16, 32, 2, 453000000, tzinfo=<UTC>), 'domain': 'strategic_management', 'original_name': 'Social Identity Theory', 'name': 'Social Identity Theory', 'description': 'Used to expect that same-gender pairs, especially among minorities such as women in entrepreneurship, are more likely through role modeling mechanisms to influence career choices.', 'created_at': neo4j.time.DateTime(2026, 1, 17, 15, 57, 40, 299000000, tzinfo=<UTC>), 'theory_type': 'framework'}
+
+Variable: 4 nodes
+  Properties: domain, measurement, operationalization, variable_id, variable_name, variable_type
+  Sample: {'variable_id': '2008_3799_var_8375', 'variable_type': 'dependent', 'domain': 'organizational', 'variable_name': 'Organizational Performance', 'operationalization': '', 'measurement': ''}
+
+================================================================================
+RELATIONSHIP TYPES
+================================================================================
+
+ADDRESSES: 1221 relationships
+  Pattern: (Paper)-[:ADDRESSES]->(ResearchQuestion)
+
+EXPLAINS_PHENOMENON: 3640 relationships
+  Properties: connection_strength, created_at, evidence_count, explicit_bonus, keyword_score, paper_count, paper_id, paper_ids, role_weight, section, section_score, semantic_score, theory_role
+  Pattern: (Theory)-[:EXPLAINS_PHENOMENON]->(Phenomenon)
+
+EXPLAINS_PHENOMENON_AGGREGATED: 3635 relationships
+  Properties: avg_strength, paper_count, paper_ids, updated_at
+  Pattern: (Theory)-[:EXPLAINS_PHENOMENON_AGGREGATED]->(Phenomenon)
+
+MAKES: 749 relationships
+  Pattern: (Paper)-[:MAKES]->(Contribution)
+
+REPORTS: 892 relationships
+  Pattern: (Paper)-[:REPORTS]->(Finding)
+
+STUDIES_PHENOMENON: 1474 relationships
+  Properties: context, section
+  Pattern: (Paper)-[:STUDIES_PHENOMENON]->(Phenomenon)
+
+USES_METHOD: 401 relationships
+  Properties: confidence
+  Pattern: (Paper)-[:USES_METHOD]->(Method)
+
+USES_SOFTWARE: 10 relationships
+  Pattern: (Paper)-[:USES_SOFTWARE]->(Software)
+
+USES_THEORY: 1550 relationships
+  Properties: role, section, updated_at
+  Pattern: (Paper)-[:USES_THEORY]->(Theory)
+
+USES_VARIABLE: 4 relationships
+  Properties: variable_type
+  Pattern: (Paper)-[:USES_VARIABLE]->(Variable)
+
+================================================================================
+MISSING DATA ANALYSIS
+================================================================================
+
+Total Papers: 1029
+
+Missing Data:
+  papers_missing_titles: 433 (42.1%)
+  papers_missing_authors: 1029 (100.0%)
+  papers_missing_theories: 451 (43.8%)
+  papers_missing_methods: 733 (71.2%)
+  papers_missing_phenomena: 555 (53.9%)
+  papers_missing_research_questions: 490 (47.6%)
+  papers_missing_findings: 1029 (100.0%)
+  papers_missing_contributions: 1029 (100.0%)
+
+================================================================================
+SUMMARY
+================================================================================
+Node Types: 10
+Relationship Types: 10
+Total Nodes: 6597
+Total Relationships: 13576

@@ -1,0 +1,148 @@
+{
+  "total_papers": 275,
+  "processed": 255,
+  "failed": 20,
+  "skipped": 0,
+  "in_progress": 0,
+  "start_time": "2026-01-17T10:48:17.110030",
+  "end_time": "2026-01-17T11:00:53.554281",
+  "total_extraction_time": 3240.834091901779,
+  "total_normalization_time": 10.844552516937256,
+  "total_ingestion_time": 214.68597555160522,
+  "total_theories": 323,
+  "total_phenomena": 417,
+  "total_methods": 172,
+  "total_variables": 423,
+  "total_findings": 325,
+  "normalization_hits": 538,
+  "normalization_misses": 351,
+  "embedding_normalizations": 1,
+  "errors": [
+    {
+      "paper_id": "2015_1253",
+      "error": "'NoneType' object is not iterable",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:48:34.726498"
+    },
+    {
+      "paper_id": "2015_287",
+      "error": "'NoneType' object is not iterable",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:50:13.998515"
+    },
+    {
+      "paper_id": "2015_3073",
+      "error": "'NoneType' object is not iterable",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:50:50.384330"
+    },
+    {
+      "paper_id": "2016_1135",
+      "error": "'NoneType' object is not iterable",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:51:31.251567"
+    },
+    {
+      "paper_id": "2016_1317",
+      "error": "'NoneType' object is not iterable",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:51:38.462676"
+    },
+    {
+      "paper_id": "2016_2712",
+      "error": "{code: Neo.ClientError.Statement.TypeError} {message: Property values can only be of primitive types or arrays thereof. Encountered: Map{name -> String(\"Kinder, Lyndenberg, & Domini (KLD) CSR database\"), usage -> String(\"Measurement of corporate social responsibility\")}.}",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:52:41.205135"
+    },
+    {
+      "paper_id": "2016_3995",
+      "error": "'NoneType' object is not iterable",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:53:22.090507"
+    },
+    {
+      "paper_id": "2016_4398",
+      "error": "'NoneType' object is not iterable",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:53:39.088828"
+    },
+    {
+      "paper_id": "2016_4427",
+      "error": "'NoneType' object is not iterable",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:53:40.729321"
+    },
+    {
+      "paper_id": "2016_4428",
+      "error": "'NoneType' object is not iterable",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:53:44.008167"
+    },
+    {
+      "paper_id": "2016_4454",
+      "error": "'NoneType' object is not iterable",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:53:55.247482"
+    },
+    {
+      "paper_id": "2016_4551",
+      "error": "'NoneType' object is not iterable",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:54:14.938706"
+    },
+    {
+      "paper_id": "2016_4633",
+      "error": "'NoneType' object is not iterable",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:54:46.059688"
+    },
+    {
+      "paper_id": "2016_4631",
+      "error": "'NoneType' object is not iterable",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:54:47.532718"
+    },
+    {
+      "paper_id": "2016_618",
+      "error": "'NoneType' object is not iterable",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:55:00.810408"
+    },
+    {
+      "paper_id": "2017_1480",
+      "error": "'NoneType' object is not iterable",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:55:29.538954"
+    },
+    {
+      "paper_id": "2017_1816",
+      "error": "'NoneType' object is not iterable",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:55:45.380089"
+    },
+    {
+      "paper_id": "2017_3947",
+      "error": "data_validator.ResearchQuestionData() argument after ** must be a mapping, not str",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:56:29.688158"
+    },
+    {
+      "paper_id": "2017_4344",
+      "error": "data_validator.ResearchQuestionData() argument after ** must be a mapping, not str",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:57:12.432825"
+    },
+    {
+      "paper_id": "2017_4368",
+      "error": "'NoneType' object is not iterable",
+      "attempt": 1,
+      "timestamp": "2026-01-17T10:57:24.366515"
+    }
+  ],
+  "papers_per_hour": 1213.555956216445,
+  "success_rate": 92.72727272727272,
+  "avg_extraction_time": 12.709153301575604,
+  "avg_normalization_time": 0.04252765692916571,
+  "avg_ingestion_time": 0.8419057864768832,
+  "normalization_coverage": 60.51743532058492
+}

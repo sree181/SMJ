@@ -1,0 +1,1142 @@
+================================================================================
+THEORY PROPORTIONS TAB - DETAILED CALCULATION VERIFICATION REPORT
+================================================================================
+
+OVERVIEW
+--------------------------------------------------------------------------------
+
+The Theory Proportions tab displays pie charts showing the distribution
+of theory usage across 5-year intervals. Each pie chart shows:
+  - Top 20 theories by usage count
+  - Percentage of total usage for each theory
+  - Total usage count for the top 20 theories
+
+Data Source: Same as Theory Evolution tab
+Endpoint: /api/analytics/theories/evolution-divergence
+
+SECTION 1: CALCULATION LOGIC
+--------------------------------------------------------------------------------
+
+1.1 Database Query:
+  Query: MATCH (p:Paper)-[:USES_THEORY]->(t:Theory)
+         WHERE p.paper_id IN $paper_ids
+         RETURN t.name, count(DISTINCT p) as usage_count
+
+1.2 Proportion Calculation:
+  Step 1: Get all theories and their usage counts for the interval
+  Step 2: Sort theories by usage count (descending)
+  Step 3: Select top 20 theories
+  Step 4: Calculate total usage for top 20: sum(usage_count)
+  Step 5: Calculate percentage for each theory:
+          percentage = (theory_usage_count / total_usage_top_20) * 100
+
+1.3 Display Logic:
+  - Pie chart shows top 20 theories
+  - Each slice size = theory percentage
+  - Tooltip shows: 'X uses (Y%)'
+  - List below shows top 10 theories with counts and percentages
+
+SECTION 2: VERIFIED CALCULATIONS BY INTERVAL
+--------------------------------------------------------------------------------
+
+Interval: 1985-1989
+  Papers: 10
+  Total Theories: 21
+  Total Theory Usage (All): 21
+  Total Theory Usage (Top 20): 20
+  Coverage (Top 20 / All): 95.2%
+
+  Top 20 Theories (for pie chart):
+
+     1. Organizational Ecology
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+     2. Upper-Echelon Theory
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+     3. Market For Corporate Control
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+     4. Uncertainty And Turnover Intent
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+     5. Organizational Culture Shock
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+     6. Visionary Leadership As Drama
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+     7. Strategic Management (SM) Framework
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+     8. Creative Management (CM) Model
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+     9. Naive Realism
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    10. Clans
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    11. Organizational Adaptability
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    12. Group Homogeneity
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    13. Group Heterogeneity
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    14. Management Development
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    15. Political-Incremental Model Of Strategy-Making
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    16. Organic Vs. Mechanistic Structures
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    17. Environmental Hostility
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    18. Entrepreneurial Vs. Conservative Strategic Posture
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    19. Agency Theory
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    20. Cognitive Resources Theory
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+  Top 10 Theories (displayed in list below chart):
+
+     1. Organizational Ecology: 1 uses (5.0%)
+     2. Upper-Echelon Theory: 1 uses (5.0%)
+     3. Market For Corporate Control: 1 uses (5.0%)
+     4. Uncertainty And Turnover Intent: 1 uses (5.0%)
+     5. Organizational Culture Shock: 1 uses (5.0%)
+     6. Visionary Leadership As Drama: 1 uses (5.0%)
+     7. Strategic Management (SM) Framework: 1 uses (5.0%)
+     8. Creative Management (CM) Model: 1 uses (5.0%)
+     9. Naive Realism: 1 uses (5.0%)
+    10. Clans: 1 uses (5.0%)
+
+  Verification:
+    Sum of top 20 percentages: 100.00%
+    Expected: 100.00%
+
+--------------------------------------------------------------------------------
+
+Interval: 1990-1994
+  Papers: 85
+  Total Theories: 190
+  Total Theory Usage (All): 222
+  Total Theory Usage (Top 20): 52
+  Coverage (Top 20 / All): 23.4%
+
+  Top 20 Theories (for pie chart):
+
+     1. Agency Theory
+        Usage: 8 papers
+        Percentage: 15.38%
+        Calculation: (8 / 52) * 100 = 15.38%
+
+     2. Transaction Cost Economics
+        Usage: 5 papers
+        Percentage: 9.62%
+        Calculation: (5 / 52) * 100 = 9.62%
+
+     3. Miles And Snow Typology
+        Usage: 4 papers
+        Percentage: 7.69%
+        Calculation: (4 / 52) * 100 = 7.69%
+
+     4. Organizational Learning Theory
+        Usage: 4 papers
+        Percentage: 7.69%
+        Calculation: (4 / 52) * 100 = 7.69%
+
+     5. Market For Corporate Control
+        Usage: 3 papers
+        Percentage: 5.77%
+        Calculation: (3 / 52) * 100 = 5.77%
+
+     6. Resource-Based View
+        Usage: 3 papers
+        Percentage: 5.77%
+        Calculation: (3 / 52) * 100 = 5.77%
+
+     7. Contingency Theory
+        Usage: 3 papers
+        Percentage: 5.77%
+        Calculation: (3 / 52) * 100 = 5.77%
+
+     8. Organizational Ecology
+        Usage: 3 papers
+        Percentage: 5.77%
+        Calculation: (3 / 52) * 100 = 5.77%
+
+     9. Upper Echelons Theory
+        Usage: 2 papers
+        Percentage: 3.85%
+        Calculation: (2 / 52) * 100 = 3.85%
+
+    10. Strategic Choice Perspective
+        Usage: 2 papers
+        Percentage: 3.85%
+        Calculation: (2 / 52) * 100 = 3.85%
+
+    11. Inertia
+        Usage: 2 papers
+        Percentage: 3.85%
+        Calculation: (2 / 52) * 100 = 3.85%
+
+    12. Absorptive Capacity
+        Usage: 2 papers
+        Percentage: 3.85%
+        Calculation: (2 / 52) * 100 = 3.85%
+
+    13. Strategic Management
+        Usage: 2 papers
+        Percentage: 3.85%
+        Calculation: (2 / 52) * 100 = 3.85%
+
+    14. Institutional Theory
+        Usage: 2 papers
+        Percentage: 3.85%
+        Calculation: (2 / 52) * 100 = 3.85%
+
+    15. Resource-Based View Of The Firm
+        Usage: 2 papers
+        Percentage: 3.85%
+        Calculation: (2 / 52) * 100 = 3.85%
+
+    16. Industrial Organization (I/O) Economics
+        Usage: 1 papers
+        Percentage: 1.92%
+        Calculation: (1 / 52) * 100 = 1.92%
+
+    17. Rational-Normative Strategic Management
+        Usage: 1 papers
+        Percentage: 1.92%
+        Calculation: (1 / 52) * 100 = 1.92%
+
+    18. Incremental-Political Perspective
+        Usage: 1 papers
+        Percentage: 1.92%
+        Calculation: (1 / 52) * 100 = 1.92%
+
+    19. Strategic Process Involvement
+        Usage: 1 papers
+        Percentage: 1.92%
+        Calculation: (1 / 52) * 100 = 1.92%
+
+    20. Consensus Theory
+        Usage: 1 papers
+        Percentage: 1.92%
+        Calculation: (1 / 52) * 100 = 1.92%
+
+  Top 10 Theories (displayed in list below chart):
+
+     1. Agency Theory: 8 uses (15.4%)
+     2. Transaction Cost Economics: 5 uses (9.6%)
+     3. Miles And Snow Typology: 4 uses (7.7%)
+     4. Organizational Learning Theory: 4 uses (7.7%)
+     5. Market For Corporate Control: 3 uses (5.8%)
+     6. Resource-Based View: 3 uses (5.8%)
+     7. Contingency Theory: 3 uses (5.8%)
+     8. Organizational Ecology: 3 uses (5.8%)
+     9. Upper Echelons Theory: 2 uses (3.8%)
+    10. Strategic Choice Perspective: 2 uses (3.8%)
+
+  Verification:
+    Sum of top 20 percentages: 100.00%
+    Expected: 100.00%
+
+--------------------------------------------------------------------------------
+
+Interval: 1995-1999
+  Papers: 106
+  Total Theories: 224
+  Total Theory Usage (All): 281
+  Total Theory Usage (Top 20): 77
+  Coverage (Top 20 / All): 27.4%
+
+  Top 20 Theories (for pie chart):
+
+     1. Resource-Based View
+        Usage: 15 papers
+        Percentage: 19.48%
+        Calculation: (15 / 77) * 100 = 19.48%
+
+     2. Resource-Based View Of The Firm
+        Usage: 11 papers
+        Percentage: 14.29%
+        Calculation: (11 / 77) * 100 = 14.29%
+
+     3. Agency Theory
+        Usage: 9 papers
+        Percentage: 11.69%
+        Calculation: (9 / 77) * 100 = 11.69%
+
+     4. Transaction Cost Economics
+        Usage: 7 papers
+        Percentage: 9.09%
+        Calculation: (7 / 77) * 100 = 9.09%
+
+     5. Organizational Learning Theory
+        Usage: 5 papers
+        Percentage: 6.49%
+        Calculation: (5 / 77) * 100 = 6.49%
+
+     6. Organizational Ecology
+        Usage: 3 papers
+        Percentage: 3.90%
+        Calculation: (3 / 77) * 100 = 3.90%
+
+     7. Industrial Organization Theory
+        Usage: 2 papers
+        Percentage: 2.60%
+        Calculation: (2 / 77) * 100 = 2.60%
+
+     8. Resource Dependence Theory
+        Usage: 2 papers
+        Percentage: 2.60%
+        Calculation: (2 / 77) * 100 = 2.60%
+
+     9. Dominant Logic
+        Usage: 2 papers
+        Percentage: 2.60%
+        Calculation: (2 / 77) * 100 = 2.60%
+
+    10. Upper Echelons Theory
+        Usage: 2 papers
+        Percentage: 2.60%
+        Calculation: (2 / 77) * 100 = 2.60%
+
+    11. Contingency Theory
+        Usage: 2 papers
+        Percentage: 2.60%
+        Calculation: (2 / 77) * 100 = 2.60%
+
+    12. Neoclassical Economics
+        Usage: 2 papers
+        Percentage: 2.60%
+        Calculation: (2 / 77) * 100 = 2.60%
+
+    13. Strategic Choice Perspective
+        Usage: 2 papers
+        Percentage: 2.60%
+        Calculation: (2 / 77) * 100 = 2.60%
+
+    14. Managerial Discretion
+        Usage: 2 papers
+        Percentage: 2.60%
+        Calculation: (2 / 77) * 100 = 2.60%
+
+    15. Corporate Entrepreneurship
+        Usage: 2 papers
+        Percentage: 2.60%
+        Calculation: (2 / 77) * 100 = 2.60%
+
+    16. Game Theory
+        Usage: 2 papers
+        Percentage: 2.60%
+        Calculation: (2 / 77) * 100 = 2.60%
+
+    17. Institutional Theory
+        Usage: 2 papers
+        Percentage: 2.60%
+        Calculation: (2 / 77) * 100 = 2.60%
+
+    18. Economies Of Scope
+        Usage: 2 papers
+        Percentage: 2.60%
+        Calculation: (2 / 77) * 100 = 2.60%
+
+    19. Absorptive Capacity
+        Usage: 2 papers
+        Percentage: 2.60%
+        Calculation: (2 / 77) * 100 = 2.60%
+
+    20. Transaction-Cost Economics
+        Usage: 1 papers
+        Percentage: 1.30%
+        Calculation: (1 / 77) * 100 = 1.30%
+
+  Top 10 Theories (displayed in list below chart):
+
+     1. Resource-Based View: 15 uses (19.5%)
+     2. Resource-Based View Of The Firm: 11 uses (14.3%)
+     3. Agency Theory: 9 uses (11.7%)
+     4. Transaction Cost Economics: 7 uses (9.1%)
+     5. Organizational Learning Theory: 5 uses (6.5%)
+     6. Organizational Ecology: 3 uses (3.9%)
+     7. Industrial Organization Theory: 2 uses (2.6%)
+     8. Resource Dependence Theory: 2 uses (2.6%)
+     9. Dominant Logic: 2 uses (2.6%)
+    10. Upper Echelons Theory: 2 uses (2.6%)
+
+  Verification:
+    Sum of top 20 percentages: 100.00%
+    Expected: 100.00%
+
+--------------------------------------------------------------------------------
+
+Interval: 2000-2004
+  Papers: 127
+  Total Theories: 188
+  Total Theory Usage (All): 243
+  Total Theory Usage (Top 20): 75
+  Coverage (Top 20 / All): 30.9%
+
+  Top 20 Theories (for pie chart):
+
+     1. Resource-Based View
+        Usage: 19 papers
+        Percentage: 25.33%
+        Calculation: (19 / 75) * 100 = 25.33%
+
+     2. Agency Theory
+        Usage: 12 papers
+        Percentage: 16.00%
+        Calculation: (12 / 75) * 100 = 16.00%
+
+     3. Dynamic Capabilities Theory
+        Usage: 6 papers
+        Percentage: 8.00%
+        Calculation: (6 / 75) * 100 = 8.00%
+
+     4. Resource-Based View Of The Firm
+        Usage: 6 papers
+        Percentage: 8.00%
+        Calculation: (6 / 75) * 100 = 8.00%
+
+     5. Organizational Learning Theory
+        Usage: 5 papers
+        Percentage: 6.67%
+        Calculation: (5 / 75) * 100 = 6.67%
+
+     6. Transaction Cost Economics
+        Usage: 4 papers
+        Percentage: 5.33%
+        Calculation: (4 / 75) * 100 = 5.33%
+
+     7. Contingency Theory
+        Usage: 3 papers
+        Percentage: 4.00%
+        Calculation: (3 / 75) * 100 = 4.00%
+
+     8. Strategic Group Theory
+        Usage: 2 papers
+        Percentage: 2.67%
+        Calculation: (2 / 75) * 100 = 2.67%
+
+     9. Absorptive Capacity
+        Usage: 2 papers
+        Percentage: 2.67%
+        Calculation: (2 / 75) * 100 = 2.67%
+
+    10. Knowledge-Based View Of The Firm
+        Usage: 2 papers
+        Percentage: 2.67%
+        Calculation: (2 / 75) * 100 = 2.67%
+
+    11. Organizational Ecology
+        Usage: 2 papers
+        Percentage: 2.67%
+        Calculation: (2 / 75) * 100 = 2.67%
+
+    12. Realism
+        Usage: 2 papers
+        Percentage: 2.67%
+        Calculation: (2 / 75) * 100 = 2.67%
+
+    13. Constructivism
+        Usage: 2 papers
+        Percentage: 2.67%
+        Calculation: (2 / 75) * 100 = 2.67%
+
+    14. Internalization Theory
+        Usage: 2 papers
+        Percentage: 2.67%
+        Calculation: (2 / 75) * 100 = 2.67%
+
+    15. Miles And Snow'S Strategy Typology
+        Usage: 1 papers
+        Percentage: 1.33%
+        Calculation: (1 / 75) * 100 = 1.33%
+
+    16. Porter'S Strategy Typology
+        Usage: 1 papers
+        Percentage: 1.33%
+        Calculation: (1 / 75) * 100 = 1.33%
+
+    17. Knowledge-Based View
+        Usage: 1 papers
+        Percentage: 1.33%
+        Calculation: (1 / 75) * 100 = 1.33%
+
+    18. Social Exchange Theory
+        Usage: 1 papers
+        Percentage: 1.33%
+        Calculation: (1 / 75) * 100 = 1.33%
+
+    19. Tichy'S Technical-Political-Cultural (TPC) Framework
+        Usage: 1 papers
+        Percentage: 1.33%
+        Calculation: (1 / 75) * 100 = 1.33%
+
+    20. Modified TPC Framework
+        Usage: 1 papers
+        Percentage: 1.33%
+        Calculation: (1 / 75) * 100 = 1.33%
+
+  Top 10 Theories (displayed in list below chart):
+
+     1. Resource-Based View: 19 uses (25.3%)
+     2. Agency Theory: 12 uses (16.0%)
+     3. Dynamic Capabilities Theory: 6 uses (8.0%)
+     4. Resource-Based View Of The Firm: 6 uses (8.0%)
+     5. Organizational Learning Theory: 5 uses (6.7%)
+     6. Transaction Cost Economics: 4 uses (5.3%)
+     7. Contingency Theory: 3 uses (4.0%)
+     8. Strategic Group Theory: 2 uses (2.7%)
+     9. Absorptive Capacity: 2 uses (2.7%)
+    10. Knowledge-Based View Of The Firm: 2 uses (2.7%)
+
+  Verification:
+    Sum of top 20 percentages: 100.00%
+    Expected: 100.00%
+
+--------------------------------------------------------------------------------
+
+Interval: 2005-2009
+  Papers: 99
+  Total Theories: 162
+  Total Theory Usage (All): 227
+  Total Theory Usage (Top 20): 85
+  Coverage (Top 20 / All): 37.4%
+
+  Top 20 Theories (for pie chart):
+
+     1. Resource-Based View
+        Usage: 21 papers
+        Percentage: 24.71%
+        Calculation: (21 / 85) * 100 = 24.71%
+
+     2. Agency Theory
+        Usage: 10 papers
+        Percentage: 11.76%
+        Calculation: (10 / 85) * 100 = 11.76%
+
+     3. Transaction Cost Economics
+        Usage: 9 papers
+        Percentage: 10.59%
+        Calculation: (9 / 85) * 100 = 10.59%
+
+     4. Dynamic Capabilities Theory
+        Usage: 5 papers
+        Percentage: 5.88%
+        Calculation: (5 / 85) * 100 = 5.88%
+
+     5. Stakeholder Theory
+        Usage: 5 papers
+        Percentage: 5.88%
+        Calculation: (5 / 85) * 100 = 5.88%
+
+     6. Contingency Theory
+        Usage: 4 papers
+        Percentage: 4.71%
+        Calculation: (4 / 85) * 100 = 4.71%
+
+     7. Institutional Theory
+        Usage: 4 papers
+        Percentage: 4.71%
+        Calculation: (4 / 85) * 100 = 4.71%
+
+     8. Signaling Theory
+        Usage: 3 papers
+        Percentage: 3.53%
+        Calculation: (3 / 85) * 100 = 3.53%
+
+     9. Behavioral Theory of the Firm
+        Usage: 3 papers
+        Percentage: 3.53%
+        Calculation: (3 / 85) * 100 = 3.53%
+
+    10. Evolutionary Economics
+        Usage: 3 papers
+        Percentage: 3.53%
+        Calculation: (3 / 85) * 100 = 3.53%
+
+    11. Knowledge-Based View Of The Firm
+        Usage: 3 papers
+        Percentage: 3.53%
+        Calculation: (3 / 85) * 100 = 3.53%
+
+    12. Human Capital Theory
+        Usage: 2 papers
+        Percentage: 2.35%
+        Calculation: (2 / 85) * 100 = 2.35%
+
+    13. Resource-Based View Of The Firm
+        Usage: 2 papers
+        Percentage: 2.35%
+        Calculation: (2 / 85) * 100 = 2.35%
+
+    14. Legitimacy Theory
+        Usage: 2 papers
+        Percentage: 2.35%
+        Calculation: (2 / 85) * 100 = 2.35%
+
+    15. Rationality
+        Usage: 2 papers
+        Percentage: 2.35%
+        Calculation: (2 / 85) * 100 = 2.35%
+
+    16. Prospect Theory
+        Usage: 2 papers
+        Percentage: 2.35%
+        Calculation: (2 / 85) * 100 = 2.35%
+
+    17. Organizational Learning Theory
+        Usage: 2 papers
+        Percentage: 2.35%
+        Calculation: (2 / 85) * 100 = 2.35%
+
+    18. Organizational Capabilities
+        Usage: 1 papers
+        Percentage: 1.18%
+        Calculation: (1 / 85) * 100 = 1.18%
+
+    19. Knowledge-Sharing Research
+        Usage: 1 papers
+        Percentage: 1.18%
+        Calculation: (1 / 85) * 100 = 1.18%
+
+    20. Situated Performance View
+        Usage: 1 papers
+        Percentage: 1.18%
+        Calculation: (1 / 85) * 100 = 1.18%
+
+  Top 10 Theories (displayed in list below chart):
+
+     1. Resource-Based View: 21 uses (24.7%)
+     2. Agency Theory: 10 uses (11.8%)
+     3. Transaction Cost Economics: 9 uses (10.6%)
+     4. Dynamic Capabilities Theory: 5 uses (5.9%)
+     5. Stakeholder Theory: 5 uses (5.9%)
+     6. Contingency Theory: 4 uses (4.7%)
+     7. Institutional Theory: 4 uses (4.7%)
+     8. Signaling Theory: 3 uses (3.5%)
+     9. Behavioral Theory of the Firm: 3 uses (3.5%)
+    10. Evolutionary Economics: 3 uses (3.5%)
+
+  Verification:
+    Sum of top 20 percentages: 100.00%
+    Expected: 100.00%
+
+--------------------------------------------------------------------------------
+
+Interval: 2010-2014
+  Papers: 149
+  Total Theories: 181
+  Total Theory Usage (All): 267
+  Total Theory Usage (Top 20): 104
+  Coverage (Top 20 / All): 39.0%
+
+  Top 20 Theories (for pie chart):
+
+     1. Resource-Based View
+        Usage: 25 papers
+        Percentage: 24.04%
+        Calculation: (25 / 104) * 100 = 24.04%
+
+     2. Agency Theory
+        Usage: 18 papers
+        Percentage: 17.31%
+        Calculation: (18 / 104) * 100 = 17.31%
+
+     3. Upper Echelons Theory
+        Usage: 7 papers
+        Percentage: 6.73%
+        Calculation: (7 / 104) * 100 = 6.73%
+
+     4. Institutional Theory
+        Usage: 7 papers
+        Percentage: 6.73%
+        Calculation: (7 / 104) * 100 = 6.73%
+
+     5. Stakeholder Theory
+        Usage: 6 papers
+        Percentage: 5.77%
+        Calculation: (6 / 104) * 100 = 5.77%
+
+     6. Dynamic Capabilities Theory
+        Usage: 6 papers
+        Percentage: 5.77%
+        Calculation: (6 / 104) * 100 = 5.77%
+
+     7. Resource Dependence Theory
+        Usage: 4 papers
+        Percentage: 3.85%
+        Calculation: (4 / 104) * 100 = 3.85%
+
+     8. Social Comparison Theory
+        Usage: 3 papers
+        Percentage: 2.88%
+        Calculation: (3 / 104) * 100 = 2.88%
+
+     9. Signaling Theory
+        Usage: 3 papers
+        Percentage: 2.88%
+        Calculation: (3 / 104) * 100 = 2.88%
+
+    10. Transaction Cost Economics
+        Usage: 3 papers
+        Percentage: 2.88%
+        Calculation: (3 / 104) * 100 = 2.88%
+
+    11. Behavioral Theory of the Firm
+        Usage: 3 papers
+        Percentage: 2.88%
+        Calculation: (3 / 104) * 100 = 2.88%
+
+    12. Human Capital Theory
+        Usage: 3 papers
+        Percentage: 2.88%
+        Calculation: (3 / 104) * 100 = 2.88%
+
+    13. Tournament Theory
+        Usage: 2 papers
+        Percentage: 1.92%
+        Calculation: (2 / 104) * 100 = 1.92%
+
+    14. Real Options Theory
+        Usage: 2 papers
+        Percentage: 1.92%
+        Calculation: (2 / 104) * 100 = 1.92%
+
+    15. Organizational Learning Theory
+        Usage: 2 papers
+        Percentage: 1.92%
+        Calculation: (2 / 104) * 100 = 1.92%
+
+    16. Attention-Based View
+        Usage: 2 papers
+        Percentage: 1.92%
+        Calculation: (2 / 104) * 100 = 1.92%
+
+    17. Social Network Theory
+        Usage: 2 papers
+        Percentage: 1.92%
+        Calculation: (2 / 104) * 100 = 1.92%
+
+    18. Dominant Logic
+        Usage: 2 papers
+        Percentage: 1.92%
+        Calculation: (2 / 104) * 100 = 1.92%
+
+    19. Legitimacy Theory
+        Usage: 2 papers
+        Percentage: 1.92%
+        Calculation: (2 / 104) * 100 = 1.92%
+
+    20. Contingency Theory
+        Usage: 2 papers
+        Percentage: 1.92%
+        Calculation: (2 / 104) * 100 = 1.92%
+
+  Top 10 Theories (displayed in list below chart):
+
+     1. Resource-Based View: 25 uses (24.0%)
+     2. Agency Theory: 18 uses (17.3%)
+     3. Upper Echelons Theory: 7 uses (6.7%)
+     4. Institutional Theory: 7 uses (6.7%)
+     5. Stakeholder Theory: 6 uses (5.8%)
+     6. Dynamic Capabilities Theory: 6 uses (5.8%)
+     7. Resource Dependence Theory: 4 uses (3.8%)
+     8. Social Comparison Theory: 3 uses (2.9%)
+     9. Signaling Theory: 3 uses (2.9%)
+    10. Transaction Cost Economics: 3 uses (2.9%)
+
+  Verification:
+    Sum of top 20 percentages: 100.00%
+    Expected: 100.00%
+
+--------------------------------------------------------------------------------
+
+Interval: 2015-2019
+  Papers: 159
+  Total Theories: 222
+  Total Theory Usage (All): 310
+  Total Theory Usage (Top 20): 98
+  Coverage (Top 20 / All): 31.6%
+
+  Top 20 Theories (for pie chart):
+
+     1. Resource-Based View
+        Usage: 16 papers
+        Percentage: 16.33%
+        Calculation: (16 / 98) * 100 = 16.33%
+
+     2. Agency Theory
+        Usage: 16 papers
+        Percentage: 16.33%
+        Calculation: (16 / 98) * 100 = 16.33%
+
+     3. Stakeholder Theory
+        Usage: 8 papers
+        Percentage: 8.16%
+        Calculation: (8 / 98) * 100 = 8.16%
+
+     4. Upper Echelons Theory
+        Usage: 7 papers
+        Percentage: 7.14%
+        Calculation: (7 / 98) * 100 = 7.14%
+
+     5. Knowledge-Based View
+        Usage: 5 papers
+        Percentage: 5.10%
+        Calculation: (5 / 98) * 100 = 5.10%
+
+     6. Dynamic Capabilities Theory
+        Usage: 5 papers
+        Percentage: 5.10%
+        Calculation: (5 / 98) * 100 = 5.10%
+
+     7. Social Comparison Theory
+        Usage: 4 papers
+        Percentage: 4.08%
+        Calculation: (4 / 98) * 100 = 4.08%
+
+     8. Transaction Cost Economics
+        Usage: 4 papers
+        Percentage: 4.08%
+        Calculation: (4 / 98) * 100 = 4.08%
+
+     9. Signaling Theory
+        Usage: 4 papers
+        Percentage: 4.08%
+        Calculation: (4 / 98) * 100 = 4.08%
+
+    10. Tournament Theory
+        Usage: 3 papers
+        Percentage: 3.06%
+        Calculation: (3 / 98) * 100 = 3.06%
+
+    11. Institutional Theory
+        Usage: 3 papers
+        Percentage: 3.06%
+        Calculation: (3 / 98) * 100 = 3.06%
+
+    12. Human Capital Theory
+        Usage: 3 papers
+        Percentage: 3.06%
+        Calculation: (3 / 98) * 100 = 3.06%
+
+    13. Organizational Learning Theory
+        Usage: 3 papers
+        Percentage: 3.06%
+        Calculation: (3 / 98) * 100 = 3.06%
+
+    14. Equity Theory
+        Usage: 3 papers
+        Percentage: 3.06%
+        Calculation: (3 / 98) * 100 = 3.06%
+
+    15. Resource Dependence Theory
+        Usage: 3 papers
+        Percentage: 3.06%
+        Calculation: (3 / 98) * 100 = 3.06%
+
+    16. Behavioral Theory of the Firm
+        Usage: 3 papers
+        Percentage: 3.06%
+        Calculation: (3 / 98) * 100 = 3.06%
+
+    17. Game Theory
+        Usage: 2 papers
+        Percentage: 2.04%
+        Calculation: (2 / 98) * 100 = 2.04%
+
+    18. Absorptive Capacity
+        Usage: 2 papers
+        Percentage: 2.04%
+        Calculation: (2 / 98) * 100 = 2.04%
+
+    19. Social Identity Theory
+        Usage: 2 papers
+        Percentage: 2.04%
+        Calculation: (2 / 98) * 100 = 2.04%
+
+    20. Attention-Based View
+        Usage: 2 papers
+        Percentage: 2.04%
+        Calculation: (2 / 98) * 100 = 2.04%
+
+  Top 10 Theories (displayed in list below chart):
+
+     1. Resource-Based View: 16 uses (16.3%)
+     2. Agency Theory: 16 uses (16.3%)
+     3. Stakeholder Theory: 8 uses (8.2%)
+     4. Upper Echelons Theory: 7 uses (7.1%)
+     5. Knowledge-Based View: 5 uses (5.1%)
+     6. Dynamic Capabilities Theory: 5 uses (5.1%)
+     7. Social Comparison Theory: 4 uses (4.1%)
+     8. Transaction Cost Economics: 4 uses (4.1%)
+     9. Signaling Theory: 4 uses (4.1%)
+    10. Tournament Theory: 3 uses (3.1%)
+
+  Verification:
+    Sum of top 20 percentages: 100.00%
+    Expected: 100.00%
+
+--------------------------------------------------------------------------------
+
+Interval: 2020-2024
+  Papers: 16
+  Total Theories: 20
+  Total Theory Usage (All): 20
+  Total Theory Usage (Top 20): 20
+  Coverage (Top 20 / All): 100.0%
+
+  Top 20 Theories (for pie chart):
+
+     1. Hypercompetition
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+     2. Entrenchment And Increased Inequality
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+     3. Mueller Persistence
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+     4. Rank Friction
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+     5. Upper Echelons Theory
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+     6. Emphasis Framing
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+     7. Categorization
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+     8. Psychology And Behavioral Economics
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+     9. Strategic Management
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    10. Institutional Economics
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    11. Elinor Ostrom'S Principles Of Polycentric Governance
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    12. Organizational Ecology
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    13. Institutional Theory
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    14. CEO In Context (Cic) Technique
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    15. Managerial Discretion
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    16. Variance Partitioning Methods
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    17. Investment In General Human Capital
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    18. Instrumental Mechanisms
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    19. Commitment-Based Mechanisms
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+    20. Relational Framing
+        Usage: 1 papers
+        Percentage: 5.00%
+        Calculation: (1 / 20) * 100 = 5.00%
+
+  Top 10 Theories (displayed in list below chart):
+
+     1. Hypercompetition: 1 uses (5.0%)
+     2. Entrenchment And Increased Inequality: 1 uses (5.0%)
+     3. Mueller Persistence: 1 uses (5.0%)
+     4. Rank Friction: 1 uses (5.0%)
+     5. Upper Echelons Theory: 1 uses (5.0%)
+     6. Emphasis Framing: 1 uses (5.0%)
+     7. Categorization: 1 uses (5.0%)
+     8. Psychology And Behavioral Economics: 1 uses (5.0%)
+     9. Strategic Management: 1 uses (5.0%)
+    10. Institutional Economics: 1 uses (5.0%)
+
+  Verification:
+    Sum of top 20 percentages: 100.00%
+    Expected: 100.00%
+
+--------------------------------------------------------------------------------
+
+SECTION 3: SUMMARY STATISTICS
+--------------------------------------------------------------------------------
+
+Total Intervals: 8
+Total Unique Theories (across all intervals): 1208
+Average Theories per Interval: 151.0
+Average Coverage (Top 20 / All): 48.1%
+
+SECTION 4: MOST COMMON THEORIES ACROSS INTERVALS
+--------------------------------------------------------------------------------
+
+Theories appearing in top 20 across multiple intervals:
+
+  Agency Theory:
+    Appears in 7 intervals
+    Total usage across intervals: 74 papers
+  Resource-Based View:
+    Appears in 6 intervals
+    Total usage across intervals: 99 papers
+  Transaction Cost Economics:
+    Appears in 6 intervals
+    Total usage across intervals: 32 papers
+  Organizational Learning Theory:
+    Appears in 6 intervals
+    Total usage across intervals: 21 papers
+  Institutional Theory:
+    Appears in 6 intervals
+    Total usage across intervals: 19 papers
+  Upper Echelons Theory:
+    Appears in 5 intervals
+    Total usage across intervals: 19 papers
+  Contingency Theory:
+    Appears in 5 intervals
+    Total usage across intervals: 14 papers
+  Organizational Ecology:
+    Appears in 5 intervals
+    Total usage across intervals: 10 papers
+  Dynamic Capabilities Theory:
+    Appears in 4 intervals
+    Total usage across intervals: 22 papers
+  Resource-Based View Of The Firm:
+    Appears in 4 intervals
+    Total usage across intervals: 21 papers
+  Absorptive Capacity:
+    Appears in 4 intervals
+    Total usage across intervals: 8 papers
+  Stakeholder Theory:
+    Appears in 3 intervals
+    Total usage across intervals: 19 papers
+  Signaling Theory:
+    Appears in 3 intervals
+    Total usage across intervals: 10 papers
+  Resource Dependence Theory:
+    Appears in 3 intervals
+    Total usage across intervals: 9 papers
+  Behavioral Theory of the Firm:
+    Appears in 3 intervals
+    Total usage across intervals: 9 papers
+  Human Capital Theory:
+    Appears in 3 intervals
+    Total usage across intervals: 8 papers
+  Social Comparison Theory:
+    Appears in 2 intervals
+    Total usage across intervals: 7 papers
+  Knowledge-Based View:
+    Appears in 2 intervals
+    Total usage across intervals: 6 papers
+  Knowledge-Based View Of The Firm:
+    Appears in 2 intervals
+    Total usage across intervals: 5 papers
+  Tournament Theory:
+    Appears in 2 intervals
+    Total usage across intervals: 5 papers
+
+================================================================================
+END OF VERIFICATION REPORT
+================================================================================

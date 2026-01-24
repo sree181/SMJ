@@ -1,0 +1,1318 @@
+{
+  "timestamp": "2025-11-11T08:38:03.472188",
+  "stats": {
+    "total_papers": 158,
+    "processed": 0,
+    "failed": 112,
+    "extraction_counts": {},
+    "relationship_counts": {},
+    "errors": [
+      {
+        "paper_id": "2021_4327",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)",
+        "timestamp": "2025-11-10T06:51:46.743644"
+      },
+      {
+        "paper_id": "2021_4373",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)",
+        "timestamp": "2025-11-10T08:33:12.955847"
+      },
+      {
+        "paper_id": "2021_4443",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)",
+        "timestamp": "2025-11-10T10:22:24.030369"
+      },
+      {
+        "paper_id": "2021_4448",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)",
+        "timestamp": "2025-11-10T11:43:50.140559"
+      },
+      {
+        "paper_id": "2021_4467",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362ca6100>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T12:34:22.492379"
+      },
+      {
+        "paper_id": "2021_4482",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x367120df0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T12:37:08.155663"
+      },
+      {
+        "paper_id": "2021_4515",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36537e850>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T12:39:53.851610"
+      },
+      {
+        "paper_id": "2021_4525",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x367120f70>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T12:42:39.362533"
+      },
+      {
+        "paper_id": "2021_4531",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362c7b1f0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T12:45:25.000282"
+      },
+      {
+        "paper_id": "2021_4554",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a97a490>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T12:48:10.560110"
+      },
+      {
+        "paper_id": "2021_4565",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a9a1c10>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T12:50:56.194383"
+      },
+      {
+        "paper_id": "2021_4625",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a982670>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T12:53:41.960453"
+      },
+      {
+        "paper_id": "2021_860",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3631728b0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T12:56:27.361052"
+      },
+      {
+        "paper_id": "2022_1223",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a99ab80>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T12:59:13.073505"
+      },
+      {
+        "paper_id": "2022_1320",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x363172310>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T13:01:58.817749"
+      },
+      {
+        "paper_id": "2022_1963",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a99afa0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T13:04:44.571173"
+      },
+      {
+        "paper_id": "2022_2091",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x363172160>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T14:36:21.229753"
+      },
+      {
+        "paper_id": "2022_2114",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a99ad30>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T16:06:56.702609"
+      },
+      {
+        "paper_id": "2022_3725",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x363172880>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T16:09:42.398867"
+      },
+      {
+        "paper_id": "2022_3937",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a99ad00>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T16:52:46.346931"
+      },
+      {
+        "paper_id": "2022_4065",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3631724c0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T17:01:20.371491"
+      },
+      {
+        "paper_id": "2022_4113",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a99a340>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T17:04:06.101990"
+      },
+      {
+        "paper_id": "2022_4191",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3631722b0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T17:06:51.833110"
+      },
+      {
+        "paper_id": "2022_4193",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a99adc0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T17:10:35.307405"
+      },
+      {
+        "paper_id": "2022_4220",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362c41d60>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T17:13:20.982624"
+      },
+      {
+        "paper_id": "2022_4235",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36712ca00>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T17:16:06.607826"
+      },
+      {
+        "paper_id": "2022_4322",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36537efa0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T17:18:52.154735"
+      },
+      {
+        "paper_id": "2022_4324",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362ca46a0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T17:21:37.931875"
+      },
+      {
+        "paper_id": "2022_4325",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x363188550>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T17:24:23.624670"
+      },
+      {
+        "paper_id": "2022_4326",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362ca6040>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T17:27:09.498811"
+      },
+      {
+        "paper_id": "2022_4348",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x367136610>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T17:33:18.366679"
+      },
+      {
+        "paper_id": "2022_4365",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a982700>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T17:36:04.147719"
+      },
+      {
+        "paper_id": "2022_4387",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36712c730>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T17:38:49.867529"
+      },
+      {
+        "paper_id": "2022_4449",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x363188040>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T17:41:35.498268"
+      },
+      {
+        "paper_id": "2022_4466",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36537e6d0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T17:44:21.086791"
+      },
+      {
+        "paper_id": "2022_4481",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362c607f0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-10T17:47:06.724918"
+      },
+      {
+        "paper_id": "2022_4490",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36536d9a0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T00:25:00.141646"
+      },
+      {
+        "paper_id": "2022_4497",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36537ed90>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T05:47:14.674334"
+      },
+      {
+        "paper_id": "2022_4498",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3653bbc70>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T06:32:48.262191"
+      },
+      {
+        "paper_id": "2022_4523",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x365808760>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T06:35:34.006345"
+      },
+      {
+        "paper_id": "2022_4545",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a9aac10>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T06:38:19.709425"
+      },
+      {
+        "paper_id": "2022_893",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3653e0b20>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T06:41:05.377810"
+      },
+      {
+        "paper_id": "2022_907",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36710b8e0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T06:43:51.138830"
+      },
+      {
+        "paper_id": "2023_1194",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x363188f10>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T06:46:36.873186"
+      },
+      {
+        "paper_id": "2023_1240",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36319da30>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T06:49:22.557163"
+      },
+      {
+        "paper_id": "2023_1417",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a99a9a0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T06:52:07.893414"
+      },
+      {
+        "paper_id": "2023_1929",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3653bbd30>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T06:54:53.584327"
+      },
+      {
+        "paper_id": "2023_1946",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3653bbf10>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T06:57:39.525987"
+      },
+      {
+        "paper_id": "2023_1961",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3653d6d30>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T07:00:25.039089"
+      },
+      {
+        "paper_id": "2023_2088",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a9aa580>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T07:03:10.373277"
+      },
+      {
+        "paper_id": "2023_2092",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3653bb9a0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T07:05:56.018325"
+      },
+      {
+        "paper_id": "2023_2106",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a97aac0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T07:08:41.658043"
+      },
+      {
+        "paper_id": "2023_2118",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x365818d30>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T07:11:27.417075"
+      },
+      {
+        "paper_id": "2023_2521",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a97a280>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T07:14:12.760711"
+      },
+      {
+        "paper_id": "2023_2594",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x365812a00>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T07:16:58.484075"
+      },
+      {
+        "paper_id": "2023_4017",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362ca6580>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T07:19:44.107740"
+      },
+      {
+        "paper_id": "2023_4077",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362ca6280>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T07:22:29.424905"
+      },
+      {
+        "paper_id": "2023_4114",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36536d310>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T07:25:14.703438"
+      },
+      {
+        "paper_id": "2023_4118",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a97ae50>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T07:28:00.083707"
+      },
+      {
+        "paper_id": "2023_4194",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3631884f0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T07:30:45.879155"
+      },
+      {
+        "paper_id": "2023_4243",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a982d60>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T07:33:31.239930"
+      },
+      {
+        "paper_id": "2023_4283",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36319df10>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T07:36:16.584277"
+      },
+      {
+        "paper_id": "2023_4303",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36536d4f0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T07:39:01.916367"
+      },
+      {
+        "paper_id": "2023_4347",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36536d8e0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T07:41:47.625676"
+      },
+      {
+        "paper_id": "2023_4361",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a9a1ee0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T07:44:33.321870"
+      },
+      {
+        "paper_id": "2023_4395",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362c7bca0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T07:47:19.063278"
+      },
+      {
+        "paper_id": "2023_4400",
+        "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362ca4550>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+        "timestamp": "2025-11-11T07:55:56.892109"
+      },
+      {
+        "paper_id": "2023_4402",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:00:20.797783"
+      },
+      {
+        "paper_id": "2023_4411",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:01:16.018442"
+      },
+      {
+        "paper_id": "2023_4424",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:02:07.528343"
+      },
+      {
+        "paper_id": "2023_4433",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:02:58.913020"
+      },
+      {
+        "paper_id": "2023_4450",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:03:50.265854"
+      },
+      {
+        "paper_id": "2023_4457",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:04:41.678248"
+      },
+      {
+        "paper_id": "2023_4491",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:05:33.099516"
+      },
+      {
+        "paper_id": "2023_4496",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:06:24.337166"
+      },
+      {
+        "paper_id": "2023_4506",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:07:15.792782"
+      },
+      {
+        "paper_id": "2023_4522",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:08:07.245651"
+      },
+      {
+        "paper_id": "2023_4530",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:08:58.635071"
+      },
+      {
+        "paper_id": "2023_4542",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:09:49.928579"
+      },
+      {
+        "paper_id": "2023_4564",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:10:41.416069"
+      },
+      {
+        "paper_id": "2023_4574",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:11:32.887062"
+      },
+      {
+        "paper_id": "2023_4575",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:12:24.304103"
+      },
+      {
+        "paper_id": "2023_4594",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:13:15.842244"
+      },
+      {
+        "paper_id": "2023_4613",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:14:07.196648"
+      },
+      {
+        "paper_id": "2023_4621",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:14:58.663830"
+      },
+      {
+        "paper_id": "2024_1141",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:15:49.932681"
+      },
+      {
+        "paper_id": "2024_1227",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:16:41.215005"
+      },
+      {
+        "paper_id": "2024_2082",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:17:32.548803"
+      },
+      {
+        "paper_id": "2024_2094",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:18:23.939508"
+      },
+      {
+        "paper_id": "2024_3911",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:19:15.184336"
+      },
+      {
+        "paper_id": "2024_3912",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:20:06.537205"
+      },
+      {
+        "paper_id": "2024_3988",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:20:57.889699"
+      },
+      {
+        "paper_id": "2024_4030",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:21:49.198987"
+      },
+      {
+        "paper_id": "2024_4208",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:22:40.516120"
+      },
+      {
+        "paper_id": "2024_4209",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:23:31.812583"
+      },
+      {
+        "paper_id": "2024_4218",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:24:23.069916"
+      },
+      {
+        "paper_id": "2024_4242",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:25:14.328623"
+      },
+      {
+        "paper_id": "2024_4272",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:26:05.608799"
+      },
+      {
+        "paper_id": "2024_4282",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:26:56.916270"
+      },
+      {
+        "paper_id": "2024_4293",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:27:48.139551"
+      },
+      {
+        "paper_id": "2024_4360",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:28:39.373603"
+      },
+      {
+        "paper_id": "2024_4432",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:29:30.593842"
+      },
+      {
+        "paper_id": "2024_4441",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:30:21.810814"
+      },
+      {
+        "paper_id": "2024_4463",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:31:13.119600"
+      },
+      {
+        "paper_id": "2024_4480",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:32:04.418008"
+      },
+      {
+        "paper_id": "2024_4521",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:32:55.662718"
+      },
+      {
+        "paper_id": "2024_4563",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:33:46.911516"
+      },
+      {
+        "paper_id": "2024_4572",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:34:38.041687"
+      },
+      {
+        "paper_id": "2024_652",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:35:29.258626"
+      },
+      {
+        "paper_id": "2024_856",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:36:20.954676"
+      },
+      {
+        "paper_id": "2024_863",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:37:12.226882"
+      },
+      {
+        "paper_id": "2024_905",
+        "error": "OLLAMA API error: 500",
+        "timestamp": "2025-11-11T08:38:03.468882"
+      }
+    ]
+  },
+  "results": [
+    {
+      "status": "skipped",
+      "paper_id": "2020_1103"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_1313"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_1319"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_1773"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_1779"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_1959"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_2076"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_2097"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_2359"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_3639"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4094"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4253"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4286"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4287"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4317"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4338"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4349"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4381"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4397"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4413"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4425"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4434"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4435"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4483"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4499"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4508"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4510"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4516"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4537"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4555"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_4606"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2020_890"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2021_168"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2021_1780"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2021_1788"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2021_1802"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2021_2591"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2021_3051"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2021_4093"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2021_4105"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2021_4159"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2021_4315"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2021_4316"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2021_4327",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2021_4373",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2021_4374"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2021_4380"
+    },
+    {
+      "status": "skipped",
+      "paper_id": "2021_4388"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2021_4443",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2021_4448",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2021_4467",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362ca6100>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2021_4482",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x367120df0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2021_4515",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36537e850>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2021_4525",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x367120f70>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2021_4531",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362c7b1f0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2021_4554",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a97a490>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2021_4565",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a9a1c10>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2021_4625",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a982670>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2021_860",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3631728b0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_1223",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a99ab80>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_1320",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x363172310>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_1963",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a99afa0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_2091",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x363172160>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_2114",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a99ad30>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_3725",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x363172880>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_3937",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a99ad00>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4065",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3631724c0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4113",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a99a340>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4191",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3631722b0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4193",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a99adc0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4220",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362c41d60>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4235",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36712ca00>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4322",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36537efa0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4324",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362ca46a0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4325",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x363188550>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4326",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362ca6040>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4348",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x367136610>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4365",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a982700>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4387",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36712c730>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4449",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x363188040>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4466",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36537e6d0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4481",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362c607f0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4490",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36536d9a0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4497",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36537ed90>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4498",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3653bbc70>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4523",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x365808760>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_4545",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a9aac10>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_893",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3653e0b20>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2022_907",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36710b8e0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_1194",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x363188f10>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_1240",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36319da30>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_1417",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a99a9a0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_1929",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3653bbd30>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_1946",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3653bbf10>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_1961",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3653d6d30>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_2088",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a9aa580>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_2092",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3653bb9a0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_2106",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a97aac0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_2118",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x365818d30>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_2521",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a97a280>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_2594",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x365812a00>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4017",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362ca6580>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4077",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362ca6280>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4114",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36536d310>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4118",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a97ae50>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4194",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x3631884f0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4243",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a982d60>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4283",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36319df10>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4303",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36536d4f0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4347",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36536d8e0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4361",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x36a9a1ee0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4395",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362c7bca0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4400",
+      "error": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x362ca4550>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4402",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4411",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4424",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4433",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4450",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4457",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4491",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4496",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4506",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4522",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4530",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4542",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4564",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4574",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4575",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4594",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4613",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2023_4621",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_1141",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_1227",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_2082",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_2094",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_3911",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_3912",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_3988",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_4030",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_4208",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_4209",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_4218",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_4242",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_4272",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_4282",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_4293",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_4360",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_4432",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_4441",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_4463",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_4480",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_4521",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_4563",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_4572",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_652",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_856",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_863",
+      "error": "OLLAMA API error: 500"
+    },
+    {
+      "status": "failed",
+      "paper_id": "2024_905",
+      "error": "OLLAMA API error: 500"
+    }
+  ]
+}

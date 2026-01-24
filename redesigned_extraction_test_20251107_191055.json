@@ -1,0 +1,344 @@
+{
+  "test_info": {
+    "test_dir": "2025-2029",
+    "test_timestamp": "2025-11-07T19:10:55.100452",
+    "models_tested": [
+      "mistral:7b",
+      "llama3.1:8b"
+    ],
+    "papers_tested": [
+      "2025_4359",
+      "2025_4573",
+      "2025_4488"
+    ]
+  },
+  "results_by_model": {
+    "mistral:7b": {
+      "model": "mistral:7b",
+      "papers": [
+        {
+          "paper_id": "2025_4359",
+          "status": "success",
+          "section_detection": {
+            "found": true,
+            "confidence": 0.7,
+            "text_length": 11
+          },
+          "primary_extraction": {
+            "method_type": "quantitative",
+            "primary_methods": [],
+            "confidence": 0.5
+          },
+          "detailed_extraction": {
+            "methods_count": 0,
+            "methods": [],
+            "avg_confidence": 0.0
+          }
+        },
+        {
+          "paper_id": "2025_4573",
+          "status": "success",
+          "section_detection": {
+            "found": true,
+            "confidence": 1.0,
+            "text_length": 33
+          },
+          "primary_extraction": {
+            "method_type": "",
+            "primary_methods": [],
+            "confidence": 0.5
+          },
+          "detailed_extraction": {
+            "methods_count": 0,
+            "methods": [],
+            "avg_confidence": 0.0
+          }
+        },
+        {
+          "paper_id": "2025_4488",
+          "status": "success",
+          "section_detection": {
+            "found": true,
+            "confidence": 1.0,
+            "text_length": 671
+          },
+          "primary_extraction": {
+            "method_type": "quantitative",
+            "primary_methods": [
+              "N-armed bandit model",
+              "reinforcement learning"
+            ],
+            "confidence": 1.0
+          },
+          "detailed_extraction": {
+            "methods_count": 2,
+            "methods": [
+              {
+                "method_name": "N-armed bandit model",
+                "software": [],
+                "sample_size": "Not specified in the provided text",
+                "data_sources": [],
+                "variables": {
+                  "dependent": [],
+                  "independent": [],
+                  "control": []
+                },
+                "time_period": "Not specified in the provided text",
+                "confidence": 0.0,
+                "method_type": "quantitative"
+              },
+              {
+                "method_name": "reinforcement learning",
+                "software": [],
+                "sample_size": "",
+                "data_sources": [],
+                "variables": {
+                  "dependent": [],
+                  "independent": [],
+                  "control": []
+                },
+                "time_period": "",
+                "confidence": 0.0,
+                "method_type": "quantitative"
+              }
+            ],
+            "avg_confidence": 0.0
+          }
+        }
+      ],
+      "statistics": {
+        "total_papers": 3,
+        "successful": 1,
+        "failed": 2,
+        "avg_methods_per_paper": 2.0,
+        "avg_confidence": 0.0
+      }
+    },
+    "llama3.1:8b": {
+      "model": "llama3.1:8b",
+      "papers": [
+        {
+          "paper_id": "2025_4359",
+          "status": "success",
+          "section_detection": {
+            "found": true,
+            "confidence": 0.9,
+            "text_length": 10000
+          },
+          "primary_extraction": {
+            "method_type": "qualitative",
+            "primary_methods": [
+              "archival media coverage",
+              "first-hand interviews"
+            ],
+            "confidence": 1.0
+          },
+          "detailed_extraction": {
+            "methods_count": 2,
+            "methods": [
+              {
+                "method_name": "archival media coverage",
+                "software": [],
+                "sample_size": "",
+                "data_sources": [
+                  "archival media coverage"
+                ],
+                "variables": {
+                  "dependent": [],
+                  "independent": [],
+                  "control": []
+                },
+                "time_period": "",
+                "confidence": 0.0,
+                "method_type": "qualitative"
+              },
+              {
+                "method_name": "first-hand interviews",
+                "software": [],
+                "sample_size": "23 first-hand interviews with restaurant owners, managers, and chefs from some of New York City's most elite restaurants.",
+                "data_sources": [
+                  "archival media coverage"
+                ],
+                "variables": {
+                  "dependent": [],
+                  "independent": [],
+                  "control": []
+                },
+                "time_period": "",
+                "confidence": 0.0,
+                "method_type": "qualitative"
+              }
+            ],
+            "avg_confidence": 0.0
+          }
+        },
+        {
+          "paper_id": "2025_4573",
+          "status": "success",
+          "section_detection": {
+            "found": true,
+            "confidence": 1.0,
+            "text_length": 10000
+          },
+          "primary_extraction": {
+            "method_type": "qualitative",
+            "primary_methods": [
+              "grounded theory",
+              "semi-structured interviews",
+              "archival data"
+            ],
+            "confidence": 1.0
+          },
+          "detailed_extraction": {
+            "methods_count": 3,
+            "methods": [
+              {
+                "method_name": "grounded theory",
+                "software": [],
+                "sample_size": "",
+                "data_sources": [
+                  "archives",
+                  "observations",
+                  "semi-structured interviews"
+                ],
+                "variables": {
+                  "dependent": [],
+                  "independent": [],
+                  "control": []
+                },
+                "time_period": "Spring 2014 to Spring 2016, with follow-ups through Fall 2019",
+                "confidence": 0.0,
+                "method_type": "qualitative"
+              },
+              {
+                "method_name": "semi-structured interviews",
+                "software": [],
+                "sample_size": "53 semi-structured formal interviews with Slow Money local leaders, investors, and entrepreneurs between March 2015 and June 2016",
+                "data_sources": [
+                  "field observations",
+                  "archival data"
+                ],
+                "variables": {
+                  "dependent": [],
+                  "independent": [],
+                  "control": []
+                },
+                "time_period": "March 2015 to June 2016",
+                "confidence": 0.0,
+                "method_type": "qualitative"
+              },
+              {
+                "method_name": "archival data",
+                "software": [],
+                "sample_size": "",
+                "data_sources": [
+                  "Slow Money internal publications",
+                  "media articles",
+                  "interviews"
+                ],
+                "variables": {
+                  "dependent": [],
+                  "independent": [],
+                  "control": []
+                },
+                "time_period": "",
+                "confidence": 0.0,
+                "method_type": "qualitative"
+              }
+            ],
+            "avg_confidence": 0.0
+          }
+        },
+        {
+          "paper_id": "2025_4488",
+          "status": "success",
+          "section_detection": {
+            "found": true,
+            "confidence": 1.0,
+            "text_length": 3920
+          },
+          "primary_extraction": {
+            "method_type": "quantitative",
+            "primary_methods": [
+              "N-armed bandit model",
+              "Reinforcement learning",
+              "Computational model"
+            ],
+            "confidence": 1.0
+          },
+          "detailed_extraction": {
+            "methods_count": 3,
+            "methods": [
+              {
+                "method_name": "N-armed bandit model",
+                "software": [],
+                "sample_size": "",
+                "data_sources": [],
+                "variables": {
+                  "dependent": [],
+                  "independent": [],
+                  "control": []
+                },
+                "time_period": "",
+                "confidence": 0.0,
+                "method_type": "quantitative"
+              },
+              {
+                "method_name": "Reinforcement learning",
+                "software": [],
+                "sample_size": "",
+                "data_sources": [],
+                "variables": {
+                  "dependent": [],
+                  "independent": [],
+                  "control": []
+                },
+                "time_period": "",
+                "confidence": 0.0,
+                "method_type": "quantitative"
+              },
+              {
+                "method_name": "Computational model",
+                "software": [],
+                "sample_size": "",
+                "data_sources": [],
+                "variables": {
+                  "dependent": [],
+                  "independent": [],
+                  "control": []
+                },
+                "time_period": "",
+                "confidence": 0.0,
+                "method_type": "quantitative"
+              }
+            ],
+            "avg_confidence": 0.0
+          }
+        }
+      ],
+      "statistics": {
+        "total_papers": 3,
+        "successful": 3,
+        "failed": 0,
+        "avg_methods_per_paper": 2.6666666666666665,
+        "avg_confidence": 0.0
+      }
+    }
+  },
+  "summary": {
+    "models_tested": 2,
+    "best_model": null,
+    "model_comparison": {
+      "mistral:7b": {
+        "success_rate": 0.3333333333333333,
+        "avg_methods_per_paper": 2.0,
+        "avg_confidence": 0.0
+      },
+      "llama3.1:8b": {
+        "success_rate": 1.0,
+        "avg_methods_per_paper": 2.6666666666666665,
+        "avg_confidence": 0.0
+      }
+    }
+  }
+}
