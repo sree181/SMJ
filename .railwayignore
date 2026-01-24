@@ -1,0 +1,11 @@
+# Railway ignore file - exclude Python files from frontend builds
+# This helps Railway detect Node.js instead of Python
+
+requirements.txt
+requirements.backend.txt
+*.py
+api_server.py
+__pycache__/
+*.pyc
+.env
+*.log
