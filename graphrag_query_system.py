@@ -127,17 +127,21 @@ class GraphRAGQuerySystem:
         
         similarities = []
         for paper in papers:
-            if paper['embedding']:
-                similarity = self.cosine_similarity(query_vector, paper['embedding'])
-                if similarity >= threshold:
-                    similarities.append({
-                        'paper_id': paper['paper_id'],
-                        'title': paper['title'],
-                        'abstract': paper['abstract'],
-                        'year': paper['year'],
-                        'similarity': similarity,
-                        'source': 'vector_search'
-                    })
+            if paper and paper.get('embedding'):
+                try:
+                    similarity = self.cosine_similarity(query_vector, paper['embedding'])
+                    if similarity >= threshold:
+                        similarities.append({
+                            'paper_id': paper.get('paper_id'),
+                            'title': paper.get('title', ''),
+                            'abstract': paper.get('abstract', ''),
+                            'year': paper.get('year'),
+                            'similarity': similarity,
+                            'source': 'vector_search'
+                        })
+                except Exception as e:
+                    logger.warning(f"Error calculating similarity for paper {paper.get('paper_id')}: {e}")
+                    continue
         
         similarities.sort(key=lambda x: x['similarity'], reverse=True)
         return similarities[:top_k]
@@ -157,14 +161,18 @@ class GraphRAGQuerySystem:
         
         similarities = []
         for theory in theories:
-            if theory['embedding']:
-                similarity = self.cosine_similarity(query_vector, theory['embedding'])
-                if similarity >= threshold:
-                    similarities.append({
-                        'name': theory['name'],
-                        'description': theory['description'],
-                        'similarity': similarity
-                    })
+            if theory and theory.get('embedding'):
+                try:
+                    similarity = self.cosine_similarity(query_vector, theory['embedding'])
+                    if similarity >= threshold:
+                        similarities.append({
+                            'name': theory.get('name', ''),
+                            'description': theory.get('description', ''),
+                            'similarity': similarity
+                        })
+                except Exception as e:
+                    logger.warning(f"Error calculating similarity for theory {theory.get('name')}: {e}")
+                    continue
         
         similarities.sort(key=lambda x: x['similarity'], reverse=True)
         return similarities[:top_k]
@@ -184,14 +192,18 @@ class GraphRAGQuerySystem:
         
         similarities = []
         for phenomenon in phenomena:
-            if phenomenon['embedding']:
-                similarity = self.cosine_similarity(query_vector, phenomenon['embedding'])
-                if similarity >= threshold:
-                    similarities.append({
-                        'name': phenomenon['name'],
-                        'description': phenomenon['description'],
-                        'similarity': similarity
-                    })
+            if phenomenon and phenomenon.get('embedding'):
+                try:
+                    similarity = self.cosine_similarity(query_vector, phenomenon['embedding'])
+                    if similarity >= threshold:
+                        similarities.append({
+                            'name': phenomenon.get('name', ''),
+                            'description': phenomenon.get('description', ''),
+                            'similarity': similarity
+                        })
+                except Exception as e:
+                    logger.warning(f"Error calculating similarity for phenomenon {phenomenon.get('name')}: {e}")
+                    continue
         
         similarities.sort(key=lambda x: x['similarity'], reverse=True)
         return similarities[:top_k]
@@ -211,14 +223,18 @@ class GraphRAGQuerySystem:
         
         similarities = []
         for method in methods:
-            if method['embedding']:
-                similarity = self.cosine_similarity(query_vector, method['embedding'])
-                if similarity >= threshold:
-                    similarities.append({
-                        'name': method['name'],
-                        'type': method['type'],
-                        'similarity': similarity
-                    })
+            if method and method.get('embedding'):
+                try:
+                    similarity = self.cosine_similarity(query_vector, method['embedding'])
+                    if similarity >= threshold:
+                        similarities.append({
+                            'name': method.get('name', ''),
+                            'type': method.get('type', ''),
+                            'similarity': similarity
+                        })
+                except Exception as e:
+                    logger.warning(f"Error calculating similarity for method {method.get('name')}: {e}")
+                    continue
         
         similarities.sort(key=lambda x: x['similarity'], reverse=True)
         return similarities[:top_k]
@@ -231,13 +247,14 @@ class GraphRAGQuerySystem:
         result = session.run("""
             MATCH (p1:Paper)-[r]->(entity)
             WHERE p1.paper_id IN $paper_ids
+            AND entity IS NOT NULL
             WITH DISTINCT entity
             MATCH (p2:Paper)-[r2]->(entity)
             WHERE p2.paper_id IS NOT NULL
             AND NOT p2.paper_id IN $paper_ids
             WITH p2, 
                  count(DISTINCT entity) as connection_strength,
-                 collect(DISTINCT labels(entity)[0]) as entity_types
+                 collect(DISTINCT CASE WHEN size(labels(entity)) > 0 THEN labels(entity)[0] ELSE 'Unknown' END) as entity_types
             RETURN p2.paper_id as paper_id,
                    p2.title as title,
                    p2.abstract as abstract,
@@ -249,14 +266,14 @@ class GraphRAGQuerySystem:
         """, paper_ids=paper_ids, top_k=top_k).data()
         
         return [{
-            'paper_id': r['paper_id'],
-            'title': r['title'],
-            'abstract': r['abstract'],
-            'year': r['year'],
-            'connection_strength': r['connection_strength'],
-            'entity_types': r['entity_types'],
+            'paper_id': r.get('paper_id'),
+            'title': r.get('title', ''),
+            'abstract': r.get('abstract', ''),
+            'year': r.get('year'),
+            'connection_strength': r.get('connection_strength', 0),
+            'entity_types': r.get('entity_types', []),
             'source': 'graph_traversal'
-        } for r in result]
+        } for r in result if r and r.get('paper_id')]
     
     def _entity_matching(self, session, question: str) -> List[Dict]:
         """Extract entities from question and find matching papers"""
@@ -325,15 +342,16 @@ class GraphRAGQuerySystem:
         result = session.run("""
             MATCH (p1:Paper)-[r]->(entity)
             WHERE p1.paper_id IN $paper_ids
+            AND entity IS NOT NULL
             WITH p1, entity, type(r) as rel_type, r
             OPTIONAL MATCH (p2:Paper)-[r2]->(entity)
             WHERE p2.paper_id IS NOT NULL AND p2.paper_id <> p1.paper_id
             WITH p1, entity, rel_type, count(DISTINCT p2) as connected_papers,
-                 labels(entity)[0] as entity_type,
-                 CASE labels(entity)[0]
-                     WHEN 'Theory' THEN entity.name
-                     WHEN 'Phenomenon' THEN entity.phenomenon_name
-                     WHEN 'Method' THEN entity.name
+                 CASE WHEN size(labels(entity)) > 0 THEN labels(entity)[0] ELSE 'Unknown' END as entity_type,
+                 CASE 
+                     WHEN size(labels(entity)) > 0 AND labels(entity)[0] = 'Theory' THEN entity.name
+                     WHEN size(labels(entity)) > 0 AND labels(entity)[0] = 'Phenomenon' THEN entity.phenomenon_name
+                     WHEN size(labels(entity)) > 0 AND labels(entity)[0] = 'Method' THEN entity.name
                      ELSE ''
                  END as entity_name
             RETURN p1.paper_id as paper_id,
@@ -345,7 +363,7 @@ class GraphRAGQuerySystem:
             LIMIT 50
         """, paper_ids=paper_ids).data()
         
-        return [dict(r) for r in result]
+        return [dict(r) for r in result if r]
     
     def _build_context(self, similar_papers: List[Dict], connected_papers: List[Dict],
                       theories: List[Dict], phenomena: List[Dict], methods: List[Dict],
@@ -357,35 +375,44 @@ class GraphRAGQuerySystem:
         if similar_papers:
             context_parts.append("SEMANTICALLY SIMILAR PAPERS:")
             for paper in similar_papers[:5]:
-                context_parts.append(f"- {paper['title']} ({paper.get('year', 'N/A')})")
-                if paper.get('abstract'):
-                    context_parts.append(f"  Abstract: {paper['abstract'][:200]}...")
-                context_parts.append(f"  Similarity: {paper.get('similarity', 0):.3f}")
+                if paper and paper.get('title'):
+                    context_parts.append(f"- {paper.get('title', 'Unknown')} ({paper.get('year', 'N/A')})")
+                    if paper.get('abstract'):
+                        context_parts.append(f"  Abstract: {str(paper.get('abstract', ''))[:200]}...")
+                    context_parts.append(f"  Similarity: {paper.get('similarity', 0):.3f}")
         
         # Connected papers
         if connected_papers:
             context_parts.append("\nGRAPH-CONNECTED PAPERS:")
             for paper in connected_papers[:5]:
-                context_parts.append(f"- {paper['title']} ({paper.get('year', 'N/A')})")
-                context_parts.append(f"  Connected via: {', '.join(paper.get('entity_types', []))}")
+                if paper and paper.get('title'):
+                    context_parts.append(f"- {paper.get('title', 'Unknown')} ({paper.get('year', 'N/A')})")
+                    entity_types = paper.get('entity_types', [])
+                    if entity_types:
+                        context_parts.append(f"  Connected via: {', '.join(str(et) for et in entity_types if et)}")
         
         # Relevant theories
         if theories:
             context_parts.append("\nRELEVANT THEORIES:")
             for theory in theories[:5]:
-                context_parts.append(f"- {theory['name']}: {theory.get('description', '')[:100]}")
+                if theory and theory.get('name'):
+                    desc = theory.get('description', '') or ''
+                    context_parts.append(f"- {theory.get('name', 'Unknown')}: {desc[:100]}")
         
         # Relevant phenomena
         if phenomena:
             context_parts.append("\nRELEVANT PHENOMENA:")
             for phenomenon in phenomena[:5]:
-                context_parts.append(f"- {phenomenon['name']}: {phenomenon.get('description', '')[:100]}")
+                if phenomenon and phenomenon.get('name'):
+                    desc = phenomenon.get('description', '') or ''
+                    context_parts.append(f"- {phenomenon.get('name', 'Unknown')}: {desc[:100]}")
         
         # Relevant methods
         if methods:
             context_parts.append("\nRELEVANT METHODS:")
             for method in methods[:5]:
-                context_parts.append(f"- {method['name']} ({method.get('type', 'N/A')})")
+                if method and method.get('name'):
+                    context_parts.append(f"- {method.get('name', 'Unknown')} ({method.get('type', 'N/A')})")
         
         # Relationship context
         if relationships:
