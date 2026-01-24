@@ -17,7 +17,9 @@ function App() {
     <BrowserRouter>
       <div className="app min-h-screen bg-gray-50">
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<AdvancedAnalyticsDashboard />} />
+          <Route path="/home" element={<Dashboard />} />
+          <Route path="/analytics" element={<AdvancedAnalyticsDashboard />} />
           <Route path="/search" element={<SearchResults />} />
           <Route path="/paper/:id" element={<PaperDetail />} />
           {/* Placeholder routes for future features */}
@@ -37,7 +39,6 @@ function App() {
               </div>
             </div>
           } />
-          <Route path="/analytics" element={<AdvancedAnalyticsDashboard />} />
           <Route path="/analytics-test" element={<div className="min-h-screen flex items-center justify-center"><h1 className="text-4xl">Analytics Test Route Works!</h1></div>} />
           <Route path="/query" element={<QueryResults />} />
           <Route path="/theories/compare" element={<TheoryComparison />} />
