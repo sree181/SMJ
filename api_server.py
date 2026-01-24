@@ -429,39 +429,39 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Add CORS middleware
-# Get frontend URL from environment (for Railway deployment)
-frontend_url = os.getenv("FRONTEND_URL", "")
+# Add CORS middleware - MUST be added before routes
+# Configure for Railway deployment with explicit frontend URL
+frontend_url = os.getenv("FRONTEND_URL", "https://web-production-ff38d.up.railway.app")
 
-# For Railway deployment, allow all origins (can be restricted later for security)
-# This ensures CORS works properly with Railway's dynamic domains
+# Build list of allowed origins
 cors_origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "https://web-production-ff38d.up.railway.app",  # Explicitly add Railway frontend
 ]
 
-# Add Railway frontend URL if provided via environment variable
-if frontend_url:
+# Add frontend URL from environment if different
+if frontend_url and frontend_url not in cors_origins:
     cors_origins.append(frontend_url)
 
-# For Railway, use allow_origin_regex to match all Railway domains
-# Railway URLs typically look like: https://your-app-name.railway.app or https://your-app-name.up.railway.app
+# Railway regex pattern for dynamic Railway domains
 railway_regex = r"https://.*\.(railway\.app|up\.railway\.app)"
 
-# Use allow_origins=["*"] for Railway to ensure CORS works
-# Note: When using allow_origins=["*"], allow_credentials must be False
-# In production, you can restrict to specific domains and enable credentials
+# Configure CORS middleware
+# Using allow_origins=["*"] for maximum compatibility
+# Note: allow_credentials must be False when using ["*"]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins for Railway (can restrict later)
-    allow_origin_regex=railway_regex,  # Also allow Railway domains via regex
-    allow_credentials=False,  # Must be False when using allow_origins=["*"]
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],  # Explicitly list methods
-    allow_headers=["*"],
-    expose_headers=["*"],
-    max_age=3600,  # Cache preflight requests for 1 hour
+    allow_origins=["*"],  # Allow all origins - simplest solution for Railway
+    allow_credentials=False,  # Required when using allow_origins=["*"]
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
+    expose_headers=["*"],  # Expose all headers
+    max_age=3600,  # Cache preflight for 1 hour
 )
+
+# Log CORS configuration for debugging
+logger.info(f"CORS configured: allow_origins=['*'], allow_credentials=False")
 
 # Include Advanced Analytics Router (Graph RAG-based)
 try:
