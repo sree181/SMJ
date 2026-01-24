@@ -435,9 +435,10 @@ frontend_url = os.getenv("FRONTEND_URL", "")
 cors_origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://web-production-ff38d.up.railway.app",  # Explicitly add Railway frontend
 ]
 
-# Add Railway frontend URL if provided
+# Add Railway frontend URL if provided via environment variable
 if frontend_url:
     cors_origins.append(frontend_url)
 
@@ -452,6 +453,7 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],  # Expose all headers
 )
 
 # Include Advanced Analytics Router (Graph RAG-based)
@@ -5136,10 +5138,12 @@ async def shutdown_event():
     neo4j_service.close()
 
 if __name__ == "__main__":
+    # Use PORT from environment (Railway sets this) or default to 5000
+    port = int(os.getenv("PORT", 5000))
     uvicorn.run(
         "api_server:app",
         host="0.0.0.0",
-        port=5000,
-        reload=True,
+        port=port,
+        reload=False,  # Disable reload in production (Railway)
         log_level="info"
     )
