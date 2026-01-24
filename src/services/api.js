@@ -219,6 +219,15 @@ class ApiService {
   }
 
   /**
+   * Advanced Analytics - Author counts by 5-year intervals
+   * @param {number} startYear - Start year (default: 1985)
+   * @param {number} endYear - End year (default: 2025)
+   */
+  async getAuthorCountsByInterval(startYear = 1985, endYear = 2025) {
+    return this.fetch(`/analytics/authors/by-interval?start_year=${startYear}&end_year=${endYear}`);
+  }
+
+  /**
    * Advanced Analytics - Topic evolution
    * @param {number} startYear - Start year (default: 1985)
    * @param {number} endYear - End year (default: 2025)

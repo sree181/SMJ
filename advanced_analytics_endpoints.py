@@ -92,6 +92,69 @@ class AdvancedAnalytics:
         
         return intervals
     
+    def get_author_counts_by_interval(self, start_year: int = 1985, end_year: int = 2025) -> List[Dict]:
+        """
+        Get author counts by 5-year intervals
+        
+        Returns:
+            List of dicts with interval, total unique authors, and author details
+        """
+        intervals = []
+        current_start = start_year
+        
+        while current_start < end_year:
+            current_end = min(current_start + 5, end_year)
+            
+            with self.driver.session() as session:
+                # Get distinct authors and their paper counts for this interval
+                result = session.run("""
+                    MATCH (p:Paper)<-[:AUTHORED]-(a:Author)
+                    WHERE p.year >= $start_year 
+                      AND p.year < $end_year
+                      AND p.year > 0
+                    WITH a, count(DISTINCT p) as paper_count
+                    RETURN a.author_id as author_id,
+                           a.full_name as full_name,
+                           a.given_name as given_name,
+                           a.family_name as family_name,
+                           paper_count,
+                           collect(DISTINCT p.paper_id) as paper_ids
+                    ORDER BY paper_count DESC, a.family_name, a.given_name
+                """, start_year=current_start, end_year=current_end)
+                
+                authors = []
+                author_ids = []
+                total_papers = 0
+                
+                for record in result:
+                    author_data = {
+                        'author_id': record['author_id'],
+                        'full_name': record['full_name'] or f"{record.get('given_name', '')} {record.get('family_name', '')}".strip(),
+                        'given_name': record.get('given_name', ''),
+                        'family_name': record.get('family_name', ''),
+                        'paper_count': record['paper_count'],
+                        'paper_ids': record['paper_ids']
+                    }
+                    authors.append(author_data)
+                    author_ids.append(record['author_id'])
+                    total_papers += record['paper_count']
+                
+                # Get total unique author count
+                unique_author_count = len(author_ids)
+                
+                intervals.append({
+                    'interval': f"{current_start}-{current_end-1}",
+                    'start_year': current_start,
+                    'end_year': current_end - 1,
+                    'total_authors': unique_author_count,
+                    'total_papers': total_papers,
+                    'authors': authors
+                })
+            
+            current_start = current_end
+        
+        return intervals
+    
     def calculate_topic_evolution(self, start_year: int = 1985, end_year: int = 2025) -> Dict[str, Any]:
         """
         Calculate topic evolution using embeddings and clustering
@@ -1409,6 +1472,17 @@ async def get_paper_counts_by_interval(start_year: int = 1985, end_year: int = 2
         return {"intervals": intervals}
     except Exception as e:
         logger.error(f"Error getting paper counts: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/authors/by-interval")
+async def get_author_counts_by_interval(start_year: int = 1985, end_year: int = 2025):
+    """Get author counts by 5-year intervals"""
+    try:
+        analytics = get_analytics()
+        intervals = analytics.get_author_counts_by_interval(start_year, end_year)
+        return {"intervals": intervals}
+    except Exception as e:
+        logger.error(f"Error getting author counts: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/topics/evolution")

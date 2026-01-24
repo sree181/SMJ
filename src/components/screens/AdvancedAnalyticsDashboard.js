@@ -9,6 +9,7 @@ import '../ChatInterface.css';
 const AdvancedAnalyticsDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [paperCounts, setPaperCounts] = useState([]);
+  const [authorCounts, setAuthorCounts] = useState([]);
   const [topicEvolution, setTopicEvolution] = useState(null);
   const [theoryEvolution, setTheoryEvolution] = useState(null);
   const [theoryBetweenness, setTheoryBetweenness] = useState(null);
@@ -28,7 +29,7 @@ const AdvancedAnalyticsDashboard = () => {
   const [chatLoading, setChatLoading] = useState(false);
   
   // Tab state for dashboard views
-  const [activeTab, setActiveTab] = useState('charts'); // 'charts', 'theory-proportions', 'betweenness', 'opportunities', 'integration', 'cumulative', 'canonical', 'hhi', 'alignment', 'integrative'
+  const [activeTab, setActiveTab] = useState('charts'); // 'charts', 'theory-proportions', 'betweenness', 'opportunities', 'integration', 'cumulative', 'canonical', 'hhi', 'alignment', 'integrative', 'authors'
 
   useEffect(() => {
     loadAllData();
@@ -59,6 +60,10 @@ const AdvancedAnalyticsDashboard = () => {
       const results = await Promise.allSettled([
         withTimeout(api.getPaperCountsByInterval(), 30000).catch(err => {
           console.error('Error loading paper counts:', err);
+          return { intervals: [] };
+        }),
+        withTimeout(api.getAuthorCountsByInterval(), 30000).catch(err => {
+          console.error('Error loading author counts:', err);
           return { intervals: [] };
         }),
         withTimeout(api.getTopicEvolution(), 60000).catch(err => {
@@ -100,7 +105,7 @@ const AdvancedAnalyticsDashboard = () => {
       
       // Extract values from Promise.allSettled results
       const [
-        countsData, topicsData, theoriesData, betweennessData, gapsData, 
+        countsData, authorCountsData, topicsData, theoriesData, betweennessData, gapsData, 
         integrationData, cumulativeData, coverageData, centralityData, 
         hhiData, alignmentData, integrativeData
       ] = results.map(result => {
@@ -128,6 +133,7 @@ const AdvancedAnalyticsDashboard = () => {
       });
 
       setPaperCounts(countsData?.intervals || []);
+      setAuthorCounts(authorCountsData?.intervals || []);
       setTopicEvolution(topicsData);
       setTheoryEvolution(theoriesData);
       setTheoryBetweenness(betweennessData);
@@ -443,6 +449,17 @@ const AdvancedAnalyticsDashboard = () => {
           >
             <Sparkles size={18} className="inline mr-2" />
             Integrative
+          </button>
+          <button
+            onClick={() => setActiveTab('authors')}
+            className={`px-6 py-2 rounded-lg font-semibold transition-all ${
+              activeTab === 'authors'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'text-gray-600 hover:bg-gray-100'
+            }`}
+          >
+            <BookOpen size={18} className="inline mr-2" />
+            Authors
           </button>
         </div>
       </div>
@@ -1870,6 +1887,188 @@ const AdvancedAnalyticsDashboard = () => {
               <p className="text-gray-600">Integrative Theory Centrality feature is currently unavailable.</p>
               <p className="text-sm text-gray-500 mt-2">Please check back later.</p>
             </div>
+          </div>
+        </div>
+        ) : activeTab === 'authors' ? (
+        <div className="space-y-6">
+          {/* Author Counts by Period Tab */}
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+            <div className="flex items-center gap-2 mb-6">
+              <BookOpen size={24} className="text-blue-600" />
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900">Author Counts by Period</h2>
+                <p className="text-gray-600 mt-1">Number of unique authors publishing in each 5-year period</p>
+              </div>
+            </div>
+
+            {/* Summary Cards */}
+            {authorCounts.length > 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-6 text-white shadow-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <BookOpen size={20} />
+                    <span className="text-blue-100 text-sm font-medium">Total Authors</span>
+                  </div>
+                  <p className="text-3xl font-bold">
+                    {authorCounts.reduce((sum, interval) => sum + (interval.total_authors || 0), 0).toLocaleString()}
+                  </p>
+                  <p className="text-blue-100 text-xs mt-1">Across all periods</p>
+                </div>
+                
+                <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-6 text-white shadow-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <TrendingUp size={20} />
+                    <span className="text-purple-100 text-sm font-medium">Avg per Period</span>
+                  </div>
+                  <p className="text-3xl font-bold">
+                    {authorCounts.length > 0 
+                      ? Math.round(authorCounts.reduce((sum, interval) => sum + (interval.total_authors || 0), 0) / authorCounts.length)
+                      : 0}
+                  </p>
+                  <p className="text-purple-100 text-xs mt-1">5-year periods</p>
+                </div>
+                
+                <div className="bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl p-6 text-white shadow-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Target size={20} />
+                    <span className="text-indigo-100 text-sm font-medium">Peak Period</span>
+                  </div>
+                  <p className="text-3xl font-bold">
+                    {authorCounts.length > 0 
+                      ? authorCounts.reduce((max, interval) => 
+                          (interval.total_authors || 0) > (max.total_authors || 0) ? interval : max, 
+                          authorCounts[0]
+                        ).interval
+                      : 'N/A'}
+                  </p>
+                  <p className="text-indigo-100 text-xs mt-1">
+                    {authorCounts.length > 0 
+                      ? `${authorCounts.reduce((max, interval) => 
+                          (interval.total_authors || 0) > (max.total_authors || 0) ? interval : max, 
+                          authorCounts[0]
+                        ).total_authors || 0} authors`
+                      : ''}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Author Counts Chart */}
+            {authorCounts.length > 0 ? (
+              <>
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Author Counts Over Time</h3>
+                  <ResponsiveContainer width="100%" height={350}>
+                    <BarChart 
+                      data={authorCounts.map(interval => ({
+                        interval: interval.interval,
+                        authors: interval.total_authors || 0,
+                        papers: interval.total_papers || 0
+                      }))} 
+                      margin={{ top: 20, right: 30, left: 20, bottom: 80 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                      <XAxis 
+                        dataKey="interval" 
+                        angle={-45} 
+                        textAnchor="end" 
+                        height={100}
+                        tick={{ fill: '#6b7280', fontSize: 11 }}
+                      />
+                      <YAxis 
+                        yAxisId="left"
+                        label={{ value: 'Number of Authors', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle', fill: '#6b7280', fontSize: 11 } }}
+                        tick={{ fill: '#6b7280', fontSize: 11 }}
+                      />
+                      <YAxis 
+                        yAxisId="right"
+                        orientation="right"
+                        label={{ value: 'Number of Papers', angle: 90, position: 'insideRight', style: { textAnchor: 'middle', fill: '#8B5CF6', fontSize: 11 } }}
+                        tick={{ fill: '#8B5CF6', fontSize: 11 }}
+                      />
+                      <Tooltip 
+                        contentStyle={{ 
+                          backgroundColor: '#fff', 
+                          border: '1px solid #e5e7eb',
+                          borderRadius: '8px',
+                          boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+                        }}
+                      />
+                      <Legend wrapperStyle={{ paddingTop: '20px', fontSize: '12px' }} />
+                      <Bar 
+                        yAxisId="left"
+                        dataKey="authors" 
+                        fill="#3B82F6" 
+                        name="Authors"
+                        radius={[6, 6, 0, 0]}
+                      />
+                      <Bar 
+                        yAxisId="right"
+                        dataKey="papers" 
+                        fill="#8B5CF6" 
+                        name="Papers"
+                        radius={[6, 6, 0, 0]}
+                      />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+
+                {/* Detailed Author List by Period */}
+                <div className="mt-6 border-t border-gray-200 pt-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Authors by Period</h3>
+                  <div className="space-y-4 max-h-96 overflow-y-auto">
+                    {authorCounts.map((interval) => (
+                      <div key={interval.interval} className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                        <div className="flex items-center justify-between mb-3">
+                          <h4 className="font-semibold text-gray-900">{interval.interval}</h4>
+                          <span className="text-sm text-gray-600">
+                            {interval.total_authors || 0} authors • {interval.total_papers || 0} papers
+                          </span>
+                        </div>
+                        {interval.authors && interval.authors.length > 0 ? (
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                            {interval.authors.slice(0, 20).map((author, idx) => (
+                              <div 
+                                key={author.author_id || idx} 
+                                className="bg-white rounded-lg p-3 border border-gray-200 shadow-sm"
+                              >
+                                <div className="flex items-center justify-between mb-1">
+                                  <span className="text-sm font-semibold text-gray-900 truncate" title={author.full_name}>
+                                    {author.full_name || `${author.given_name || ''} ${author.family_name || ''}`.trim() || 'Unknown Author'}
+                                  </span>
+                                  <span className="text-xs text-gray-600 ml-2 flex-shrink-0">
+                                    {author.paper_count || 0} paper{author.paper_count !== 1 ? 's' : ''}
+                                  </span>
+                                </div>
+                                {(author.given_name || author.family_name) && (
+                                  <div className="text-xs text-gray-500">
+                                    {[author.given_name, author.family_name].filter(Boolean).join(' ')}
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                            {interval.authors.length > 20 && (
+                              <div className="bg-gray-100 rounded-lg p-3 border border-gray-200 text-center">
+                                <span className="text-sm text-gray-600">
+                                  +{interval.authors.length - 20} more authors
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        ) : (
+                          <p className="text-sm text-gray-500">No authors found for this period</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-gray-600">No author data available.</p>
+                <p className="text-sm text-gray-500 mt-2">Author data will appear here once available.</p>
+              </div>
+            )}
           </div>
         </div>
         ) : null}
