@@ -23,11 +23,12 @@ from pydantic import BaseModel, Field
 from neo4j import GraphDatabase
 from dotenv import load_dotenv
 
-# Import LLMClient from api_server
-import sys
-from pathlib import Path
-sys.path.append(str(Path(__file__).parent))
-from api_server import LLMClient
+# Import LLMClient from api_server - use lazy import to avoid circular dependency
+# LLMClient will be imported only when needed, not at module level
+def get_llm_client():
+    """Lazy import of LLMClient to avoid circular dependency"""
+    from api_server import LLMClient
+    return LLMClient()
 
 load_dotenv()
 
@@ -338,7 +339,7 @@ async def get_fragmentation_analysis_with_llm(period: str):
             break
     
     driver = get_neo4j_driver()
-    llm_client = LLMClient()
+    llm_client = get_llm_client()
     
     try:
         with driver.session() as session:

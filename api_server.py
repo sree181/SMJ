@@ -194,11 +194,23 @@ class TrendAnalysisResponse(BaseModel):
 # Neo4j connection class
 class Neo4jService:
     def __init__(self):
-        self.uri = os.getenv("NEO4J_URI")
-        self.user = os.getenv("NEO4J_USER")
-        self.password = os.getenv("NEO4J_PASSWORD")
+        self.uri = os.getenv("NEO4J_URI", "").strip()
+        self.user = os.getenv("NEO4J_USER", "").strip()
+        self.password = os.getenv("NEO4J_PASSWORD", "").strip()
         self.driver = None
-        self.connect()
+        
+        # Validate environment variables
+        if not self.uri:
+            logger.error("✗ NEO4J_URI environment variable is not set or is empty")
+        if not self.user:
+            logger.error("✗ NEO4J_USER environment variable is not set or is empty")
+        if not self.password:
+            logger.error("✗ NEO4J_PASSWORD environment variable is not set or is empty")
+        
+        if self.uri and self.user and self.password:
+            self.connect()
+        else:
+            logger.error("✗ Cannot connect to Neo4j: Missing required environment variables")
 
     def connect(self):
         try:
