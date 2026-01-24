@@ -772,22 +772,6 @@ class LLMClient:
         # Fallback narrative
         return self._generate_fallback_theory_comparison(theories, context_data)
     
-        
-        prompt = f"""
-        You are a strategic management research expert. Compare the following theories and provide a comprehensive analysis.
-        
-        Theories to Compare: {theories_str}
-        
-        Context Data:
-        - Shared Phenomena: {shared_count} phenomena explained by both theories
-        - Compatibility Score: {compatibility:.2f} (0.0 = incompatible, 1.0 = highly compatible)
-        )
-        
-        if response.status_code == 200:
-            result = response.json()
-            return result.get('response', '').strip()
-        else:
-    
     def _generate_theory_comparison_with_openai(self, theories: List[str], context_data: Dict[str, Any],
                                                user_query: Optional[str] = None) -> str:
         """Generate theory comparison narrative using OpenAI"""
@@ -857,20 +841,6 @@ class LLMClient:
         
         return self._generate_fallback_assumptions_narrative(theory_name, assumptions_data)
     
-        
-        prompt = f"""
-        You are a strategic management research expert. Analyze the assumptions underlying {theory_name}.
-        
-        Context:
-            json=payload,
-            timeout=120
-        )
-        
-        if response.status_code == 200:
-            result = response.json()
-            return result.get('response', '').strip()
-        else:
-    
     def _generate_assumptions_narrative_with_openai(self, theory_name: str, assumptions_data: Dict[str, Any],
                                                    phenomena: List[Dict], methods: List[Dict]) -> str:
         """Generate assumptions narrative using OpenAI"""
@@ -918,16 +888,6 @@ class LLMClient:
                 logger.error(f"Error generating constructs with OpenAI: {e}")
         
         return self._generate_fallback_constructs_narrative(theory_name, constructs)
-    
-        
-            json=payload,
-            timeout=120
-        )
-        
-        if response.status_code == 200:
-            result = response.json()
-            return result.get('response', '').strip()
-        else:
     
     def _generate_constructs_narrative_with_openai(self, theory_name: str, constructs: List[TheoryConstruct],
                                                   phenomena: List[Dict]) -> str:
@@ -992,16 +952,6 @@ class LLMClient:
             prompt = f"""
             Generate a research contribution statement for using {contribution_data.get('method')} to study {contribution_data.get('theory')}.
             
-            Context:
-            json=payload,
-            timeout=60
-        )
-        
-        if response.status_code == 200:
-            result = response.json()
-            return result.get('response', '').strip()
-        else:
-    
     def _generate_contribution_statement_with_openai(self, opportunity_type: str, contribution_data: Dict[str, Any]) -> str:
         """Generate contribution statement using OpenAI"""
         from openai import OpenAI
@@ -1118,14 +1068,7 @@ class LLMClient:
             except Exception as e:
                 logger.error(f"Error generating summary with OpenAI: {e}")
         
-            json=payload,
-            timeout=60
-        )
-        
-        if response.status_code == 200:
-            result = response.json()
-            return result.get('response', '').strip()
-        else:
+        return self._generate_fallback_opportunities_summary(opportunities)
     
     def _generate_opportunities_summary_with_openai(self, opportunities: List[ContributionOpportunity], query: Optional[str] = None) -> str:
         """Generate summary using OpenAI"""
@@ -1175,14 +1118,32 @@ class LLMClient:
             forecast_text = f"\n\nForecast for {forecast.next_period}: {forecast.predicted_paper_count} papers ({forecast.trend_direction})"
         
         prompt = f"""
-            json=payload,
-            timeout=60
+        Analyze the temporal evolution of {entity_type} "{entity_name}":
+        
+        Usage by Period:
+        {usage_summary}
+        
+        Evolution Steps:
+        {evolution_summary}
+        {forecast_text}
+        
+        Write a 3-4 paragraph narrative that:
+        1. Describes where the field has been (historical usage)
+        2. Identifies key turning points and trends
+        3. Explains where the field is going (based on recent trends)
+        4. Discusses implications for future research
+        
+        Write in an academic but accessible style.
+        """
+        
+        response = client.chat.completions.create(
+            model="gpt-4",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=600,
+            temperature=0.7
         )
         
-        if response.status_code == 200:
-            result = response.json()
-            return result.get('response', '').strip()
-        else:
+        return response.choices[0].message.content.strip()
     
     def _generate_trend_narrative_with_openai(self, entity_type: str, entity_name: str, usage_by_period: List[PeriodUsage],
                                              evolution_steps: List[EvolutionStep], forecast: Optional[TrendForecast]) -> str:
@@ -1230,14 +1191,10 @@ class LLMClient:
         if self.api_key:
             try:
                 return self._generate_trend_summary_with_openai(entity_type, entity_name, usage_by_period, evolution_steps)
-            json=payload,
-            timeout=60
-        )
+            except Exception as e:
+                logger.error(f"Error generating trend summary with OpenAI: {e}")
         
-        if response.status_code == 200:
-            result = response.json()
-            return result.get('response', '').strip()
-        else:
+        return self._generate_fallback_trend_summary(entity_type, entity_name, usage_by_period, evolution_steps)
     
     def _generate_trend_summary_with_openai(self, entity_type: str, entity_name: str, usage_by_period: List[PeriodUsage],
                                            evolution_steps: List[EvolutionStep]) -> str:
