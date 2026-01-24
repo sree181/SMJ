@@ -552,32 +552,14 @@ neo4j_service = Neo4jService()
 class LLMClient:
     def __init__(self):
         self.api_key = os.getenv("OPENAI_API_KEY")
-        self.ollama_base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
-        self.ollama_model = os.getenv("OLLAMA_MODEL", "llama3.1:8b")
-        # Force OLLAMA to be used if no OpenAI key, or if explicitly enabled
-        use_ollama_env = os.getenv("USE_OLLAMA", "").lower()
-        if use_ollama_env == "false":
-            self.use_ollama = False
+        
+        if self.api_key:
+            logger.info("Using OpenAI for LLM (OpenAI API key found)")
         else:
-            # Default to OLLAMA if not explicitly disabled
-            self.use_ollama = True
-        
-        if not self.api_key and not self.use_ollama:
-            logger.warning("OpenAI API key not found and OLLAMA not enabled. LLM features will be limited.")
-        
-        if self.use_ollama:
-            logger.info(f"Using OLLAMA at {self.ollama_base_url} with model {self.ollama_model}")
+            logger.warning("OpenAI API key not found. LLM features will be limited to fallback responses.")
 
     def generate_answer(self, query: str, research_data: Dict[str, Any], persona: Optional[str] = None) -> str:
-        """Generate answer using LLM based on research data with optional persona"""
-        # Try OLLAMA first if enabled, then OpenAI, then fallback
-        if self.use_ollama:
-            try:
-                return self._generate_answer_with_ollama(query, research_data, persona)
-            except Exception as e:
-                logger.warning(f"OLLAMA failed, trying OpenAI: {e}")
-                # Fall through to OpenAI if OLLAMA fails
-        
+        """Generate answer using OpenAI based on research data with optional persona"""
         if self.api_key:
             try:
                 return self._generate_answer_with_openai(query, research_data, persona)
@@ -624,56 +606,6 @@ class LLMClient:
 
         return response.choices[0].message.content.strip()
     
-    def _generate_answer_with_ollama(self, query: str, research_data: Dict[str, Any], persona: Optional[str] = None) -> str:
-        """Generate answer using OLLAMA"""
-        # Prepare context from research data
-        context = self._prepare_context(research_data)
-        
-        # Get persona-specific system prompt
-        system_prompt = self._get_persona_prompt(persona)
-        
-        # Debug: Log the context being sent to LLM
-        logger.info(f"Using OLLAMA ({self.ollama_model}) - Context length: {len(context)} characters")
-        logger.info(f"Persona: {persona or 'default'}")
-        
-        # Build full prompt for OLLAMA
-        full_prompt = f"""
-        {system_prompt}
-
-        User Question: {query}
-
-        Available Research Data:
-        {context}
-
-        Please provide a comprehensive, well-structured answer based on the available data.
-        If the data doesn't contain enough information to answer the question, 
-        say so and suggest what additional information might be helpful.
-        """
-        
-        # Call OLLAMA API
-        payload = {
-            "model": self.ollama_model,
-            "prompt": full_prompt,
-            "stream": False,
-            "options": {
-                "temperature": 0.7,
-                "top_p": 0.9,
-                "num_predict": 2000,  # OLLAMA uses num_predict instead of max_tokens
-            }
-        }
-        
-        response = requests.post(
-            f"{self.ollama_base_url}/api/generate",
-            json=payload,
-            timeout=120  # 2 minute timeout
-        )
-        
-        if response.status_code == 200:
-            result = response.json()
-            return result.get('response', '').strip()
-        else:
-            raise Exception(f"OLLAMA API error: {response.status_code} - {response.text}")
-
     def _prepare_context(self, research_data: Dict[str, Any]) -> str:
         """Prepare context string from research data - Updated for latest schema"""
         context_parts = []
@@ -831,12 +763,6 @@ class LLMClient:
     def generate_theory_comparison_narrative(self, theories: List[str], context_data: Dict[str, Any], 
                                             user_query: Optional[str] = None) -> str:
         """Generate LLM narrative for theory comparison"""
-        if self.use_ollama:
-            try:
-                return self._generate_theory_comparison_with_ollama(theories, context_data, user_query)
-            except Exception as e:
-                logger.warning(f"OLLAMA failed for theory comparison, trying OpenAI: {e}")
-        
         if self.api_key:
             try:
                 return self._generate_theory_comparison_with_openai(theories, context_data, user_query)
@@ -846,13 +772,6 @@ class LLMClient:
         # Fallback narrative
         return self._generate_fallback_theory_comparison(theories, context_data)
     
-    def _generate_theory_comparison_with_ollama(self, theories: List[str], context_data: Dict[str, Any],
-                                               user_query: Optional[str] = None) -> str:
-        """Generate theory comparison narrative using OLLAMA"""
-        theories_str = ", ".join(theories)
-        shared_count = len(context_data.get("shared_phenomena", []))
-        compatibility = context_data.get("compatibility_score", 0.0)
-        tensions_count = len(context_data.get("tensions", []))
         
         prompt = f"""
         You are a strategic management research expert. Compare the following theories and provide a comprehensive analysis.
@@ -862,46 +781,12 @@ class LLMClient:
         Context Data:
         - Shared Phenomena: {shared_count} phenomena explained by both theories
         - Compatibility Score: {compatibility:.2f} (0.0 = incompatible, 1.0 = highly compatible)
-        - Compatibility Factors: {', '.join(context_data.get('compatibility_factors', []))}
-        - Co-usage: Used together in {context_data.get('co_usage', 0)} papers
-        - Methods Overlap: {len(context_data.get('methods_overlap', []))} shared methods
-        - Tensions: {tensions_count} identified tensions
-        
-        Shared Phenomena: {', '.join([p['phenomenon_name'] for p in context_data.get('shared_phenomena', [])[:5]])}
-        
-        User Question: {user_query if user_query else 'General comparison requested'}
-        
-        Please provide a comprehensive comparison narrative covering:
-        1. Compatibility: Where do these theories align? What shared phenomena do they explain?
-        2. Tensions: Where do they conflict or diverge? What are the key differences?
-        3. Integration: How could these theories be combined or used together?
-        4. Practical Implications: What does this comparison mean for research?
-        
-        Write in an academic but accessible style. Be specific and evidence-based.
-        """
-        
-        payload = {
-            "model": self.ollama_model,
-            "prompt": prompt,
-            "stream": False,
-            "options": {
-                "temperature": 0.7,
-                "top_p": 0.9,
-                "num_predict": 2000,
-            }
-        }
-        
-        response = requests.post(
-            f"{self.ollama_base_url}/api/generate",
-            json=payload,
-            timeout=120
         )
         
         if response.status_code == 200:
             result = response.json()
             return result.get('response', '').strip()
         else:
-            raise Exception(f"OLLAMA API error: {response.status_code}")
     
     def _generate_theory_comparison_with_openai(self, theories: List[str], context_data: Dict[str, Any],
                                                user_query: Optional[str] = None) -> str:
@@ -964,12 +849,6 @@ class LLMClient:
     def generate_theory_assumptions_narrative(self, theory_name: str, assumptions_data: Dict[str, Any],
                                              phenomena: List[Dict], methods: List[Dict]) -> str:
         """Generate LLM narrative for theory assumptions"""
-        if self.use_ollama:
-            try:
-                return self._generate_assumptions_narrative_with_ollama(theory_name, assumptions_data, phenomena, methods)
-            except Exception as e:
-                logger.warning(f"OLLAMA failed for assumptions, trying OpenAI: {e}")
-        
         if self.api_key:
             try:
                 return self._generate_assumptions_narrative_with_openai(theory_name, assumptions_data, phenomena, methods)
@@ -978,47 +857,11 @@ class LLMClient:
         
         return self._generate_fallback_assumptions_narrative(theory_name, assumptions_data)
     
-    def _generate_assumptions_narrative_with_ollama(self, theory_name: str, assumptions_data: Dict[str, Any],
-                                                    phenomena: List[Dict], methods: List[Dict]) -> str:
-        """Generate assumptions narrative using OLLAMA"""
-        phenomena_list = [p["phenomenon_name"] for p in phenomena[:10]]
-        methods_list = [m["name"] for m in methods[:10]]
         
         prompt = f"""
         You are a strategic management research expert. Analyze the assumptions underlying {theory_name}.
         
         Context:
-        - Phenomena explained: {len(phenomena)} phenomena
-        - Methods used: {len(methods)} methods
-        - Papers using theory: {assumptions_data.get('papers_count', 0)} papers
-        - Co-usage with other theories: {assumptions_data.get('co_usage_count', 0)} theories
-        
-        Key Phenomena: {', '.join(phenomena_list)}
-        Key Methods: {', '.join(methods_list)}
-        
-        Based on this usage pattern, identify and explain the core assumptions of {theory_name}.
-        Consider:
-        1. What assumptions about firm behavior does this theory make?
-        2. What assumptions about resources/capabilities?
-        3. What boundary conditions or scope assumptions?
-        4. What methodological assumptions?
-        
-        Write in an academic style, be specific and evidence-based.
-        """
-        
-        payload = {
-            "model": self.ollama_model,
-            "prompt": prompt,
-            "stream": False,
-            "options": {
-                "temperature": 0.7,
-                "top_p": 0.9,
-                "num_predict": 1500,
-            }
-        }
-        
-        response = requests.post(
-            f"{self.ollama_base_url}/api/generate",
             json=payload,
             timeout=120
         )
@@ -1027,7 +870,6 @@ class LLMClient:
             result = response.json()
             return result.get('response', '').strip()
         else:
-            raise Exception(f"OLLAMA API error: {response.status_code}")
     
     def _generate_assumptions_narrative_with_openai(self, theory_name: str, assumptions_data: Dict[str, Any],
                                                    phenomena: List[Dict], methods: List[Dict]) -> str:
@@ -1069,12 +911,6 @@ class LLMClient:
     def generate_theory_constructs_narrative(self, theory_name: str, constructs: List[TheoryConstruct],
                                             phenomena: List[Dict]) -> str:
         """Generate LLM narrative for theory constructs"""
-        if self.use_ollama:
-            try:
-                return self._generate_constructs_narrative_with_ollama(theory_name, constructs, phenomena)
-            except Exception as e:
-                logger.warning(f"OLLAMA failed for constructs, trying OpenAI: {e}")
-        
         if self.api_key:
             try:
                 return self._generate_constructs_narrative_with_openai(theory_name, constructs, phenomena)
@@ -1083,43 +919,7 @@ class LLMClient:
         
         return self._generate_fallback_constructs_narrative(theory_name, constructs)
     
-    def _generate_constructs_narrative_with_ollama(self, theory_name: str, constructs: List[TheoryConstruct],
-                                                   phenomena: List[Dict]) -> str:
-        """Generate constructs narrative using OLLAMA"""
-        constructs_list = [f"{c.construct_name} ({c.frequency} related phenomena)" for c in constructs[:5]]
-        phenomena_list = [p["phenomenon_name"] for p in phenomena[:10]]
         
-        prompt = f"""
-        You are a strategic management research expert. Analyze the key constructs of {theory_name}.
-        
-        Constructs Identified:
-        {chr(10).join(constructs_list)}
-        
-        Related Phenomena:
-        {', '.join(phenomena_list)}
-        
-        Explain:
-        1. What are the core constructs of {theory_name}?
-        2. How do these constructs relate to each other?
-        3. How do constructs connect to phenomena?
-        4. What is the theoretical structure?
-        
-        Write in an academic style, be specific and evidence-based.
-        """
-        
-        payload = {
-            "model": self.ollama_model,
-            "prompt": prompt,
-            "stream": False,
-            "options": {
-                "temperature": 0.7,
-                "top_p": 0.9,
-                "num_predict": 1500,
-            }
-        }
-        
-        response = requests.post(
-            f"{self.ollama_base_url}/api/generate",
             json=payload,
             timeout=120
         )
@@ -1128,7 +928,6 @@ class LLMClient:
             result = response.json()
             return result.get('response', '').strip()
         else:
-            raise Exception(f"OLLAMA API error: {response.status_code}")
     
     def _generate_constructs_narrative_with_openai(self, theory_name: str, constructs: List[TheoryConstruct],
                                                   phenomena: List[Dict]) -> str:
@@ -1167,12 +966,6 @@ class LLMClient:
     
     def generate_contribution_statement(self, opportunity_type: str, contribution_data: Dict[str, Any]) -> str:
         """Generate LLM contribution statement for an opportunity"""
-        if self.use_ollama:
-            try:
-                return self._generate_contribution_statement_with_ollama(opportunity_type, contribution_data)
-            except Exception as e:
-                logger.warning(f"OLLAMA failed for contribution statement, trying OpenAI: {e}")
-        
         if self.api_key:
             try:
                 return self._generate_contribution_statement_with_openai(opportunity_type, contribution_data)
@@ -1181,11 +974,6 @@ class LLMClient:
         
         return self._generate_fallback_contribution_statement(opportunity_type, contribution_data)
     
-    def _generate_contribution_statement_with_ollama(self, opportunity_type: str, contribution_data: Dict[str, Any]) -> str:
-        """Generate contribution statement using OLLAMA"""
-        if opportunity_type == "theory-phenomenon":
-            prompt = f"""
-            Generate a research contribution statement for exploring how {contribution_data.get('theory')} could explain {contribution_data.get('phenomenon')}.
             
             Context:
             - Current connection strength: {contribution_data.get('current_strength', 0.0):.2f}
@@ -1205,37 +993,6 @@ class LLMClient:
             Generate a research contribution statement for using {contribution_data.get('method')} to study {contribution_data.get('theory')}.
             
             Context:
-            - Current usage: {contribution_data.get('usage_count', 0)} papers
-            - Common methods with theory: {', '.join(contribution_data.get('common_methods', [])[:3])}
-            - Opportunity score: {contribution_data.get('opportunity_score', 0.0):.2f}
-            
-            Write a 2-3 sentence contribution statement explaining why this method-theory combination is novel and valuable.
-            """
-        else:  # construct
-            prompt = f"""
-            Generate a research contribution statement for studying {contribution_data.get('phenomenon')} ({contribution_data.get('phenomenon_type')}).
-            
-            Context:
-            - Current research: {contribution_data.get('paper_count', 0)} papers
-            - Potential theories: {', '.join(contribution_data.get('potential_theories', [])[:3])}
-            - Opportunity score: {contribution_data.get('opportunity_score', 0.0):.2f}
-            
-            Write a 2-3 sentence contribution statement explaining why this construct is underexplored and worth studying.
-            """
-        
-        payload = {
-            "model": self.ollama_model,
-            "prompt": prompt,
-            "stream": False,
-            "options": {
-                "temperature": 0.7,
-                "top_p": 0.9,
-                "num_predict": 500,
-            }
-        }
-        
-        response = requests.post(
-            f"{self.ollama_base_url}/api/generate",
             json=payload,
             timeout=60
         )
@@ -1244,7 +1001,6 @@ class LLMClient:
             result = response.json()
             return result.get('response', '').strip()
         else:
-            raise Exception(f"OLLAMA API error: {response.status_code}")
     
     def _generate_contribution_statement_with_openai(self, opportunity_type: str, contribution_data: Dict[str, Any]) -> str:
         """Generate contribution statement using OpenAI"""
@@ -1273,12 +1029,6 @@ class LLMClient:
     
     def generate_research_questions(self, opportunity_type: str, contribution_data: Dict[str, Any]) -> List[str]:
         """Generate research questions for an opportunity"""
-        if self.use_ollama:
-            try:
-                return self._generate_research_questions_with_ollama(opportunity_type, contribution_data)
-            except Exception as e:
-                logger.warning(f"OLLAMA failed for research questions, trying OpenAI: {e}")
-        
         if self.api_key:
             try:
                 return self._generate_research_questions_with_openai(opportunity_type, contribution_data)
@@ -1287,11 +1037,6 @@ class LLMClient:
         
         return self._generate_fallback_research_questions(opportunity_type, contribution_data)
     
-    def _generate_research_questions_with_ollama(self, opportunity_type: str, contribution_data: Dict[str, Any]) -> List[str]:
-        """Generate research questions using OLLAMA"""
-        if opportunity_type == "theory-phenomenon":
-            prompt = f"""
-            Generate 2-3 specific research questions for exploring how {contribution_data.get('theory')} could explain {contribution_data.get('phenomenon')}.
             
             Context:
             - Current connection strength: {contribution_data.get('current_strength', 0.0):.2f}
@@ -1301,37 +1046,6 @@ class LLMClient:
             1. Specific and actionable
             2. Grounded in the theory
             3. Focused on the phenomenon
-            
-            Format as a numbered list.
-            """
-        elif opportunity_type == "theory-method":
-            prompt = f"""
-            Generate 2-3 specific research questions for using {contribution_data.get('method')} to study {contribution_data.get('theory')}.
-            
-            Focus on how this method could provide novel insights into the theory.
-            Format as a numbered list.
-            """
-        else:
-            prompt = f"""
-            Generate 2-3 specific research questions for studying {contribution_data.get('phenomenon')}.
-            
-            Potential theories: {', '.join(contribution_data.get('potential_theories', [])[:2])}
-            Format as a numbered list.
-            """
-        
-        payload = {
-            "model": self.ollama_model,
-            "prompt": prompt,
-            "stream": False,
-            "options": {
-                "temperature": 0.7,
-                "top_p": 0.9,
-                "num_predict": 400,
-            }
-        }
-        
-        response = requests.post(
-            f"{self.ollama_base_url}/api/generate",
             json=payload,
             timeout=60
         )
@@ -1350,7 +1064,6 @@ class LLMClient:
                         questions.append(question)
             return questions[:3] if questions else ["How can this opportunity be explored?"]
         else:
-            raise Exception(f"OLLAMA API error: {response.status_code}")
     
     def _generate_research_questions_with_openai(self, opportunity_type: str, contribution_data: Dict[str, Any]) -> List[str]:
         """Generate research questions using OpenAI"""
@@ -1399,59 +1112,12 @@ class LLMClient:
         if not opportunities:
             return "No contribution opportunities found matching the criteria."
         
-        if self.use_ollama:
-            try:
-                return self._generate_opportunities_summary_with_ollama(opportunities, query)
-            except Exception as e:
-                logger.warning(f"OLLAMA failed for summary, trying OpenAI: {e}")
-        
         if self.api_key:
             try:
                 return self._generate_opportunities_summary_with_openai(opportunities, query)
             except Exception as e:
                 logger.error(f"Error generating summary with OpenAI: {e}")
         
-        return self._generate_fallback_opportunities_summary(opportunities)
-    
-    def _generate_opportunities_summary_with_ollama(self, opportunities: List[ContributionOpportunity], query: Optional[str] = None) -> str:
-        """Generate summary using OLLAMA"""
-        opp_summary = []
-        for opp in opportunities[:5]:
-            if opp.type == "theory-phenomenon":
-                opp_summary.append(f"- {opp.theory} + {opp.phenomenon} (score: {opp.opportunity_score:.2f})")
-            elif opp.type == "theory-method":
-                opp_summary.append(f"- {opp.theory} + {opp.method} (score: {opp.opportunity_score:.2f})")
-            else:
-                opp_summary.append(f"- {opp.phenomenon} (score: {opp.opportunity_score:.2f})")
-        
-        prompt = f"""
-        Summarize the following research contribution opportunities:
-        
-        {chr(10).join(opp_summary)}
-        
-        User Query: {query if query else 'General opportunities'}
-        
-        Provide a 2-3 paragraph summary that:
-        1. Highlights the most promising opportunities
-        2. Identifies common patterns
-        3. Suggests priority areas for research
-        
-        Write in an academic but accessible style.
-        """
-        
-        payload = {
-            "model": self.ollama_model,
-            "prompt": prompt,
-            "stream": False,
-            "options": {
-                "temperature": 0.7,
-                "top_p": 0.9,
-                "num_predict": 600,
-            }
-        }
-        
-        response = requests.post(
-            f"{self.ollama_base_url}/api/generate",
             json=payload,
             timeout=60
         )
@@ -1460,7 +1126,6 @@ class LLMClient:
             result = response.json()
             return result.get('response', '').strip()
         else:
-            raise Exception(f"OLLAMA API error: {response.status_code}")
     
     def _generate_opportunities_summary_with_openai(self, opportunities: List[ContributionOpportunity], query: Optional[str] = None) -> str:
         """Generate summary using OpenAI"""
@@ -1496,12 +1161,6 @@ class LLMClient:
     def generate_trend_narrative(self, entity_type: str, entity_name: str, usage_by_period: List[PeriodUsage], 
                                  evolution_steps: List[EvolutionStep], forecast: Optional[TrendForecast]) -> str:
         """Generate LLM narrative for trend analysis"""
-        if self.use_ollama:
-            try:
-                return self._generate_trend_narrative_with_ollama(entity_type, entity_name, usage_by_period, evolution_steps, forecast)
-            except Exception as e:
-                logger.warning(f"OLLAMA failed for trend narrative, trying OpenAI: {e}")
-        
         if self.api_key:
             try:
                 return self._generate_trend_narrative_with_openai(entity_type, entity_name, usage_by_period, evolution_steps, forecast)
@@ -1510,48 +1169,12 @@ class LLMClient:
         
         return self._generate_fallback_trend_narrative(entity_type, entity_name, usage_by_period, evolution_steps, forecast)
     
-    def _generate_trend_narrative_with_ollama(self, entity_type: str, entity_name: str, usage_by_period: List[PeriodUsage],
-                                             evolution_steps: List[EvolutionStep], forecast: Optional[TrendForecast]) -> str:
-        """Generate trend narrative using OLLAMA"""
-        usage_summary = "\n".join([f"- {p.period}: {p.paper_count} papers" for p in usage_by_period])
-        evolution_summary = "\n".join([f"- {e.from_period} → {e.to_period}: {e.change:+d} ({e.evolution_type})" for e in evolution_steps])
         
         forecast_text = ""
         if forecast:
             forecast_text = f"\n\nForecast for {forecast.next_period}: {forecast.predicted_paper_count} papers ({forecast.trend_direction})"
         
         prompt = f"""
-        Analyze the temporal evolution of {entity_type} "{entity_name}":
-        
-        Usage by Period:
-        {usage_summary}
-        
-        Evolution Steps:
-        {evolution_summary}
-        {forecast_text}
-        
-        Write a 3-4 paragraph narrative that:
-        1. Describes where the field has been (historical usage)
-        2. Identifies key turning points and trends
-        3. Explains where the field is going (based on recent trends)
-        4. Discusses implications for future research
-        
-        Write in an academic but accessible style.
-        """
-        
-        payload = {
-            "model": self.ollama_model,
-            "prompt": prompt,
-            "stream": False,
-            "options": {
-                "temperature": 0.7,
-                "top_p": 0.9,
-                "num_predict": 800,
-            }
-        }
-        
-        response = requests.post(
-            f"{self.ollama_base_url}/api/generate",
             json=payload,
             timeout=60
         )
@@ -1560,7 +1183,6 @@ class LLMClient:
             result = response.json()
             return result.get('response', '').strip()
         else:
-            raise Exception(f"OLLAMA API error: {response.status_code}")
     
     def _generate_trend_narrative_with_openai(self, entity_type: str, entity_name: str, usage_by_period: List[PeriodUsage],
                                              evolution_steps: List[EvolutionStep], forecast: Optional[TrendForecast]) -> str:
@@ -1605,50 +1227,9 @@ class LLMClient:
     def generate_trend_summary(self, entity_type: str, entity_name: str, usage_by_period: List[PeriodUsage],
                                evolution_steps: List[EvolutionStep]) -> str:
         """Generate LLM summary for trend analysis"""
-        if self.use_ollama:
-            try:
-                return self._generate_trend_summary_with_ollama(entity_type, entity_name, usage_by_period, evolution_steps)
-            except Exception as e:
-                logger.warning(f"OLLAMA failed for trend summary, trying OpenAI: {e}")
-        
         if self.api_key:
             try:
                 return self._generate_trend_summary_with_openai(entity_type, entity_name, usage_by_period, evolution_steps)
-            except Exception as e:
-                logger.error(f"Error generating trend summary with OpenAI: {e}")
-        
-        return self._generate_fallback_trend_summary(entity_type, entity_name, usage_by_period, evolution_steps)
-    
-    def _generate_trend_summary_with_ollama(self, entity_type: str, entity_name: str, usage_by_period: List[PeriodUsage],
-                                           evolution_steps: List[EvolutionStep]) -> str:
-        """Generate trend summary using OLLAMA"""
-        usage_summary = "\n".join([f"- {p.period}: {p.paper_count} papers" for p in usage_by_period])
-        
-        prompt = f"""
-        Provide a 1-2 paragraph summary of the temporal evolution of {entity_type} "{entity_name}":
-        
-        Usage by Period:
-        {usage_summary}
-        
-        Evolution Steps:
-        {chr(10).join([f"- {e.from_period} → {e.to_period}: {e.change:+d} ({e.evolution_type})" for e in evolution_steps])}
-        
-        Write a concise summary highlighting key trends and patterns.
-        """
-        
-        payload = {
-            "model": self.ollama_model,
-            "prompt": prompt,
-            "stream": False,
-            "options": {
-                "temperature": 0.7,
-                "top_p": 0.9,
-                "num_predict": 400,
-            }
-        }
-        
-        response = requests.post(
-            f"{self.ollama_base_url}/api/generate",
             json=payload,
             timeout=60
         )
@@ -1657,7 +1238,6 @@ class LLMClient:
             result = response.json()
             return result.get('response', '').strip()
         else:
-            raise Exception(f"OLLAMA API error: {response.status_code}")
     
     def _generate_trend_summary_with_openai(self, entity_type: str, entity_name: str, usage_by_period: List[PeriodUsage],
                                            evolution_steps: List[EvolutionStep]) -> str:

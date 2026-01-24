@@ -63,51 +63,73 @@ class GraphRAGQuerySystem:
         query_embedding = self.embedding_model.encode(question, convert_to_numpy=True)
         query_vector = query_embedding.tolist()
         
-        with self.driver.session() as session:
-            # 2. Vector Search: Find semantically similar papers
-            similar_papers = self._vector_search_papers(session, query_vector, top_k, similarity_threshold)
-            
-            # 3. Vector Search: Find similar theories, phenomena, methods
-            similar_theories = self._vector_search_theories(session, query_vector, top_k=5, threshold=similarity_threshold)
-            similar_phenomena = self._vector_search_phenomena(session, query_vector, top_k=5, threshold=similarity_threshold)
-            similar_methods = self._vector_search_methods(session, query_vector, top_k=5, threshold=similarity_threshold)
-            
-            # 4. Graph Traversal: Find connected papers
-            paper_ids = [p.get('paper_id') for p in similar_papers if p and p.get('paper_id')]
-            connected_papers = self._graph_traversal(session, paper_ids, top_k) if paper_ids else []
-            
-            # 5. Entity Matching: Extract entities and find papers
-            entity_matches = self._entity_matching(session, question)
-            
-            # 6. Build relationship context
-            # Safely extract paper_ids from all sources
-            connected_paper_ids = [p.get('paper_id') for p in connected_papers if p and p.get('paper_id')]
-            entity_paper_ids = [p.get('paper_id') for p in entity_matches if p and p.get('paper_id')]
-            all_paper_ids = list(set(paper_ids + connected_paper_ids + entity_paper_ids))
-            relationship_context = self._get_relationship_context(session, all_paper_ids[:20]) if all_paper_ids else []
-            
-            # 7. Build comprehensive context
-            context = self._build_context(
-                similar_papers,
-                connected_papers,
-                similar_theories,
-                similar_phenomena,
-                similar_methods,
-                entity_matches,
-                relationship_context
-            )
-            
+        try:
+            with self.driver.session() as session:
+                # 2. Vector Search: Find semantically similar papers
+                similar_papers = self._vector_search_papers(session, query_vector, top_k, similarity_threshold) or []
+                
+                # 3. Vector Search: Find similar theories, phenomena, methods
+                similar_theories = self._vector_search_theories(session, query_vector, top_k=5, threshold=similarity_threshold) or []
+                similar_phenomena = self._vector_search_phenomena(session, query_vector, top_k=5, threshold=similarity_threshold) or []
+                similar_methods = self._vector_search_methods(session, query_vector, top_k=5, threshold=similarity_threshold) or []
+                
+                # 4. Graph Traversal: Find connected papers
+                paper_ids = [p.get('paper_id') for p in similar_papers if p and p.get('paper_id')]
+                connected_papers = self._graph_traversal(session, paper_ids, top_k) if paper_ids else []
+                if connected_papers is None:
+                    connected_papers = []
+                
+                # 5. Entity Matching: Extract entities and find papers
+                entity_matches = self._entity_matching(session, question) or []
+                
+                # 6. Build relationship context
+                # Safely extract paper_ids from all sources
+                connected_paper_ids = [p.get('paper_id') for p in connected_papers if p and p.get('paper_id')]
+                entity_paper_ids = [p.get('paper_id') for p in entity_matches if p and p.get('paper_id')]
+                all_paper_ids = list(set(paper_ids + connected_paper_ids + entity_paper_ids))
+                relationship_context = self._get_relationship_context(session, all_paper_ids[:20]) if all_paper_ids else []
+                if relationship_context is None:
+                    relationship_context = []
+                
+                # 7. Build comprehensive context
+                context = self._build_context(
+                    similar_papers,
+                    connected_papers,
+                    similar_theories,
+                    similar_phenomena,
+                    similar_methods,
+                    entity_matches,
+                    relationship_context
+                )
+                
+                return {
+                    'question': question,
+                    'context': context or '',
+                    'papers': (similar_papers or [])[:top_k],
+                    'connected_papers': (connected_papers or [])[:top_k],
+                    'theories': similar_theories or [],
+                    'phenomena': similar_phenomena or [],
+                    'methods': similar_methods or [],
+                    'entity_matches': entity_matches or [],
+                    'relationships': relationship_context or [],
+                    'total_papers': len(set(all_paper_ids)) if all_paper_ids else 0
+                }
+        except Exception as e:
+            logger.error(f"Error in Graph RAG query: {e}")
+            import traceback
+            logger.error(traceback.format_exc())
+            # Return empty result instead of None
             return {
                 'question': question,
-                'context': context,
-                'papers': similar_papers[:top_k],
-                'connected_papers': connected_papers[:top_k],
-                'theories': similar_theories,
-                'phenomena': similar_phenomena,
-                'methods': similar_methods,
-                'entity_matches': entity_matches,
-                'relationships': relationship_context,
-                'total_papers': len(set(all_paper_ids))
+                'context': '',
+                'papers': [],
+                'connected_papers': [],
+                'theories': [],
+                'phenomena': [],
+                'methods': [],
+                'entity_matches': [],
+                'relationships': [],
+                'total_papers': 0
             }
     
     def _vector_search_papers(self, session, query_vector: List[float], top_k: int, threshold: float) -> List[Dict]:
@@ -127,9 +149,12 @@ class GraphRAGQuerySystem:
         
         similarities = []
         for paper in papers:
-            if paper and paper.get('embedding'):
+            if not paper:
+                continue
+            embedding = paper.get('embedding')
+            if embedding:
                 try:
-                    similarity = self.cosine_similarity(query_vector, paper['embedding'])
+                    similarity = self.cosine_similarity(query_vector, embedding)
                     if similarity >= threshold:
                         similarities.append({
                             'paper_id': paper.get('paper_id'),
@@ -161,9 +186,12 @@ class GraphRAGQuerySystem:
         
         similarities = []
         for theory in theories:
-            if theory and theory.get('embedding'):
+            if not theory:
+                continue
+            embedding = theory.get('embedding')
+            if embedding:
                 try:
-                    similarity = self.cosine_similarity(query_vector, theory['embedding'])
+                    similarity = self.cosine_similarity(query_vector, embedding)
                     if similarity >= threshold:
                         similarities.append({
                             'name': theory.get('name', ''),
@@ -192,9 +220,12 @@ class GraphRAGQuerySystem:
         
         similarities = []
         for phenomenon in phenomena:
-            if phenomenon and phenomenon.get('embedding'):
+            if not phenomenon:
+                continue
+            embedding = phenomenon.get('embedding')
+            if embedding:
                 try:
-                    similarity = self.cosine_similarity(query_vector, phenomenon['embedding'])
+                    similarity = self.cosine_similarity(query_vector, embedding)
                     if similarity >= threshold:
                         similarities.append({
                             'name': phenomenon.get('name', ''),
@@ -223,9 +254,12 @@ class GraphRAGQuerySystem:
         
         similarities = []
         for method in methods:
-            if method and method.get('embedding'):
+            if not method:
+                continue
+            embedding = method.get('embedding')
+            if embedding:
                 try:
-                    similarity = self.cosine_similarity(query_vector, method['embedding'])
+                    similarity = self.cosine_similarity(query_vector, embedding)
                     if similarity >= threshold:
                         similarities.append({
                             'name': method.get('name', ''),
@@ -320,14 +354,16 @@ class GraphRAGQuerySystem:
         seen = set()
         unique_matches = []
         for match in matches:
-            paper_id = match['paper_id']
+            if not match:
+                continue
+            paper_id = match.get('paper_id')
             if paper_id and paper_id not in seen:
                 seen.add(paper_id)
                 unique_matches.append({
                     'paper_id': paper_id,
-                    'title': match['title'],
-                    'abstract': match['abstract'],
-                    'year': match['year'],
+                    'title': match.get('title', ''),
+                    'abstract': match.get('abstract', ''),
+                    'year': match.get('year'),
                     'match_type': match.get('match_type', 'entity_match'),
                     'source': 'entity_matching'
                 })
