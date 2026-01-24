@@ -2,7 +2,7 @@
 # This overrides auto-detection to use requirements.backend.txt
 
 [phases.setup]
-nixPkgs = ["python39"]
+nixPkgs = ["python312"]
 
 [phases.install]
 cmds = ["pip install -r requirements.backend.txt"]
