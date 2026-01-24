@@ -62,10 +62,10 @@ If Railway still detects Node.js:
 
 1. **Variables tab** → Add all your environment variables:
    ```
-   NEO4J_URI=neo4j+s://d1a3de49.databases.neo4j.io
+   NEO4J_URI=your-neo4j-uri
    NEO4J_USER=neo4j
-   NEO4J_PASSWORD=QGaIl1PSNjXlNIFV1vghPbOBC5yKQPuFFqwb8gMU04I
-   OPENAI_API_KEY=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
+   NEO4J_PASSWORD=your-password
+   OPENAI_API_KEY=your-openai-key
    ```
 
 ### Step 7: Update Frontend Environment Variable
