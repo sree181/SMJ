@@ -73,15 +73,18 @@ class GraphRAGQuerySystem:
             similar_methods = self._vector_search_methods(session, query_vector, top_k=5, threshold=similarity_threshold)
             
             # 4. Graph Traversal: Find connected papers
-            paper_ids = [p['paper_id'] for p in similar_papers]
-            connected_papers = self._graph_traversal(session, paper_ids, top_k)
+            paper_ids = [p.get('paper_id') for p in similar_papers if p and p.get('paper_id')]
+            connected_papers = self._graph_traversal(session, paper_ids, top_k) if paper_ids else []
             
             # 5. Entity Matching: Extract entities and find papers
             entity_matches = self._entity_matching(session, question)
             
             # 6. Build relationship context
-            all_paper_ids = list(set(paper_ids + [p['paper_id'] for p in connected_papers] + [p['paper_id'] for p in entity_matches]))
-            relationship_context = self._get_relationship_context(session, all_paper_ids[:20])
+            # Safely extract paper_ids from all sources
+            connected_paper_ids = [p.get('paper_id') for p in connected_papers if p and p.get('paper_id')]
+            entity_paper_ids = [p.get('paper_id') for p in entity_matches if p and p.get('paper_id')]
+            all_paper_ids = list(set(paper_ids + connected_paper_ids + entity_paper_ids))
+            relationship_context = self._get_relationship_context(session, all_paper_ids[:20]) if all_paper_ids else []
             
             # 7. Build comprehensive context
             context = self._build_context(
@@ -395,14 +398,23 @@ class GraphRAGQuerySystem:
     
     def generate_answer(self, query_result: Dict[str, Any], use_llm: bool = True) -> str:
         """Generate answer using LLM with Graph RAG context"""
+        if not query_result:
+            logger.error("query_result is None or empty")
+            return "I'm sorry, I couldn't retrieve enough context to answer your question. Please try rephrasing it."
+        
         if not use_llm:
             return self._generate_summary(query_result)
         
         from openai import OpenAI
-        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        api_key = os.getenv("OPENAI_API_KEY")
+        if not api_key:
+            logger.warning("OPENAI_API_KEY not set, falling back to summary")
+            return self._generate_summary(query_result)
         
-        context = query_result.get('context', '')
-        question = query_result.get('question', '')
+        client = OpenAI(api_key=api_key)
+        
+        context = query_result.get('context', '') if query_result else ''
+        question = query_result.get('question', '') if query_result else ''
         
         prompt = f"""You are an expert research assistant analyzing Strategic Management Journal literature.
 
@@ -427,9 +439,16 @@ Be specific, well-structured, and cite paper IDs when referencing studies."""
                 max_tokens=2000,
                 temperature=0.7
             )
-            return response.choices[0].message.content.strip()
+            if response and response.choices and len(response.choices) > 0:
+                content = response.choices[0].message.content
+                if content:
+                    return content.strip()
+            logger.warning("OpenAI API returned empty response, falling back to summary")
+            return self._generate_summary(query_result)
         except Exception as e:
             logger.error(f"Error generating answer: {e}")
+            import traceback
+            logger.error(traceback.format_exc())
             return self._generate_summary(query_result)
     
     def _generate_summary(self, query_result: Dict[str, Any]) -> str:

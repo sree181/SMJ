@@ -1773,9 +1773,17 @@ async def process_query(request: QueryRequest):
                     similarity_threshold=0.3
                 )
                 
+                # Check if result is valid
+                if not graphrag_result:
+                    raise ValueError("Graph RAG query returned None or empty result")
+                
                 # Generate answer using Graph RAG context
                 persona = request.persona if hasattr(request, 'persona') else None
                 answer = graphrag.generate_answer(graphrag_result, use_llm=True)
+                
+                # Check if answer is valid
+                if not answer:
+                    raise ValueError("Graph RAG generate_answer returned None or empty")
                 
                 # Prepare sources from Graph RAG results
                 sources = []
