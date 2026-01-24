@@ -252,7 +252,7 @@ const AdvancedAnalyticsDashboard = () => {
   }) || [];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50 relative">
       {/* Header Bar */}
       <div className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-30">
         <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -272,21 +272,21 @@ const AdvancedAnalyticsDashboard = () => {
             </div>
             <button
               onClick={() => setChatOpen(!chatOpen)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all shadow-sm ${
                 chatOpen 
-                  ? 'bg-blue-600 text-white hover:bg-blue-700' 
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md' 
+                  : 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 shadow-md hover:shadow-lg'
               }`}
             >
               {chatOpen ? (
                 <>
                   <X size={18} />
-                  <span className="hidden sm:inline">Close Chat</span>
+                  <span className="hidden sm:inline">Close Assistant</span>
                 </>
               ) : (
                 <>
                   <MessageCircle size={18} />
-                  <span className="hidden sm:inline">Ask Questions</span>
+                  <span className="hidden sm:inline">Research Assistant</span>
                 </>
               )}
             </button>
@@ -1729,7 +1729,7 @@ const AdvancedAnalyticsDashboard = () => {
         ) : null}
       </div>
 
-      {/* Chat Sidebar */}
+      {/* Professional Chat Sidebar - Right Side */}
       {chatOpen && (
         <>
           {/* Overlay for mobile */}
@@ -1738,9 +1738,32 @@ const AdvancedAnalyticsDashboard = () => {
             onClick={() => setChatOpen(false)}
           />
           
-          {/* Chat Sidebar */}
-          <div className="fixed lg:relative right-0 top-0 h-screen w-full lg:w-96 bg-white shadow-2xl z-50 flex flex-col border-l border-gray-200">
-            <div className="flex-1 overflow-hidden">
+          {/* Chat Sidebar - Professional Design */}
+          <div className="fixed right-0 top-0 bottom-0 w-full lg:w-[420px] bg-white shadow-2xl z-50 flex flex-col border-l border-gray-200 transition-transform duration-300 ease-in-out">
+            {/* Chat Header */}
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-4 border-b border-blue-700">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-white/20 rounded-lg">
+                    <MessageCircle size={20} className="text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg">Research Assistant</h3>
+                    <p className="text-xs text-blue-100">Ask questions about the data</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setChatOpen(false)}
+                  className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+                  title="Close chat"
+                >
+                  <X size={20} className="text-white" />
+                </button>
+              </div>
+            </div>
+
+            {/* Chat Interface */}
+            <div className="flex-1 overflow-hidden flex flex-col">
               <ChatInterface
                 messages={messages}
                 onSendMessage={handleSendMessage}
@@ -1752,15 +1775,18 @@ const AdvancedAnalyticsDashboard = () => {
         </>
       )}
 
-      {/* Floating Chat Button (when closed) */}
+      {/* Floating Chat Button (when closed) - Professional Design */}
       {!chatOpen && (
         <button
           onClick={() => setChatOpen(true)}
-          className="fixed bottom-6 right-6 lg:bottom-8 lg:right-8 w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full shadow-xl hover:shadow-2xl transition-all hover:scale-110 flex items-center justify-center z-40 group"
-          title="Open Chat"
+          className="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full shadow-2xl hover:shadow-3xl transition-all hover:scale-110 flex items-center justify-center z-40 group"
+          title="Open Research Assistant"
+          aria-label="Open Research Assistant"
         >
-          <MessageCircle size={28} className="group-hover:scale-110 transition-transform" />
-          <span className="absolute -top-2 -right-2 w-4 h-4 bg-red-500 rounded-full border-2 border-white animate-pulse"></span>
+          <MessageCircle size={24} className="group-hover:scale-110 transition-transform" />
+          <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full border-2 border-white flex items-center justify-center">
+            <span className="text-xs font-bold text-white">?</span>
+          </span>
         </button>
       )}
     </div>
