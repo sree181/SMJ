@@ -969,33 +969,6 @@ class LLMClient:
         
         return self._generate_fallback_research_questions(opportunity_type, contribution_data)
     
-            
-            Context:
-            - Current connection strength: {contribution_data.get('current_strength', 0.0):.2f}
-            - Similar theories: {', '.join(contribution_data.get('similar_theories', [])[:2])}
-            
-            Generate research questions that are:
-            1. Specific and actionable
-            2. Grounded in the theory
-            3. Focused on the phenomenon
-            json=payload,
-            timeout=60
-        )
-        
-        if response.status_code == 200:
-            result = response.json()
-            text = result.get('response', '').strip()
-            # Parse numbered list into array
-            questions = []
-            for line in text.split('\n'):
-                line = line.strip()
-                if line and (line[0].isdigit() or line.startswith('-') or line.startswith('•')):
-                    # Remove numbering/bullets
-                    question = line.split('.', 1)[-1].strip() if '.' in line else line[1:].strip()
-                    if question:
-                        questions.append(question)
-            return questions[:3] if questions else ["How can this opportunity be explored?"]
-    
     def _generate_research_questions_with_openai(self, opportunity_type: str, contribution_data: Dict[str, Any]) -> List[str]:
         """Generate research questions using OpenAI"""
         from openai import OpenAI
