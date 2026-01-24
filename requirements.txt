@@ -1,4 +1,6 @@
 # PDF Processing
+# PyMuPDF==1.23.8  # Commented out for Railway deployment - only needed for local PDF ingestion, not for API server
+# To install locally: pip install PyMuPDF==1.23.8
 
 # LLM Integration
 openai==1.3.0
