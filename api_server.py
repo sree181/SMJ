@@ -12,9 +12,10 @@ import re
 from typing import Dict, List, Optional, Any, Tuple
 from datetime import datetime
 
-from fastapi import FastAPI, HTTPException, BackgroundTasks, Query
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
+from starlette.middleware.base import BaseHTTPMiddleware
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
 import uvicorn
@@ -471,6 +472,34 @@ app.add_middleware(
     expose_headers=["*"],  # Expose all headers
     max_age=3600,  # Cache preflight for 1 hour
 )
+
+# Additional middleware to ensure CORS headers are always present
+class CORSHeaderMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        response = await call_next(request)
+        # Explicitly set CORS headers
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+        response.headers["Access-Control-Allow-Headers"] = "*"
+        response.headers["Access-Control-Expose-Headers"] = "*"
+        response.headers["Access-Control-Max-Age"] = "3600"
+        return response
+
+app.add_middleware(CORSHeaderMiddleware)
+
+# Explicit OPTIONS handler for all routes
+@app.options("/{full_path:path}")
+async def options_handler(request: Request, full_path: str):
+    """Handle OPTIONS preflight requests explicitly"""
+    return Response(
+        status_code=200,
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Max-Age": "3600",
+        }
+    )
 
 # Log CORS configuration for debugging
 logger.info(f"CORS configured: allow_origins=['*'], allow_credentials=False")
