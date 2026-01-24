@@ -475,10 +475,12 @@ app.add_middleware(
 
 # Additional middleware to ensure CORS headers are always present
 # This handles OPTIONS preflight requests BEFORE they reach route handlers
+# IMPORTANT: This middleware runs FIRST (outermost) because middleware runs in reverse order
 class CORSHeaderMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         # Handle OPTIONS preflight requests directly
         if request.method == "OPTIONS":
+            logger.info(f"🔵 Handling OPTIONS preflight for: {request.url.path}")
             return Response(
                 status_code=200,
                 headers={
@@ -491,7 +493,7 @@ class CORSHeaderMiddleware(BaseHTTPMiddleware):
         
         # For all other requests, add CORS headers to response
         response = await call_next(request)
-        # Explicitly set CORS headers
+        # Explicitly set CORS headers on ALL responses
         response.headers["Access-Control-Allow-Origin"] = "*"
         response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS, PATCH"
         response.headers["Access-Control-Allow-Headers"] = "*"
@@ -499,12 +501,15 @@ class CORSHeaderMiddleware(BaseHTTPMiddleware):
         response.headers["Access-Control-Max-Age"] = "3600"
         return response
 
+# Add CORS middleware FIRST so it runs last (outermost layer)
+# This ensures OPTIONS requests are caught before CORSMiddleware
 app.add_middleware(CORSHeaderMiddleware)
 
-# Explicit OPTIONS handler for all routes
+# Explicit OPTIONS handler for all routes (backup - middleware should catch it first)
 @app.options("/{full_path:path}")
 async def options_handler(request: Request, full_path: str):
-    """Handle OPTIONS preflight requests explicitly"""
+    """Handle OPTIONS preflight requests explicitly (backup handler)"""
+    logger.info(f"🟢 OPTIONS handler called for: {full_path}")
     return Response(
         status_code=200,
         headers={
@@ -516,7 +521,9 @@ async def options_handler(request: Request, full_path: str):
     )
 
 # Log CORS configuration for debugging
-logger.info(f"CORS configured: allow_origins=['*'], allow_credentials=False")
+logger.info(f"✅ CORS configured: allow_origins=['*'], allow_credentials=False")
+logger.info(f"✅ CORSHeaderMiddleware added to handle OPTIONS requests")
+logger.info(f"✅ Explicit OPTIONS route handler registered")
 
 # Include Advanced Analytics Router (Graph RAG-based)
 try:
