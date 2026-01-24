@@ -934,24 +934,6 @@ class LLMClient:
         
         return self._generate_fallback_contribution_statement(opportunity_type, contribution_data)
     
-            
-            Context:
-            - Current connection strength: {contribution_data.get('current_strength', 0.0):.2f}
-            - Papers using this combination: {contribution_data.get('paper_count', 0)}
-            - Similar theories: {', '.join(contribution_data.get('similar_theories', [])[:3])}
-            - Opportunity score: {contribution_data.get('opportunity_score', 0.0):.2f}
-            
-            Write a 2-3 sentence contribution statement that:
-            1. Identifies the research gap
-            2. Explains why this combination is promising
-            3. Suggests the potential contribution
-            
-            Be specific and academic in tone.
-            """
-        elif opportunity_type == "theory-method":
-            prompt = f"""
-            Generate a research contribution statement for using {contribution_data.get('method')} to study {contribution_data.get('theory')}.
-            
     def _generate_contribution_statement_with_openai(self, opportunity_type: str, contribution_data: Dict[str, Any]) -> str:
         """Generate contribution statement using OpenAI"""
         from openai import OpenAI
@@ -1013,7 +995,6 @@ class LLMClient:
                     if question:
                         questions.append(question)
             return questions[:3] if questions else ["How can this opportunity be explored?"]
-        else:
     
     def _generate_research_questions_with_openai(self, opportunity_type: str, contribution_data: Dict[str, Any]) -> List[str]:
         """Generate research questions using OpenAI"""
