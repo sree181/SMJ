@@ -474,8 +474,22 @@ app.add_middleware(
 )
 
 # Additional middleware to ensure CORS headers are always present
+# This handles OPTIONS preflight requests BEFORE they reach route handlers
 class CORSHeaderMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
+        # Handle OPTIONS preflight requests directly
+        if request.method == "OPTIONS":
+            return Response(
+                status_code=200,
+                headers={
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
+                    "Access-Control-Allow-Headers": "*",
+                    "Access-Control-Max-Age": "3600",
+                }
+            )
+        
+        # For all other requests, add CORS headers to response
         response = await call_next(request)
         # Explicitly set CORS headers
         response.headers["Access-Control-Allow-Origin"] = "*"
