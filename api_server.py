@@ -432,6 +432,9 @@ app = FastAPI(
 # Add CORS middleware
 # Get frontend URL from environment (for Railway deployment)
 frontend_url = os.getenv("FRONTEND_URL", "")
+
+# For Railway deployment, allow all origins (can be restricted later for security)
+# This ensures CORS works properly with Railway's dynamic domains
 cors_origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
@@ -442,18 +445,21 @@ cors_origins = [
 if frontend_url:
     cors_origins.append(frontend_url)
 
-# For Railway, we'll use allow_origin_regex to match Railway domains
+# For Railway, use allow_origin_regex to match all Railway domains
 # Railway URLs typically look like: https://your-app-name.railway.app or https://your-app-name.up.railway.app
 railway_regex = r"https://.*\.(railway\.app|up\.railway\.app)"
 
+# Use allow_origins=["*"] for Railway to ensure CORS works
+# In production, you can restrict this to specific domains
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=cors_origins,
-    allow_origin_regex=railway_regex,  # Allow all Railway apps
+    allow_origins=["*"],  # Allow all origins for Railway (can restrict later)
+    allow_origin_regex=railway_regex,  # Also allow Railway domains via regex
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],  # Explicitly list methods
     allow_headers=["*"],
-    expose_headers=["*"],  # Expose all headers
+    expose_headers=["*"],
+    max_age=3600,  # Cache preflight requests for 1 hour
 )
 
 # Include Advanced Analytics Router (Graph RAG-based)
