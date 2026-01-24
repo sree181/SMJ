@@ -450,12 +450,13 @@ if frontend_url:
 railway_regex = r"https://.*\.(railway\.app|up\.railway\.app)"
 
 # Use allow_origins=["*"] for Railway to ensure CORS works
-# In production, you can restrict this to specific domains
+# Note: When using allow_origins=["*"], allow_credentials must be False
+# In production, you can restrict to specific domains and enable credentials
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Allow all origins for Railway (can restrict later)
     allow_origin_regex=railway_regex,  # Also allow Railway domains via regex
-    allow_credentials=True,
+    allow_credentials=False,  # Must be False when using allow_origins=["*"]
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],  # Explicitly list methods
     allow_headers=["*"],
     expose_headers=["*"],
