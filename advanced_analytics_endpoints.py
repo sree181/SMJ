@@ -155,6 +155,74 @@ class AdvancedAnalytics:
         
         return intervals
     
+    def get_phenomenon_counts_by_interval(self, start_year: int = 1985, end_year: int = 2025, top_n: int = 20) -> List[Dict]:
+        """
+        Get phenomenon counts by 5-year intervals with top N phenomena per period
+        
+        Returns:
+            List of dicts with interval, total unique phenomena, and top phenomena
+        """
+        intervals = []
+        current_start = start_year
+        
+        while current_start < end_year:
+            current_end = min(current_start + 5, end_year)
+            
+            with self.driver.session() as session:
+                # Get distinct phenomena and their paper counts for this interval
+                result = session.run("""
+                    MATCH (p:Paper)-[:STUDIES_PHENOMENON]->(ph:Phenomenon)
+                    WHERE p.year >= $start_year 
+                      AND p.year < $end_year
+                      AND p.year > 0
+                    WITH ph, count(DISTINCT p) as paper_count
+                    RETURN ph.phenomenon_name as phenomenon_name,
+                           paper_count,
+                           collect(DISTINCT p.paper_id) as paper_ids
+                    ORDER BY paper_count DESC
+                    LIMIT $top_n
+                """, start_year=current_start, end_year=current_end, top_n=top_n)
+                
+                phenomena = []
+                phenomenon_names = []
+                total_papers = 0
+                
+                for record in result:
+                    phenomenon_data = {
+                        'phenomenon_name': record['phenomenon_name'],
+                        'paper_count': record['paper_count'],
+                        'paper_ids': record['paper_ids']
+                    }
+                    phenomena.append(phenomenon_data)
+                    phenomenon_names.append(record['phenomenon_name'])
+                    total_papers += record['paper_count']
+                
+                # Get total unique phenomenon count (not just top N)
+                total_result = session.run("""
+                    MATCH (p:Paper)-[:STUDIES_PHENOMENON]->(ph:Phenomenon)
+                    WHERE p.year >= $start_year 
+                      AND p.year < $end_year
+                      AND p.year > 0
+                    RETURN count(DISTINCT ph) as total_phenomena
+                """, start_year=current_start, end_year=current_end)
+                
+                total_record = total_result.single()
+                unique_phenomenon_count = total_record['total_phenomena'] if total_record else 0
+                
+                intervals.append({
+                    'interval': f"{current_start}-{current_end-1}",
+                    'start_year': current_start,
+                    'end_year': current_end - 1,
+                    'total_phenomena': unique_phenomenon_count,
+                    'top_phenomena_count': len(phenomena),
+                    'total_papers': total_papers,
+                    'top_phenomena': phenomena
+                })
+            
+            current_start = current_end
+        
+        return intervals
+    
     def calculate_topic_evolution(self, start_year: int = 1985, end_year: int = 2025) -> Dict[str, Any]:
         """
         Calculate topic evolution using embeddings and clustering
@@ -1483,6 +1551,17 @@ async def get_author_counts_by_interval(start_year: int = 1985, end_year: int = 
         return {"intervals": intervals}
     except Exception as e:
         logger.error(f"Error getting author counts: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/phenomena/by-interval")
+async def get_phenomenon_counts_by_interval(start_year: int = 1985, end_year: int = 2025, top_n: int = 20):
+    """Get phenomenon counts by 5-year intervals with top N phenomena per period"""
+    try:
+        analytics = get_analytics()
+        intervals = analytics.get_phenomenon_counts_by_interval(start_year, end_year, top_n)
+        return {"intervals": intervals}
+    except Exception as e:
+        logger.error(f"Error getting phenomenon counts: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/topics/evolution")

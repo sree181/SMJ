@@ -10,6 +10,7 @@ const AdvancedAnalyticsDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [paperCounts, setPaperCounts] = useState([]);
   const [authorCounts, setAuthorCounts] = useState([]);
+  const [phenomenonCounts, setPhenomenonCounts] = useState([]);
   const [topicEvolution, setTopicEvolution] = useState(null);
   const [theoryEvolution, setTheoryEvolution] = useState(null);
   const [theoryBetweenness, setTheoryBetweenness] = useState(null);
@@ -29,7 +30,7 @@ const AdvancedAnalyticsDashboard = () => {
   const [chatLoading, setChatLoading] = useState(false);
   
   // Tab state for dashboard views
-  const [activeTab, setActiveTab] = useState('charts'); // 'charts', 'theory-proportions', 'betweenness', 'opportunities', 'integration', 'cumulative', 'canonical', 'hhi', 'alignment', 'integrative', 'authors'
+  const [activeTab, setActiveTab] = useState('charts'); // 'charts', 'theory-proportions', 'betweenness', 'opportunities', 'integration', 'cumulative', 'canonical', 'hhi', 'alignment', 'integrative', 'authors', 'phenomena'
 
   useEffect(() => {
     loadAllData();
@@ -64,6 +65,10 @@ const AdvancedAnalyticsDashboard = () => {
         }),
         withTimeout(api.getAuthorCountsByInterval(), 30000).catch(err => {
           console.error('Error loading author counts:', err);
+          return { intervals: [] };
+        }),
+        withTimeout(api.getPhenomenonCountsByInterval(), 30000).catch(err => {
+          console.error('Error loading phenomenon counts:', err);
           return { intervals: [] };
         }),
         withTimeout(api.getTopicEvolution(), 60000).catch(err => {
@@ -105,7 +110,7 @@ const AdvancedAnalyticsDashboard = () => {
       
       // Extract values from Promise.allSettled results
       const [
-        countsData, authorCountsData, topicsData, theoriesData, betweennessData, gapsData, 
+        countsData, authorCountsData, phenomenonCountsData, topicsData, theoriesData, betweennessData, gapsData, 
         integrationData, cumulativeData, coverageData, centralityData, 
         hhiData, alignmentData, integrativeData
       ] = results.map(result => {
@@ -134,6 +139,7 @@ const AdvancedAnalyticsDashboard = () => {
 
       setPaperCounts(countsData?.intervals || []);
       setAuthorCounts(authorCountsData?.intervals || []);
+      setPhenomenonCounts(phenomenonCountsData?.intervals || []);
       setTopicEvolution(topicsData);
       setTheoryEvolution(theoriesData);
       setTheoryBetweenness(betweennessData);
@@ -460,6 +466,17 @@ const AdvancedAnalyticsDashboard = () => {
           >
             <BookOpen size={18} className="inline mr-2" />
             Authors
+          </button>
+          <button
+            onClick={() => setActiveTab('phenomena')}
+            className={`px-6 py-2 rounded-lg font-semibold transition-all ${
+              activeTab === 'phenomena'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'text-gray-600 hover:bg-gray-100'
+            }`}
+          >
+            <Sparkles size={18} className="inline mr-2" />
+            Phenomena
           </button>
         </div>
       </div>
@@ -2067,6 +2084,182 @@ const AdvancedAnalyticsDashboard = () => {
               <div className="text-center py-12">
                 <p className="text-gray-600">No author data available.</p>
                 <p className="text-sm text-gray-500 mt-2">Author data will appear here once available.</p>
+              </div>
+            )}
+          </div>
+        </div>
+        ) : activeTab === 'phenomena' ? (
+        <div className="space-y-6">
+          {/* Phenomenon Evolution by Period Tab */}
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+            <div className="flex items-center gap-2 mb-6">
+              <Sparkles size={24} className="text-purple-600" />
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900">Phenomenon Evolution by Period</h2>
+                <p className="text-gray-600 mt-1">Top 20 phenomena studied in each 5-year period</p>
+              </div>
+            </div>
+
+            {/* Summary Cards */}
+            {phenomenonCounts.length > 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-6 text-white shadow-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Sparkles size={20} />
+                    <span className="text-purple-100 text-sm font-medium">Total Phenomena</span>
+                  </div>
+                  <p className="text-3xl font-bold">
+                    {phenomenonCounts.reduce((sum, interval) => sum + (interval.total_phenomena || 0), 0).toLocaleString()}
+                  </p>
+                  <p className="text-purple-100 text-xs mt-1">Across all periods</p>
+                </div>
+                
+                <div className="bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl p-6 text-white shadow-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <TrendingUp size={20} />
+                    <span className="text-indigo-100 text-sm font-medium">Avg per Period</span>
+                  </div>
+                  <p className="text-3xl font-bold">
+                    {phenomenonCounts.length > 0 
+                      ? Math.round(phenomenonCounts.reduce((sum, interval) => sum + (interval.total_phenomena || 0), 0) / phenomenonCounts.length)
+                      : 0}
+                  </p>
+                  <p className="text-indigo-100 text-xs mt-1">5-year periods</p>
+                </div>
+                
+                <div className="bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl p-6 text-white shadow-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Target size={20} />
+                    <span className="text-pink-100 text-sm font-medium">Peak Period</span>
+                  </div>
+                  <p className="text-3xl font-bold">
+                    {phenomenonCounts.length > 0 
+                      ? phenomenonCounts.reduce((max, interval) => 
+                          (interval.total_phenomena || 0) > (max.total_phenomena || 0) ? interval : max, 
+                          phenomenonCounts[0]
+                        ).interval
+                      : 'N/A'}
+                  </p>
+                  <p className="text-pink-100 text-xs mt-1">
+                    {phenomenonCounts.length > 0 
+                      ? `${phenomenonCounts.reduce((max, interval) => 
+                          (interval.total_phenomena || 0) > (max.total_phenomena || 0) ? interval : max, 
+                          phenomenonCounts[0]
+                        ).total_phenomena || 0} phenomena`
+                      : ''}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Phenomenon Counts Chart */}
+            {phenomenonCounts.length > 0 ? (
+              <>
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Phenomenon Counts Over Time</h3>
+                  <ResponsiveContainer width="100%" height={350}>
+                    <BarChart 
+                      data={phenomenonCounts.map(interval => ({
+                        interval: interval.interval,
+                        phenomena: interval.total_phenomena || 0,
+                        papers: interval.total_papers || 0
+                      }))} 
+                      margin={{ top: 20, right: 30, left: 20, bottom: 80 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                      <XAxis 
+                        dataKey="interval" 
+                        angle={-45} 
+                        textAnchor="end" 
+                        height={100}
+                        tick={{ fill: '#6b7280', fontSize: 11 }}
+                      />
+                      <YAxis 
+                        yAxisId="left"
+                        label={{ value: 'Number of Phenomena', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle', fill: '#6b7280', fontSize: 11 } }}
+                        tick={{ fill: '#6b7280', fontSize: 11 }}
+                      />
+                      <YAxis 
+                        yAxisId="right"
+                        orientation="right"
+                        label={{ value: 'Number of Papers', angle: 90, position: 'insideRight', style: { textAnchor: 'middle', fill: '#8B5CF6', fontSize: 11 } }}
+                        tick={{ fill: '#8B5CF6', fontSize: 11 }}
+                      />
+                      <Tooltip 
+                        contentStyle={{ 
+                          backgroundColor: '#fff', 
+                          border: '1px solid #e5e7eb',
+                          borderRadius: '8px',
+                          boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+                        }}
+                      />
+                      <Legend wrapperStyle={{ paddingTop: '20px', fontSize: '12px' }} />
+                      <Bar 
+                        yAxisId="left"
+                        dataKey="phenomena" 
+                        fill="#8B5CF6" 
+                        name="Phenomena"
+                        radius={[6, 6, 0, 0]}
+                      />
+                      <Bar 
+                        yAxisId="right"
+                        dataKey="papers" 
+                        fill="#EC4899" 
+                        name="Papers"
+                        radius={[6, 6, 0, 0]}
+                      />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+
+                {/* Top 20 Phenomena by Period */}
+                <div className="mt-6 border-t border-gray-200 pt-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Top 20 Phenomena by Period</h3>
+                  <div className="space-y-4 max-h-96 overflow-y-auto">
+                    {phenomenonCounts.map((interval) => (
+                      <div key={interval.interval} className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                        <div className="flex items-center justify-between mb-3">
+                          <h4 className="font-semibold text-gray-900">{interval.interval}</h4>
+                          <span className="text-sm text-gray-600">
+                            {interval.total_phenomena || 0} total phenomena • {interval.top_phenomena_count || 0} shown • {interval.total_papers || 0} papers
+                          </span>
+                        </div>
+                        {interval.top_phenomena && interval.top_phenomena.length > 0 ? (
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                            {interval.top_phenomena.map((phenomenon, idx) => (
+                              <div 
+                                key={phenomenon.phenomenon_name || idx} 
+                                className="bg-white rounded-lg p-3 border border-gray-200 shadow-sm"
+                                style={{ borderLeft: `4px solid ${topicColors[idx % topicColors.length]}` }}
+                              >
+                                <div className="flex items-center justify-between mb-1">
+                                  <span className="text-sm font-semibold text-gray-900 truncate flex-1" title={phenomenon.phenomenon_name}>
+                                    #{idx + 1}. {phenomenon.phenomenon_name || 'Unknown Phenomenon'}
+                                  </span>
+                                  <span className="text-xs text-gray-600 ml-2 flex-shrink-0">
+                                    {phenomenon.paper_count || 0} paper{phenomenon.paper_count !== 1 ? 's' : ''}
+                                  </span>
+                                </div>
+                                {phenomenon.paper_ids && phenomenon.paper_ids.length > 0 && (
+                                  <div className="text-xs text-gray-500 mt-1">
+                                    {phenomenon.paper_ids.length} paper{phenomenon.paper_ids.length !== 1 ? 's' : ''} studied this
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <p className="text-sm text-gray-500">No phenomena found for this period</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-gray-600">No phenomenon data available.</p>
+                <p className="text-sm text-gray-500 mt-2">Phenomenon data will appear here once available.</p>
               </div>
             )}
           </div>

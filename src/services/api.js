@@ -228,6 +228,16 @@ class ApiService {
   }
 
   /**
+   * Advanced Analytics - Phenomenon counts by 5-year intervals
+   * @param {number} startYear - Start year (default: 1985)
+   * @param {number} endYear - End year (default: 2025)
+   * @param {number} topN - Top N phenomena to return (default: 20)
+   */
+  async getPhenomenonCountsByInterval(startYear = 1985, endYear = 2025, topN = 20) {
+    return this.fetch(`/analytics/phenomena/by-interval?start_year=${startYear}&end_year=${endYear}&top_n=${topN}`);
+  }
+
+  /**
    * Advanced Analytics - Topic evolution
    * @param {number} startYear - Start year (default: 1985)
    * @param {number} endYear - End year (default: 2025)
