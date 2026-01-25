@@ -30,7 +30,7 @@ const AdvancedAnalyticsDashboard = () => {
   const [chatLoading, setChatLoading] = useState(false);
   
   // Tab state for dashboard views
-  const [activeTab, setActiveTab] = useState('charts'); // 'charts', 'theory-proportions', 'betweenness', 'opportunities', 'integration', 'cumulative', 'canonical', 'hhi', 'alignment', 'integrative', 'authors', 'phenomena'
+  const [activeTab, setActiveTab] = useState('charts'); // 'charts', 'theory-proportions', 'topics-proportions', 'betweenness', 'opportunities', 'integration', 'cumulative', 'canonical', 'hhi', 'alignment', 'integrative', 'authors', 'phenomena'
 
   useEffect(() => {
     loadAllData();
@@ -139,7 +139,14 @@ const AdvancedAnalyticsDashboard = () => {
 
       setPaperCounts(countsData?.intervals || []);
       setAuthorCounts(authorCountsData?.intervals || []);
-      setPhenomenonCounts(phenomenonCountsData?.intervals || []);
+      const phenomenonIntervals = phenomenonCountsData?.intervals || [];
+      console.log('Phenomenon counts loaded:', phenomenonIntervals.length, 'intervals');
+      if (phenomenonIntervals.length > 0) {
+        console.log('First interval sample:', phenomenonIntervals[0]);
+      } else {
+        console.warn('No phenomenon intervals returned from API. Full response:', phenomenonCountsData);
+      }
+      setPhenomenonCounts(phenomenonIntervals);
       setTopicEvolution(topicsData);
       setTheoryEvolution(theoriesData);
       setTheoryBetweenness(betweennessData);
@@ -367,6 +374,17 @@ const AdvancedAnalyticsDashboard = () => {
           >
             <BookOpen size={18} className="inline mr-2" />
             Theory Proportions
+          </button>
+          <button
+            onClick={() => setActiveTab('topics-proportions')}
+            className={`px-6 py-2 rounded-lg font-semibold transition-all ${
+              activeTab === 'topics-proportions'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'text-gray-600 hover:bg-gray-100'
+            }`}
+          >
+            <Sparkles size={18} className="inline mr-2" />
+            Topics Proportions
           </button>
           <button
             onClick={() => setActiveTab('betweenness')}
@@ -1077,6 +1095,163 @@ const AdvancedAnalyticsDashboard = () => {
                       </div>
                     );
                   })}
+              </div>
+            )}
+          </div>
+        </div>
+        ) : activeTab === 'topics-proportions' ? (
+        <div className="space-y-6">
+          {/* Topics Proportions Tab */}
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+            <div className="flex items-center gap-2 mb-6">
+              <Sparkles size={24} className="text-purple-600" />
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900">Topics Proportions by 5-Year Intervals</h2>
+                <p className="text-gray-600 mt-1">Distribution of top 10 topics across research periods</p>
+              </div>
+            </div>
+
+            {/* Pie Charts Grid */}
+            {topicEvolution?.intervals && topicEvolution.intervals.length > 0 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {topicEvolution.intervals
+                  .filter(interval => interval.topics && interval.topics.length > 0)
+                  .map(interval => {
+                    // Get top 10 topics sorted by paper_count
+                    const topics = (interval.topics || [])
+                      .sort((a, b) => (b.paper_count || 0) - (a.paper_count || 0))
+                      .slice(0, 10); // Only top 10 topics
+                    
+                    const totalPapers = topics.reduce((sum, topic) => sum + (topic.paper_count || 0), 0);
+                    
+                    const pieData = topics.map((topic, idx) => {
+                      // Use generated topic name if available, otherwise fallback to representative paper title
+                      let topicName = `Topic ${idx + 1}`;
+                      if (topic.name && topic.name !== topic.representative_paper?.title) {
+                        // Use generated topic name (truncate if too long)
+                        topicName = topic.name.length > 40 ? topic.name.substring(0, 40) + '...' : topic.name;
+                      } else if (topic.representative_paper && topic.representative_paper.title) {
+                        // Fallback to representative paper title
+                        const title = topic.representative_paper.title;
+                        topicName = title.length > 40 ? title.substring(0, 40) + '...' : title;
+                      }
+                      
+                      return {
+                        name: topicName,
+                        value: topic.paper_count || 0,
+                        percentage: totalPapers > 0 ? (((topic.paper_count || 0) / totalPapers) * 100).toFixed(1) : '0.0',
+                        coherence: topic.coherence ? (topic.coherence * 100).toFixed(1) : '0.0',
+                        fullTitle: topic.name || topic.representative_paper?.title || `Topic ${idx + 1}`
+                      };
+                    });
+
+                    // Color palette for topics
+                    const TOPIC_COLORS = [
+                      '#8B5CF6', '#3B82F6', '#10B981', '#F59E0B', '#EF4444',
+                      '#EC4899', '#06B6D4', '#84CC16', '#F97316', '#6366F1'
+                    ];
+
+                    return (
+                      <div key={interval.interval} className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                        <h3 className="text-lg font-bold text-gray-900 mb-2 text-center">
+                          {interval.interval}
+                        </h3>
+                        <div className="mb-4">
+                          <p className="text-sm text-gray-600 text-center">
+                            Top {topics.length} topics • {totalPapers} papers • {interval.topic_count || 0} total topics
+                          </p>
+                        </div>
+                        <ResponsiveContainer width="100%" height={280}>
+                          <PieChart>
+                            <Pie
+                              data={pieData}
+                              cx="50%"
+                              cy="50%"
+                              labelLine={false}
+                              label={false}
+                              outerRadius={100}
+                              innerRadius={30}
+                              fill="#8884d8"
+                              dataKey="value"
+                              paddingAngle={2}
+                            >
+                              {pieData.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={TOPIC_COLORS[index % TOPIC_COLORS.length]} />
+                              ))}
+                            </Pie>
+                            <Tooltip 
+                              formatter={(value, name, props) => [
+                                `${value} papers (${props.payload.percentage}%)`,
+                                props.payload.fullTitle || props.payload.name
+                              ]}
+                              contentStyle={{
+                                backgroundColor: '#fff',
+                                border: '1px solid #e5e7eb',
+                                borderRadius: '8px',
+                                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                                maxWidth: '350px'
+                              }}
+                            />
+                          </PieChart>
+                        </ResponsiveContainer>
+                        
+                        {/* Top 10 Topics List */}
+                        <div className="mt-4 pt-4 border-t border-gray-200">
+                          <h4 className="text-sm font-semibold text-gray-700 mb-2">Top 10 Topics:</h4>
+                          <ul className="space-y-1 max-h-48 overflow-y-auto">
+                            {topics.map((topic, idx) => {
+                              // Use generated topic name if available, otherwise use representative paper title
+                              const topicName = topic.name || topic.representative_paper?.title || `Topic ${idx + 1}`;
+                              const displayName = topic.name ? topic.name : (topic.representative_paper?.title || `Topic ${idx + 1}`);
+                              
+                              return (
+                                <li key={idx} className="flex items-start justify-between text-xs py-1">
+                                  <span className="flex items-center gap-2 flex-1 min-w-0">
+                                    <div 
+                                      className="w-3 h-3 rounded-full flex-shrink-0 mt-0.5" 
+                                      style={{ backgroundColor: TOPIC_COLORS[idx % TOPIC_COLORS.length] }}
+                                    />
+                                    <span className="text-gray-900">
+                                      {topic.name ? (
+                                        <>
+                                          <span className="font-medium">{topic.name}</span>
+                                          {topic.representative_paper?.title && topic.representative_paper.title !== topic.name && (
+                                            <span className="text-gray-500 text-xs ml-1 italic" title={topic.representative_paper.title}>
+                                              ({topic.representative_paper.title.length > 30 ? topic.representative_paper.title.substring(0, 30) + '...' : topic.representative_paper.title})
+                                            </span>
+                                          )}
+                                        </>
+                                      ) : (
+                                        <>
+                                          <span className="font-medium">Topic {idx + 1}:</span>
+                                          <span className="text-gray-700 ml-1" title={displayName}>
+                                            {displayName.length > 50 ? displayName.substring(0, 50) + '...' : displayName}
+                                          </span>
+                                        </>
+                                      )}
+                                      <span className="text-gray-500 ml-1">
+                                        ({(topic.coherence * 100).toFixed(1)}% coherence)
+                                      </span>
+                                    </span>
+                                  </span>
+                                  <span className="text-gray-500 ml-2 flex-shrink-0 text-right">
+                                    {topic.paper_count || 0} papers
+                                  </span>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
+            )}
+            
+            {(!topicEvolution?.intervals || topicEvolution.intervals.length === 0) && (
+              <div className="text-center py-12">
+                <p className="text-gray-600">No topic data available.</p>
+                <p className="text-sm text-gray-500 mt-2">Topic data will appear here once available.</p>
               </div>
             )}
           </div>
@@ -2161,8 +2336,8 @@ const AdvancedAnalyticsDashboard = () => {
                     <BarChart 
                       data={phenomenonCounts.map(interval => ({
                         interval: interval.interval,
-                        phenomena: interval.total_phenomena || 0,
-                        papers: interval.total_papers || 0
+                        phenomena: interval.total_phenomena || interval.total_unique_phenomena || 0,
+                        papers: interval.total_papers_in_interval || interval.total_papers || 0
                       }))} 
                       margin={{ top: 20, right: 30, left: 20, bottom: 80 }}
                     >

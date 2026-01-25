@@ -16,6 +16,19 @@ from sentence_transformers import SentenceTransformer
 from sklearn.cluster import KMeans
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.decomposition import PCA
+
+# Initialize logger before using it
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# OpenAI for topic name generation
+try:
+    from openai import OpenAI
+    OPENAI_AVAILABLE = True
+except ImportError:
+    OPENAI_AVAILABLE = False
+    logger.warning("openai not available - topic naming will use fallback")
+
 # scipy imports are optional - only used for advanced clustering
 try:
     from scipy.spatial.distance import pdist, squareform
@@ -155,6 +168,198 @@ class AdvancedAnalytics:
         
         return intervals
     
+    def _generate_topic_name_with_openai(self, cluster_papers: List[Tuple], interval: str) -> Optional[str]:
+        """
+        Generate a descriptive topic name using OpenAI with role-based prompt.
+        
+        Args:
+            cluster_papers: List of (paper_id, title, abstract) tuples
+            interval: Time period string (e.g., "1985-1989")
+        
+        Returns:
+            Topic name string (e.g., "Strategic Alliances and Partnerships") or None if generation fails
+        """
+        if not OPENAI_AVAILABLE:
+            logger.warning("OpenAI not available, using fallback topic name")
+            return None
+        
+        api_key = os.getenv("OPENAI_API_KEY")
+        if not api_key:
+            logger.warning("OPENAI_API_KEY not set, using fallback topic name")
+            return None
+        
+        try:
+            client = OpenAI(api_key=api_key)
+            
+            # Collect top 5-10 papers for context (prioritize representative paper)
+            num_papers = min(10, len(cluster_papers))
+            selected_papers = cluster_papers[:num_papers]
+            
+            # Build paper context
+            paper_context = []
+            for paper_id, title, abstract in selected_papers:
+                paper_text = f"Title: {title}"
+                if abstract:
+                    # Truncate abstract to first 200 chars to save tokens
+                    abstract_short = abstract[:200] + "..." if len(abstract) > 200 else abstract
+                    paper_text += f"\nAbstract: {abstract_short}"
+                paper_context.append(paper_text)
+            
+            papers_text = "\n\n".join(paper_context)
+            
+            # Role-based prompt as senior strategy management professor
+            prompt = f"""You are a senior professor of Strategic Management with 30+ years of research experience analyzing the Strategic Management Journal literature. You are examining a cluster of research papers to identify the core research topic they represent.
+
+Time Period: {interval}
+
+Papers in this cluster:
+{papers_text}
+
+Based on your expertise in strategic management research, provide a concise, descriptive topic name (2-5 words) that captures the central research theme of these papers.
+
+The name should:
+- Be specific and meaningful to strategy researchers
+- Use standard academic terminology from strategic management
+- Capture the core theoretical or empirical focus
+- Be concise (avoid long phrases)
+- Reflect the dominant theme across these papers
+
+Respond with ONLY the topic name, nothing else. Do not include explanations, quotes, or additional text."""
+
+            logger.info(f"Generating topic name for interval {interval} with {len(cluster_papers)} papers")
+            
+            response = client.chat.completions.create(
+                model="gpt-4-turbo-preview",
+                messages=[
+                    {"role": "system", "content": "You are a senior professor of Strategic Management with deep expertise in research topic identification."},
+                    {"role": "user", "content": prompt}
+                ],
+                max_tokens=50,
+                temperature=0.3  # Lower temperature for more consistent naming
+            )
+            
+            if response and response.choices and len(response.choices) > 0:
+                topic_name = response.choices[0].message.content.strip()
+                # Clean up the response (remove quotes if present)
+                topic_name = topic_name.strip('"').strip("'").strip()
+                
+                # Validate length (should be 2-5 words, max 60 chars)
+                if len(topic_name) > 60:
+                    topic_name = topic_name[:57] + "..."
+                
+                logger.info(f"Generated topic name: '{topic_name}'")
+                return topic_name
+            else:
+                logger.warning("OpenAI returned empty response for topic naming")
+                return None
+                
+        except Exception as e:
+            logger.error(f"Error generating topic name with OpenAI: {e}")
+            return None
+    
+    def _get_topic_names_from_neo4j(self, interval: str, cluster_ids: List[int]) -> Dict[int, str]:
+        """
+        Retrieve existing topic names from Neo4j.
+        
+        Args:
+            interval: Time period string
+            cluster_ids: List of cluster IDs
+        
+        Returns:
+            Dictionary mapping cluster_id to topic name
+        """
+        topic_names = {}
+        try:
+            with self.driver.session() as session:
+                result = session.run("""
+                    MATCH (t:Topic)
+                    WHERE t.interval = $interval AND t.cluster_id IN $cluster_ids
+                    RETURN t.cluster_id as cluster_id, t.name as name, t.topic_id as topic_id
+                """, interval=interval, cluster_ids=cluster_ids)
+                
+                for record in result:
+                    topic_names[record['cluster_id']] = record['name']
+                    
+        except Exception as e:
+            logger.error(f"Error retrieving topic names from Neo4j: {e}")
+        
+        return topic_names
+    
+    def _persist_topic_to_neo4j(self, topic_data: Dict, interval: str, start_year: int, end_year: int) -> bool:
+        """
+        Persist topic node and relationships to Neo4j.
+        
+        Args:
+            topic_data: Dictionary with topic information
+            interval: Time period string
+            start_year: Start year of interval
+            end_year: End year of interval
+        
+        Returns:
+            True if successful, False otherwise
+        """
+        try:
+            topic_id = topic_data.get('topic_id')
+            cluster_id = topic_data.get('cluster_id')
+            name = topic_data.get('name')
+            paper_count = topic_data.get('paper_count', 0)
+            coherence = topic_data.get('coherence', 0.0)
+            representative_paper_id = topic_data.get('representative_paper', {}).get('paper_id')
+            paper_ids = topic_data.get('paper_ids', [])
+            
+            if not topic_id or not name:
+                logger.warning(f"Cannot persist topic: missing topic_id or name")
+                return False
+            
+            with self.driver.session() as session:
+                # Create or update Topic node
+                session.run("""
+                    MERGE (t:Topic {topic_id: $topic_id})
+                    SET t.name = $name,
+                        t.cluster_id = $cluster_id,
+                        t.interval = $interval,
+                        t.start_year = $start_year,
+                        t.end_year = $end_year,
+                        t.paper_count = $paper_count,
+                        t.coherence = $coherence,
+                        t.generated_at = datetime(),
+                        t.generation_method = $generation_method
+                """, 
+                    topic_id=topic_id,
+                    name=name,
+                    cluster_id=cluster_id,
+                    interval=interval,
+                    start_year=start_year,
+                    end_year=end_year,
+                    paper_count=paper_count,
+                    coherence=coherence,
+                    generation_method='openai' if name and name != topic_data.get('fallback_name') else 'fallback'
+                )
+                
+                # Link representative paper
+                if representative_paper_id:
+                    session.run("""
+                        MATCH (t:Topic {topic_id: $topic_id})
+                        MATCH (p:Paper {paper_id: $paper_id})
+                        MERGE (t)-[:REPRESENTED_BY]->(p)
+                    """, topic_id=topic_id, paper_id=representative_paper_id)
+                
+                # Link all papers in cluster
+                if paper_ids:
+                    session.run("""
+                        MATCH (t:Topic {topic_id: $topic_id})
+                        UNWIND $paper_ids AS paper_id
+                        MATCH (p:Paper {paper_id: paper_id})
+                        MERGE (p)-[:BELONGS_TO_TOPIC]->(t)
+                    """, topic_id=topic_id, paper_ids=paper_ids)
+                
+                logger.info(f"Persisted topic {topic_id} to Neo4j: '{name}'")
+                return True
+                
+        except Exception as e:
+            logger.error(f"Error persisting topic to Neo4j: {e}")
+            return False
+    
     def get_phenomenon_counts_by_interval(self, start_year: int = 1985, end_year: int = 2025, top_n: int = 20) -> List[Dict]:
         """
         Get phenomenon counts by 5-year intervals with top N phenomena per period
@@ -209,13 +414,24 @@ class AdvancedAnalytics:
                 total_record = total_result.single()
                 unique_phenomenon_count = total_record['total_phenomena'] if total_record else 0
                 
+                # Get total papers in interval (not just papers studying top N phenomena)
+                papers_in_interval_result = session.run("""
+                    MATCH (p:Paper)
+                    WHERE p.year >= $start_year AND p.year < $end_year AND p.year > 0
+                    RETURN count(p) as paper_count
+                """, start_year=current_start, end_year=current_end).single()
+                total_papers_in_interval = papers_in_interval_result['paper_count'] if papers_in_interval_result else 0
+                
                 intervals.append({
                     'interval': f"{current_start}-{current_end-1}",
                     'start_year': current_start,
                     'end_year': current_end - 1,
-                    'total_phenomena': unique_phenomenon_count,
+                    'total_unique_phenomena': unique_phenomenon_count,
+                    'total_phenomena': unique_phenomenon_count,  # Keep for backward compatibility
                     'top_phenomena_count': len(phenomena),
-                    'total_papers': total_papers,
+                    'total_papers': total_papers,  # Papers studying top N phenomena
+                    'total_papers_in_interval': total_papers_in_interval,  # All papers in interval
+                    'phenomena': phenomena,  # Add 'phenomena' alias for frontend
                     'top_phenomena': phenomena
                 })
             
@@ -297,6 +513,10 @@ class AdvancedAnalytics:
             kmeans = KMeans(n_clusters=optimal_k, random_state=42, n_init=10)
             cluster_labels = kmeans.fit_predict(embeddings)
             
+            # Get existing topic names from Neo4j (if any)
+            cluster_ids = list(range(optimal_k))
+            existing_names = self._get_topic_names_from_neo4j(interval, cluster_ids)
+            
             # Calculate topic metrics
             topics = []
             for cluster_id in range(optimal_k):
@@ -320,16 +540,51 @@ class AdvancedAnalytics:
                 representative_idx = cluster_indices[np.argmin(distances)]
                 representative_paper = paper_info[representative_idx]
                 
-                topics.append({
+                # Generate or retrieve topic name
+                topic_id = f"{interval}_{cluster_id}"
+                topic_name = None
+                fallback_name = representative_paper[1]  # Use paper title as fallback
+                
+                # Check if name exists in Neo4j
+                if cluster_id in existing_names:
+                    topic_name = existing_names[cluster_id]
+                    logger.info(f"Using existing topic name for {topic_id}: '{topic_name}'")
+                else:
+                    # Generate new topic name using OpenAI
+                    logger.info(f"Generating new topic name for {topic_id}")
+                    topic_name = self._generate_topic_name_with_openai(cluster_papers, interval)
+                    
+                    # Fallback to representative paper title if generation fails
+                    if not topic_name or len(topic_name.strip()) == 0:
+                        topic_name = fallback_name
+                        logger.info(f"Using fallback name for {topic_id}: '{topic_name}'")
+                
+                # Extract start_year and end_year from interval string
+                try:
+                    start_year_interval = int(interval.split('-')[0])
+                    end_year_interval = int(interval.split('-')[1])
+                except:
+                    start_year_interval = start_year
+                    end_year_interval = end_year
+                
+                topic_data = {
                     'cluster_id': cluster_id,
+                    'topic_id': topic_id,
+                    'name': topic_name,
                     'paper_count': len(cluster_papers),
                     'coherence': float(coherence),
                     'representative_paper': {
                         'paper_id': representative_paper[0],
                         'title': representative_paper[1]
                     },
-                    'paper_ids': [p[0] for p in cluster_papers]
-                })
+                    'paper_ids': [p[0] for p in cluster_papers],
+                    'fallback_name': fallback_name
+                }
+                
+                # Persist to Neo4j
+                self._persist_topic_to_neo4j(topic_data, interval, start_year_interval, end_year_interval)
+                
+                topics.append(topic_data)
             
             # Calculate diversity (entropy of cluster sizes)
             cluster_sizes = [t['paper_count'] for t in topics]

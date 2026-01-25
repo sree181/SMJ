@@ -557,9 +557,11 @@ class LLMClient:
         self.api_key = os.getenv("OPENAI_API_KEY")
         
         if self.api_key:
-            logger.info("Using OpenAI for LLM (OpenAI API key found)")
+            # Log that key is found but don't log the actual key for security
+            logger.info(f"Using OpenAI for LLM (OpenAI API key found, length: {len(self.api_key)})")
         else:
             logger.warning("OpenAI API key not found. LLM features will be limited to fallback responses.")
+            logger.warning("To enable LLM features, set OPENAI_API_KEY environment variable in Railway.")
 
     def generate_answer(self, query: str, research_data: Dict[str, Any], persona: Optional[str] = None) -> str:
         """Generate answer using OpenAI based on research data with optional persona"""
@@ -600,14 +602,29 @@ class LLMClient:
         say so and suggest what additional information might be helpful.
         """
 
-        response = client.chat.completions.create(
-            model="gpt-4",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=1000,
-            temperature=0.7
-        )
-
-        return response.choices[0].message.content.strip()
+        logger.info("Sending request to OpenAI API...")
+        try:
+            response = client.chat.completions.create(
+                model="gpt-4-turbo-preview",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=2000,
+                temperature=0.7
+            )
+            
+            if response and response.choices and len(response.choices) > 0:
+                content = response.choices[0].message.content
+                if content:
+                    logger.info("Successfully received answer from OpenAI")
+                    return content.strip()
+                else:
+                    logger.warning("OpenAI returned empty content")
+                    raise ValueError("OpenAI returned empty response")
+            else:
+                logger.warning("OpenAI response structure invalid")
+                raise ValueError("Invalid OpenAI response structure")
+        except Exception as e:
+            logger.error(f"OpenAI API error: {type(e).__name__}: {str(e)}")
+            raise
     
     def _prepare_context(self, research_data: Dict[str, Any]) -> str:
         """Prepare context string from research data - Updated for latest schema"""
@@ -1259,6 +1276,13 @@ async def process_query(request: QueryRequest):
         
         if use_graphrag:
             logger.info(f"Using Graph RAG for query: '{request.query[:50]}...'")
+            # Check OpenAI API key for Graph RAG
+            api_key = os.getenv("OPENAI_API_KEY")
+            if not api_key:
+                logger.warning("OPENAI_API_KEY not set - Graph RAG will use summary mode")
+            else:
+                logger.info(f"OPENAI_API_KEY found for Graph RAG (length: {len(api_key)})")
+            
             try:
                 # Use Graph RAG for hybrid search
                 graphrag_result = graphrag.query(
@@ -1273,6 +1297,7 @@ async def process_query(request: QueryRequest):
                 
                 # Generate answer using Graph RAG context
                 persona = request.persona if hasattr(request, 'persona') else None
+                logger.info("Generating answer with Graph RAG and LLM...")
                 answer = graphrag.generate_answer(graphrag_result, use_llm=True)
                 
                 # Check if answer is valid
@@ -1352,6 +1377,12 @@ async def process_query(request: QueryRequest):
         # Fallback to standard method
         if not use_graphrag:
             logger.info(f"Using standard query method for: '{request.query[:50]}...'")
+            # Check if OpenAI API key is available
+            if not llm_client.api_key:
+                logger.warning("OPENAI_API_KEY not set - LLM features disabled. Please set OPENAI_API_KEY in environment variables.")
+            else:
+                logger.info("OPENAI_API_KEY found - using OpenAI for answer generation")
+            
             # Get research data
             research_data = neo4j_service.get_all_research_data()
             
