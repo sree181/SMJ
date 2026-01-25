@@ -380,10 +380,10 @@ Respond with ONLY the topic name, nothing else. Do not include explanations, quo
                     WHERE p.year >= $start_year 
                       AND p.year < $end_year
                       AND p.year > 0
-                    WITH ph, count(DISTINCT p) as paper_count
+                    WITH ph, count(DISTINCT p) as paper_count, collect(DISTINCT p.paper_id) as paper_ids
                     RETURN ph.phenomenon_name as phenomenon_name,
                            paper_count,
-                           collect(DISTINCT p.paper_id) as paper_ids
+                           paper_ids
                     ORDER BY paper_count DESC
                     LIMIT $top_n
                 """, start_year=current_start, end_year=current_end, top_n=top_n)
