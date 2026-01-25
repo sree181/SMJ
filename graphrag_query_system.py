@@ -479,6 +479,13 @@ class GraphRAGQuerySystem:
         context = query_result.get('context', '') if query_result else ''
         question = query_result.get('question', '') if query_result else ''
         
+        # Check if context is meaningful (lowered threshold to allow more attempts)
+        if not context or len(context.strip()) < 20:
+            logger.warning(f"Context too short ({len(context)} chars), falling back to summary")
+            return self._generate_summary(query_result)
+        
+        logger.info(f"Generating LLM answer with context length: {len(context)} characters")
+        
         prompt = f"""You are an expert research assistant analyzing Strategic Management Journal literature.
 
 User Question: {question}
@@ -496,6 +503,7 @@ Based on the retrieved context, provide a comprehensive answer that:
 Be specific, well-structured, and cite paper IDs when referencing studies."""
 
         try:
+            logger.info("Calling OpenAI API for answer generation...")
             response = client.chat.completions.create(
                 model="gpt-4-turbo-preview",
                 messages=[{"role": "user", "content": prompt}],
@@ -504,27 +512,45 @@ Be specific, well-structured, and cite paper IDs when referencing studies."""
             )
             if response and response.choices and len(response.choices) > 0:
                 content = response.choices[0].message.content
-                if content:
+                if content and len(content.strip()) > 50:
+                    logger.info(f"Successfully generated LLM answer (length: {len(content)} chars)")
                     return content.strip()
-            logger.warning("OpenAI API returned empty response, falling back to summary")
+                else:
+                    logger.warning(f"OpenAI API returned short/empty content (length: {len(content) if content else 0}), falling back to summary")
+            else:
+                logger.warning("OpenAI API returned invalid response structure, falling back to summary")
             return self._generate_summary(query_result)
         except Exception as e:
-            logger.error(f"Error generating answer: {e}")
+            logger.error(f"Error generating answer with OpenAI: {type(e).__name__}: {e}")
             import traceback
             logger.error(traceback.format_exc())
+            logger.warning("Falling back to summary due to OpenAI API error")
             return self._generate_summary(query_result)
     
     def _generate_summary(self, query_result: Dict[str, Any]) -> str:
-        """Generate summary without LLM"""
-        papers = query_result.get('papers', [])
-        theories = query_result.get('theories', [])
-        phenomena = query_result.get('phenomena', [])
+        """Generate summary without LLM - this should only be used as fallback"""
+        papers = query_result.get('papers', []) or []
+        connected_papers = query_result.get('connected_papers', []) or []
+        theories = query_result.get('theories', []) or []
+        phenomena = query_result.get('phenomena', []) or []
+        methods = query_result.get('methods', []) or []
         
-        summary = f"Found {len(papers)} relevant papers"
+        total_papers = len(papers) + len(connected_papers)
+        
+        summary = f"I found {total_papers} relevant papers"
         if theories:
             summary += f", {len(theories)} relevant theories"
         if phenomena:
             summary += f", {len(phenomena)} relevant phenomena"
+        if methods:
+            summary += f", {len(methods)} relevant methods"
+        
+        summary += " in the knowledge graph.\n\n"
+        summary += "To provide a more detailed answer, I would need access to an LLM service. "
+        summary += "The current data shows research activity across multiple papers, but I cannot "
+        summary += "synthesize a comprehensive response without additional processing capabilities.\n\n"
+        summary += "Available data includes research questions, methods, findings, theories, and phenomena "
+        summary += "from various Strategic Management Journal papers."
         
         return summary
     

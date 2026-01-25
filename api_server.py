@@ -1314,9 +1314,11 @@ async def process_query(request: QueryRequest):
                     raise ValueError("Graph RAG generate_answer returned None or empty")
                 
                 # Check if answer is just a basic summary (indicates LLM wasn't used)
-                if answer.startswith("Found") and "relevant papers" in answer:
+                if answer.startswith("I found") and "relevant papers" in answer and "LLM service" in answer:
                     logger.warning("Graph RAG returned summary instead of LLM answer - OpenAI API may not be working")
-                    raise ValueError("Graph RAG returned summary instead of LLM-generated answer")
+                    logger.warning(f"Answer preview: {answer[:200]}")
+                    # Don't raise error - let it return the summary, but log the issue
+                    # This allows the frontend to still show something
                 
                 # Prepare sources from Graph RAG results
                 sources = []

@@ -125,13 +125,13 @@ class AdvancedAnalytics:
                     WHERE p.year >= $start_year 
                       AND p.year < $end_year
                       AND p.year > 0
-                    WITH a, count(DISTINCT p) as paper_count
+                    WITH a, count(DISTINCT p) as paper_count, collect(DISTINCT p.paper_id) as paper_ids
                     RETURN a.author_id as author_id,
                            a.full_name as full_name,
                            a.given_name as given_name,
                            a.family_name as family_name,
                            paper_count,
-                           collect(DISTINCT p.paper_id) as paper_ids
+                           paper_ids
                     ORDER BY paper_count DESC, a.family_name, a.given_name
                 """, start_year=current_start, end_year=current_end)
                 
