@@ -94,7 +94,7 @@ class AnalyticsExporter:
                 current_end = min(current_start + 5, end_year)
                 interval_str = f"{current_start}-{current_end-1}"
                 
-                # Get unique authors and their paper counts
+                # Get unique authors and their paper counts (top N)
                 result = session.run("""
                     MATCH (p:Paper)-[:AUTHORED_BY]->(a:Author)
                     WHERE p.year >= $start_year 
@@ -109,7 +109,15 @@ class AnalyticsExporter:
                     LIMIT $top_n
                 """, start_year=current_start, end_year=current_end, top_n=top_n).data()
                 
-                unique_author_count = len(result)
+                # Get TOTAL unique authors count (not just top N) - separate query
+                total_authors_result = session.run("""
+                    MATCH (p:Paper)-[:AUTHORED_BY]->(a:Author)
+                    WHERE p.year >= $start_year 
+                      AND p.year < $end_year 
+                      AND p.year > 0
+                    RETURN count(DISTINCT a) as total_unique_authors
+                """, start_year=current_start, end_year=current_end).single()
+                unique_author_count = total_authors_result['total_unique_authors'] if total_authors_result else 0
                 
                 # Get total papers in interval
                 papers_result = session.run("""
@@ -306,7 +314,7 @@ class AnalyticsExporter:
                 current_end = min(current_start + 5, end_year)
                 interval_str = f"{current_start}-{current_end-1}"
                 
-                # Get phenomena and their paper counts
+                # Get phenomena and their paper counts (top N)
                 result = session.run("""
                     MATCH (p:Paper)-[:STUDIES_PHENOMENON]->(ph:Phenomenon)
                     WHERE p.year >= $start_year 
@@ -319,7 +327,15 @@ class AnalyticsExporter:
                     LIMIT $top_n
                 """, start_year=current_start, end_year=current_end, top_n=top_n).data()
                 
-                unique_phenomena_count = len(result)
+                # Get TOTAL unique phenomena count (not just top N) - separate query
+                total_phenomena_result = session.run("""
+                    MATCH (p:Paper)-[:STUDIES_PHENOMENON]->(ph:Phenomenon)
+                    WHERE p.year >= $start_year 
+                      AND p.year < $end_year 
+                      AND p.year > 0
+                    RETURN count(DISTINCT ph) as total_unique_phenomena
+                """, start_year=current_start, end_year=current_end).single()
+                unique_phenomena_count = total_phenomena_result['total_unique_phenomena'] if total_phenomena_result else 0
                 
                 # Get total papers in interval
                 papers_result = session.run("""

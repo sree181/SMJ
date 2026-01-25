@@ -1,0 +1,10 @@
+Analytics Export Summary
+============================================================
+Export Date: 2026-01-24 12:20:04
+Time Range: 1985-2025
+============================================================
+
+Papers by Timeframe: 8 intervals
+Authors by Timeline: 0 records
+Topics by Timeline: 68 records
+Phenomena by Timeline: 322 records
