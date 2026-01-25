@@ -545,8 +545,8 @@ Respond with ONLY the topic name, nothing else. Do not include explanations, quo
                 topic_name = None
                 fallback_name = representative_paper[1]  # Use paper title as fallback
                 
-                # Check if name exists in Neo4j
-                if cluster_id in existing_names:
+                # Check if name exists in Neo4j and is valid (not None or empty)
+                if cluster_id in existing_names and existing_names[cluster_id] and existing_names[cluster_id].strip():
                     topic_name = existing_names[cluster_id]
                     logger.info(f"Using existing topic name for {topic_id}: '{topic_name}'")
                 else:

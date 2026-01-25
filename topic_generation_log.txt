@@ -1,0 +1,311 @@
+/Users/sreehasgopinathan/Documents/Auburn/Research/SMJ/smj/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:advanced_analytics_endpoints:Loading embedding model for analytics...
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+INFO:advanced_analytics_endpoints:✓ Embedding model loaded
+INFO:advanced_analytics_endpoints:Using existing topic name for 1985-1989_0: 'Top Management Turnover Following Mergers and Acquisitions'
+INFO:advanced_analytics_endpoints:Persisted topic 1985-1989_0 to Neo4j: 'Top Management Turnover Following Mergers and Acquisitions'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1985-1989_1: 'Top Management Group Heterogeneity and Firm Performance'
+INFO:advanced_analytics_endpoints:Persisted topic 1985-1989_1 to Neo4j: 'Top Management Group Heterogeneity and Firm Performance'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1985-1989_2: 'Visionary Leadership and Strategic Management'
+INFO:advanced_analytics_endpoints:Persisted topic 1985-1989_2 to Neo4j: 'Visionary Leadership and Strategic Management'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1990-1994_0: 'Structuring Cooperative Relationships between Organizations'
+INFO:advanced_analytics_endpoints:Persisted topic 1990-1994_0 to Neo4j: 'Structuring Cooperative Relationships between Organizations'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1990-1994_1: 'Do Firm Strategies Exist?'
+INFO:advanced_analytics_endpoints:Persisted topic 1990-1994_1 to Neo4j: 'Do Firm Strategies Exist?'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1990-1994_2: 'Effects of Executive Departures on the Performance of Acquired Firms'
+INFO:advanced_analytics_endpoints:Persisted topic 1990-1994_2 to Neo4j: 'Effects of Executive Departures on the Performance of Acquired Firms'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1990-1994_3: 'Strategic Renewal and the Interaction of Cumulative Stress and Inertia'
+INFO:advanced_analytics_endpoints:Persisted topic 1990-1994_3 to Neo4j: 'Strategic Renewal and the Interaction of Cumulative Stress and Inertia'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1990-1994_4: 'THE DESIGN SCHOOL: RECONSIDERING THE BASIC PREMISES OF STRATEGIC MANAGEMENT'
+INFO:advanced_analytics_endpoints:Persisted topic 1990-1994_4 to Neo4j: 'THE DESIGN SCHOOL: RECONSIDERING THE BASIC PREMISES OF STRATEGIC MANAGEMENT'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1990-1994_5: 'Industry Variety and Performance'
+INFO:advanced_analytics_endpoints:Persisted topic 1990-1994_5 to Neo4j: 'Industry Variety and Performance'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1990-1994_6: 'Supplier Relations and Management: A Survey of Japanese, Japanese-Transplant, and U.S. Auto Plants'
+INFO:advanced_analytics_endpoints:Persisted topic 1990-1994_6 to Neo4j: 'Supplier Relations and Management: A Survey of Japanese, Japanese-Transplant, and U.S. Auto Plants'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1990-1994_7: 'Board of Director Involvement in Restructuring: The Effects of Board Versus Managerial Controls and Characteristics'
+INFO:advanced_analytics_endpoints:Persisted topic 1990-1994_7 to Neo4j: 'Board of Director Involvement in Restructuring: The Effects of Board Versus Managerial Controls and Characteristics'
+INFO:advanced_analytics_endpoints:Generating new topic name for 1990-1994_8
+INFO:advanced_analytics_endpoints:Generating topic name for interval 1990-1994 with 2 papers
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.377879 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.896825 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+ERROR:advanced_analytics_endpoints:Error generating topic name with OpenAI: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+INFO:advanced_analytics_endpoints:Using fallback name for 1990-1994_8: ''
+WARNING:advanced_analytics_endpoints:Cannot persist topic: missing topic_id or name
+INFO:advanced_analytics_endpoints:Using existing topic name for 1990-1994_9: 'A PARADIGM OF ENTREPRENEURSHIP: ENTREPRENEURIAL MANAGEMENT'
+INFO:advanced_analytics_endpoints:Persisted topic 1990-1994_9 to Neo4j: 'A PARADIGM OF ENTREPRENEURSHIP: ENTREPRENEURIAL MANAGEMENT'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1995-1999_0: 'ON THE UTILIZATION OF RESOURCES: PERSPECTIVES FROM THE U.S. TELECOMMUNICATIONS INDUSTRY'
+INFO:advanced_analytics_endpoints:Persisted topic 1995-1999_0 to Neo4j: 'ON THE UTILIZATION OF RESOURCES: PERSPECTIVES FROM THE U.S. TELECOMMUNICATIONS INDUSTRY'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1995-1999_1: 'EVOLUTIONARY PERSPECTIVES ON STRATEGY'
+INFO:advanced_analytics_endpoints:Persisted topic 1995-1999_1 to Neo4j: 'EVOLUTIONARY PERSPECTIVES ON STRATEGY'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1995-1999_2: 'FORM OF CONTROL: A CRITICAL DETERMINANT OF ACQUISITION PERFORMANCE AND CEO REWARDS'
+INFO:advanced_analytics_endpoints:Persisted topic 1995-1999_2 to Neo4j: 'FORM OF CONTROL: A CRITICAL DETERMINANT OF ACQUISITION PERFORMANCE AND CEO REWARDS'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1995-1999_3: 'FIRM AND INDUSTRY EFFECTS WITHIN STRATEGIC MANAGEMENT: AN EMPIRICAL EXAMINATION'
+INFO:advanced_analytics_endpoints:Persisted topic 1995-1999_3 to Neo4j: 'FIRM AND INDUSTRY EFFECTS WITHIN STRATEGIC MANAGEMENT: AN EMPIRICAL EXAMINATION'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1995-1999_4: 'The Role of Strategic Alliances in High-Technology New Product Development'
+INFO:advanced_analytics_endpoints:Persisted topic 1995-1999_4 to Neo4j: 'The Role of Strategic Alliances in High-Technology New Product Development'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1995-1999_5: 'BUILDING FIRM-SPECIFIC ADVANTAGES IN MULTINATIONAL CORPORATIONS: THE ROLE OF SUBSIDIARY INITIATIVE'
+INFO:advanced_analytics_endpoints:Persisted topic 1995-1999_5 to Neo4j: 'BUILDING FIRM-SPECIFIC ADVANTAGES IN MULTINATIONAL CORPORATIONS: THE ROLE OF SUBSIDIARY INITIATIVE'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1995-1999_6: 'TOP MANAGEMENT TEAM AGREEMENT ABOUT THE STRATEGIC DECISION PROCESS: A TEST OF SOME OF ITS DETERMINANTS AND CONSEQUENCES'
+INFO:advanced_analytics_endpoints:Persisted topic 1995-1999_6 to Neo4j: 'TOP MANAGEMENT TEAM AGREEMENT ABOUT THE STRATEGIC DECISION PROCESS: A TEST OF SOME OF ITS DETERMINANTS AND CONSEQUENCES'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1995-1999_7: 'COMPETING IN THE NEW ECONOMY: MANAGING OUT OF BOUNDS'
+INFO:advanced_analytics_endpoints:Persisted topic 1995-1999_7 to Neo4j: 'COMPETING IN THE NEW ECONOMY: MANAGING OUT OF BOUNDS'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1995-1999_8: 'RELATIVE ABSORPTIVE CAPACITY AND INTERORGANIZATIONAL LEARNING'
+INFO:advanced_analytics_endpoints:Persisted topic 1995-1999_8 to Neo4j: 'RELATIVE ABSORPTIVE CAPACITY AND INTERORGANIZATIONAL LEARNING'
+INFO:advanced_analytics_endpoints:Using existing topic name for 1995-1999_9: 'CEO Duality and Firm Performance: A Contingency Model'
+INFO:advanced_analytics_endpoints:Persisted topic 1995-1999_9 to Neo4j: 'CEO Duality and Firm Performance: A Contingency Model'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2000-2004_0: 'STRATEGIC GROUPS AND COMPETITIVE ENACTMENT: A STUDY OF DYNAMIC RELATIONSHIPS BETWEEN MENTAL MODELS AND PERFORMANCE'
+INFO:advanced_analytics_endpoints:Persisted topic 2000-2004_0 to Neo4j: 'STRATEGIC GROUPS AND COMPETITIVE ENACTMENT: A STUDY OF DYNAMIC RELATIONSHIPS BETWEEN MENTAL MODELS AND PERFORMANCE'
+INFO:advanced_analytics_endpoints:Generating new topic name for 2000-2004_1
+INFO:advanced_analytics_endpoints:Generating topic name for interval 2000-2004 with 38 papers
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.473987 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.974447 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+ERROR:advanced_analytics_endpoints:Error generating topic name with OpenAI: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+INFO:advanced_analytics_endpoints:Using fallback name for 2000-2004_1: ''
+WARNING:advanced_analytics_endpoints:Cannot persist topic: missing topic_id or name
+INFO:advanced_analytics_endpoints:Using existing topic name for 2000-2004_2: 'BOARD COMPOSITION, SHARE OWNERSHIP, AND ‘UNDERPRICING’ OF U.K. IPO FIRMS'
+INFO:advanced_analytics_endpoints:Persisted topic 2000-2004_2 to Neo4j: 'BOARD COMPOSITION, SHARE OWNERSHIP, AND ‘UNDERPRICING’ OF U.K. IPO FIRMS'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2000-2004_3: 'A RESOURCE-BASED VIEW OF MANUFACTURING STRATEGY AND THE RELATIONSHIP TO MANUFACTURING PERFORMANCE'
+INFO:advanced_analytics_endpoints:Persisted topic 2000-2004_3 to Neo4j: 'A RESOURCE-BASED VIEW OF MANUFACTURING STRATEGY AND THE RELATIONSHIP TO MANUFACTURING PERFORMANCE'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2000-2004_4: 'HOW DO MULTINATIONAL COMPANIES LEVERAGE TECHNOLOGICAL COMPETENCIES? MOVING FROM SINGLE TO INTERDEPENDENT EXPLANATIONS'
+INFO:advanced_analytics_endpoints:Persisted topic 2000-2004_4 to Neo4j: 'HOW DO MULTINATIONAL COMPANIES LEVERAGE TECHNOLOGICAL COMPETENCIES? MOVING FROM SINGLE TO INTERDEPENDENT EXPLANATIONS'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2000-2004_5: 'VARIATIONS IN OWNERSHIP BEHAVIOR AND PROPENSITY TO DIVERSIFY: A STUDY OF THE INDIAN CORPORATE CONTEXT'
+INFO:advanced_analytics_endpoints:Persisted topic 2000-2004_5 to Neo4j: 'VARIATIONS IN OWNERSHIP BEHAVIOR AND PROPENSITY TO DIVERSIFY: A STUDY OF THE INDIAN CORPORATE CONTEXT'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2000-2004_6: 'PRODUCT AND INTERNATIONAL DIVERSIFICATION AMONG JAPANESE MULTINATIONAL FIRMS'
+INFO:advanced_analytics_endpoints:Persisted topic 2000-2004_6 to Neo4j: 'PRODUCT AND INTERNATIONAL DIVERSIFICATION AMONG JAPANESE MULTINATIONAL FIRMS'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2000-2004_7: 'Dynamic Capabilities: What Are They?'
+INFO:advanced_analytics_endpoints:Persisted topic 2000-2004_7 to Neo4j: 'Dynamic Capabilities: What Are They?'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2000-2004_8: 'THE IMPLICATIONS OF STRATEGY AND SOCIAL CONTEXT FOR THE RELATIONSHIP BETWEEN TOP MANAGEMENT TEAM HETEROGENEITY AND FIRM PERFORMANCE'
+INFO:advanced_analytics_endpoints:Persisted topic 2000-2004_8 to Neo4j: 'THE IMPLICATIONS OF STRATEGY AND SOCIAL CONTEXT FOR THE RELATIONSHIP BETWEEN TOP MANAGEMENT TEAM HETEROGENEITY AND FIRM PERFORMANCE'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2000-2004_9: 'MOMENTUM AND SERENDIPITY: HOW ACQUIRED LEADERS CREATE VALUE IN THE INTEGRATION OF TECHNOLOGY FIRMS'
+INFO:advanced_analytics_endpoints:Persisted topic 2000-2004_9 to Neo4j: 'MOMENTUM AND SERENDIPITY: HOW ACQUIRED LEADERS CREATE VALUE IN THE INTEGRATION OF TECHNOLOGY FIRMS'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2005-2009_0: 'FACTORS INFLUENCING PARTNER SELECTION IN STRATEGIC ALLIANCES: THE MODERATING ROLE OF ALLIANCE CONTEXT'
+INFO:advanced_analytics_endpoints:Persisted topic 2005-2009_0 to Neo4j: 'FACTORS INFLUENCING PARTNER SELECTION IN STRATEGIC ALLIANCES: THE MODERATING ROLE OF ALLIANCE CONTEXT'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2005-2009_1: 'THE USE OF LIMITED DEPENDENT VARIABLE TECHNIQUES IN STRATEGY RESEARCH: ISSUES AND METHODS'
+INFO:advanced_analytics_endpoints:Persisted topic 2005-2009_1 to Neo4j: 'THE USE OF LIMITED DEPENDENT VARIABLE TECHNIQUES IN STRATEGY RESEARCH: ISSUES AND METHODS'
+INFO:advanced_analytics_endpoints:Generating new topic name for 2005-2009_2
+INFO:advanced_analytics_endpoints:Generating topic name for interval 2005-2009 with 6 papers
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.400670 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.750092 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+ERROR:advanced_analytics_endpoints:Error generating topic name with OpenAI: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+INFO:advanced_analytics_endpoints:Using fallback name for 2005-2009_2: ''
+WARNING:advanced_analytics_endpoints:Cannot persist topic: missing topic_id or name
+INFO:advanced_analytics_endpoints:Using existing topic name for 2005-2009_3: 'FOREIGN-BASED COMPETITION AND CORPORATE DIVERSIFICATION STRATEGY'
+INFO:advanced_analytics_endpoints:Persisted topic 2005-2009_3 to Neo4j: 'FOREIGN-BASED COMPETITION AND CORPORATE DIVERSIFICATION STRATEGY'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2005-2009_4: 'DOES PERIPHERAL KNOWLEDGE COMPLEMENT CONTROL? AN EMPIRICAL TEST IN TECHNOLOGY OUTSOURCING ALLIANCES'
+INFO:advanced_analytics_endpoints:Persisted topic 2005-2009_4 to Neo4j: 'DOES PERIPHERAL KNOWLEDGE COMPLEMENT CONTROL? AN EMPIRICAL TEST IN TECHNOLOGY OUTSOURCING ALLIANCES'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2005-2009_5: 'STRATEGIC RESOURCES AND PERFORMANCE: A META-ANALYSIS'
+INFO:advanced_analytics_endpoints:Persisted topic 2005-2009_5 to Neo4j: 'STRATEGIC RESOURCES AND PERFORMANCE: A META-ANALYSIS'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2005-2009_6: 'STAKEHOLDER MANAGEMENT AS A PREDICTOR OF CEO COMPENSATION: MAIN EFFECTS AND INTERACTIONS WITH FINANCIAL PERFORMANCE'
+INFO:advanced_analytics_endpoints:Persisted topic 2005-2009_6 to Neo4j: 'STAKEHOLDER MANAGEMENT AS A PREDICTOR OF CEO COMPENSATION: MAIN EFFECTS AND INTERACTIONS WITH FINANCIAL PERFORMANCE'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2005-2009_7: 'THE INFLUENCE OF MANAGEMENT JOURNALS IN THE 1980s AND 1990s'
+INFO:advanced_analytics_endpoints:Persisted topic 2005-2009_7 to Neo4j: 'THE INFLUENCE OF MANAGEMENT JOURNALS IN THE 1980s AND 1990s'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2005-2009_8: 'THE RELATIONSHIP BETWEEN CORPORATE SOCIAL RESPONSIBILITY AND SHAREHOLDER VALUE: AN EMPIRICAL TEST OF THE RISK MANAGEMENT HYPOTHESIS'
+INFO:advanced_analytics_endpoints:Persisted topic 2005-2009_8 to Neo4j: 'THE RELATIONSHIP BETWEEN CORPORATE SOCIAL RESPONSIBILITY AND SHAREHOLDER VALUE: AN EMPIRICAL TEST OF THE RISK MANAGEMENT HYPOTHESIS'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2005-2009_9: 'THE ADOPTION OF RADICAL MANUFACTURING TECHNOLOGIES AND FIRM SURVIVAL'
+INFO:advanced_analytics_endpoints:Persisted topic 2005-2009_9 to Neo4j: 'THE ADOPTION OF RADICAL MANUFACTURING TECHNOLOGIES AND FIRM SURVIVAL'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2010-2014_0: 'HOW FIRMS RESPOND TO BEING RATED'
+INFO:advanced_analytics_endpoints:Persisted topic 2010-2014_0 to Neo4j: 'HOW FIRMS RESPOND TO BEING RATED'
+INFO:advanced_analytics_endpoints:Generating new topic name for 2010-2014_1
+INFO:advanced_analytics_endpoints:Generating topic name for interval 2010-2014 with 40 papers
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.378632 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.891628 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+ERROR:advanced_analytics_endpoints:Error generating topic name with OpenAI: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+INFO:advanced_analytics_endpoints:Using fallback name for 2010-2014_1: ''
+WARNING:advanced_analytics_endpoints:Cannot persist topic: missing topic_id or name
+INFO:advanced_analytics_endpoints:Using existing topic name for 2010-2014_2: 'THE USE OF AN INTERIM CEO DURING SUCCESSION EPISODES AND FIRM PERFORMANCE'
+INFO:advanced_analytics_endpoints:Persisted topic 2010-2014_2 to Neo4j: 'THE USE OF AN INTERIM CEO DURING SUCCESSION EPISODES AND FIRM PERFORMANCE'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2010-2014_3: 'CHIEF STRATEGY OFFICERS: CONTINGENCY ANALYSIS OF THEIR PRESENCE IN TOP MANAGEMENT TEAMS'
+INFO:advanced_analytics_endpoints:Persisted topic 2010-2014_3 to Neo4j: 'CHIEF STRATEGY OFFICERS: CONTINGENCY ANALYSIS OF THEIR PRESENCE IN TOP MANAGEMENT TEAMS'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2010-2014_4: 'LEADERSHIP SUCCESSION AND FIRM PERFORMANCE IN AN EMERGING ECONOMY: SUCCESSOR ORIGIN, RELATIONAL EMBEDDEDNESS, AND LEGITIMACY'
+INFO:advanced_analytics_endpoints:Persisted topic 2010-2014_4 to Neo4j: 'LEADERSHIP SUCCESSION AND FIRM PERFORMANCE IN AN EMERGING ECONOMY: SUCCESSOR ORIGIN, RELATIONAL EMBEDDEDNESS, AND LEGITIMACY'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2010-2014_5: 'WHAT DOESN’T KILL YOU MAKES YOU STRONGER: THE EVOLUTION OF COMPETITION AND ENTRY-ORDER ADVANTAGES IN ECONOMICALLY TURBULENT CONTEXTS'
+INFO:advanced_analytics_endpoints:Persisted topic 2010-2014_5 to Neo4j: 'WHAT DOESN’T KILL YOU MAKES YOU STRONGER: THE EVOLUTION OF COMPETITION AND ENTRY-ORDER ADVANTAGES IN ECONOMICALLY TURBULENT CONTEXTS'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2010-2014_6: 'Strategic Change and Termination of Interfirm Partnerships'
+INFO:advanced_analytics_endpoints:Persisted topic 2010-2014_6 to Neo4j: 'Strategic Change and Termination of Interfirm Partnerships'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2010-2014_7: 'REWARDING VALUE-CREATING IDEAS IN ORGANIZATIONS: THE POWER OF LOW-POWERED INCENTIVES'
+INFO:advanced_analytics_endpoints:Persisted topic 2010-2014_7 to Neo4j: 'REWARDING VALUE-CREATING IDEAS IN ORGANIZATIONS: THE POWER OF LOW-POWERED INCENTIVES'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2010-2014_8: 'A COMPETITION-BASED EXPLANATION OF COLLABORATIVE INVENTION WITHIN THE FIRM'
+INFO:advanced_analytics_endpoints:Persisted topic 2010-2014_8 to Neo4j: 'A COMPETITION-BASED EXPLANATION OF COLLABORATIVE INVENTION WITHIN THE FIRM'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2010-2014_9: 'A RESOURCE-BASED PERSPECTIVE ON HUMAN CAPITAL LOSSES, HRM INVESTMENTS, AND ORGANIZATIONAL PERFORMANCE'
+INFO:advanced_analytics_endpoints:Persisted topic 2010-2014_9 to Neo4j: 'A RESOURCE-BASED PERSPECTIVE ON HUMAN CAPITAL LOSSES, HRM INVESTMENTS, AND ORGANIZATIONAL PERFORMANCE'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2015-2019_0: 'THE IMPACT OF CONTEXT AND MODEL CHOICE ON THE DETERMINANTS OF STRATEGIC ALLIANCE FORMATION: EVIDENCE FROM A STAGED REPLICATION STUDY'
+INFO:advanced_analytics_endpoints:Persisted topic 2015-2019_0 to Neo4j: 'THE IMPACT OF CONTEXT AND MODEL CHOICE ON THE DETERMINANTS OF STRATEGIC ALLIANCE FORMATION: EVIDENCE FROM A STAGED REPLICATION STUDY'
+INFO:advanced_analytics_endpoints:Generating new topic name for 2015-2019_1
+INFO:advanced_analytics_endpoints:Generating topic name for interval 2015-2019 with 34 papers
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.455734 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.987878 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+ERROR:advanced_analytics_endpoints:Error generating topic name with OpenAI: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+INFO:advanced_analytics_endpoints:Using fallback name for 2015-2019_1: ''
+WARNING:advanced_analytics_endpoints:Cannot persist topic: missing topic_id or name
+INFO:advanced_analytics_endpoints:Using existing topic name for 2015-2019_2: 'THE ROLE OF CEO RELATIVE STANDING IN ACQUISITION BEHAVIOR AND CEO PAY'
+INFO:advanced_analytics_endpoints:Persisted topic 2015-2019_2 to Neo4j: 'THE ROLE OF CEO RELATIVE STANDING IN ACQUISITION BEHAVIOR AND CEO PAY'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2015-2019_3: 'DOES ENGAGEMENT IN CORPORATE SOCIAL RESPONSIBILITY PROVIDE STRATEGIC INSURANCE-LIKE EFFECTS?'
+INFO:advanced_analytics_endpoints:Persisted topic 2015-2019_3 to Neo4j: 'DOES ENGAGEMENT IN CORPORATE SOCIAL RESPONSIBILITY PROVIDE STRATEGIC INSURANCE-LIKE EFFECTS?'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2015-2019_4: 'THE RIGHT SPEED AND ITS VALUE'
+INFO:advanced_analytics_endpoints:Persisted topic 2015-2019_4 to Neo4j: 'THE RIGHT SPEED AND ITS VALUE'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2015-2019_5: 'SCIENTIFIC APOPHENIA IN STRATEGIC MANAGEMENT RESEARCH: SIGNIFICANCE TESTS & MISTAKEN INFERENCE'
+INFO:advanced_analytics_endpoints:Persisted topic 2015-2019_5 to Neo4j: 'SCIENTIFIC APOPHENIA IN STRATEGIC MANAGEMENT RESEARCH: SIGNIFICANCE TESTS & MISTAKEN INFERENCE'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2015-2019_6: 'INDEPENDENT DIRECTORS’ DISSENT ON BOARDS: EVIDENCE FROM LISTED COMPANIES IN CHINA'
+INFO:advanced_analytics_endpoints:Persisted topic 2015-2019_6 to Neo4j: 'INDEPENDENT DIRECTORS’ DISSENT ON BOARDS: EVIDENCE FROM LISTED COMPANIES IN CHINA'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2015-2019_7: 'STRATEGY TOOLS-IN-USE: A FRAMEWORK FOR UNDERSTANDING “TECHNOLOGIES OF RATIONALITY” IN PRACTICE'
+INFO:advanced_analytics_endpoints:Persisted topic 2015-2019_7 to Neo4j: 'STRATEGY TOOLS-IN-USE: A FRAMEWORK FOR UNDERSTANDING “TECHNOLOGIES OF RATIONALITY” IN PRACTICE'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2015-2019_8: 'HOW MUCH DOES OWNER TYPE MATTER FOR FIRM PERFORMANCE? MANUFACTURING FIRMS IN CHINA 1998–2007'
+INFO:advanced_analytics_endpoints:Persisted topic 2015-2019_8 to Neo4j: 'HOW MUCH DOES OWNER TYPE MATTER FOR FIRM PERFORMANCE? MANUFACTURING FIRMS IN CHINA 1998–2007'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2015-2019_9: 'STRUCTURAL INTERDEPENDENCE WITHIN TOP MANAGEMENT TEAMS: A KEY MODERATOR OF UPPER ECHELONS PREDICTIONS'
+INFO:advanced_analytics_endpoints:Persisted topic 2015-2019_9 to Neo4j: 'STRUCTURAL INTERDEPENDENCE WITHIN TOP MANAGEMENT TEAMS: A KEY MODERATOR OF UPPER ECHELONS PREDICTIONS'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2020-2024_0: 'Revealing the revealed preferences of public firm CEOs and top executives: A new database from credit card spending'
+INFO:advanced_analytics_endpoints:Persisted topic 2020-2024_0 to Neo4j: 'Revealing the revealed preferences of public firm CEOs and top executives: A new database from credit card spending'
+INFO:advanced_analytics_endpoints:Generating new topic name for 2020-2024_1
+INFO:advanced_analytics_endpoints:Generating topic name for interval 2020-2024 with 10 papers
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.412317 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.795754 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+ERROR:advanced_analytics_endpoints:Error generating topic name with OpenAI: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+INFO:advanced_analytics_endpoints:Using fallback name for 2020-2024_1: ''
+WARNING:advanced_analytics_endpoints:Cannot persist topic: missing topic_id or name
+INFO:advanced_analytics_endpoints:Using existing topic name for 2020-2024_2: 'The firm as an architect of polycentric governance: Building open institutional infrastructure in emerging markets'
+INFO:advanced_analytics_endpoints:Persisted topic 2020-2024_2 to Neo4j: 'The firm as an architect of polycentric governance: Building open institutional infrastructure in emerging markets'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2020-2024_3: 'Communication frames and beneficiary engagement in corporate social initiatives: Evidence from a randomized controlled trial in France'
+INFO:advanced_analytics_endpoints:Persisted topic 2020-2024_3 to Neo4j: 'Communication frames and beneficiary engagement in corporate social initiatives: Evidence from a randomized controlled trial in France'
+INFO:advanced_analytics_endpoints:Using existing topic name for 2020-2024_4: 'Changes in persistence of performance over time'
+INFO:advanced_analytics_endpoints:Persisted topic 2020-2024_4 to Neo4j: 'Changes in persistence of performance over time'
+============================================================
+Topic Name Generation and Persistence
+============================================================
+✓ OPENAI_API_KEY found (length: 164)
+
+Initializing AdvancedAnalytics...
+✓ Connected to Neo4j
+
+Calculating topic evolution (this will generate topic names)...
+Note: This may take a few minutes and will use OpenAI API (~$0.01-0.02)
+
+
+============================================================
+Topic Name Generation Results
+============================================================
+
+📊 1985-1989:
+  → 1985-1989_0: 'Top Management Turnover Following Mergers and Acquisitions' (3 papers) [Fallback]
+  → 1985-1989_1: 'Top Management Group Heterogeneity and Firm Performance' (5 papers) [Fallback]
+  → 1985-1989_2: 'Visionary Leadership and Strategic Management' (2 papers) [Fallback]
+
+📊 1990-1994:
+  → 1990-1994_0: 'Structuring Cooperative Relationships between Organizations' (2 papers) [Fallback]
+  → 1990-1994_1: 'Do Firm Strategies Exist?' (27 papers) [Fallback]
+  → 1990-1994_2: 'Effects of Executive Departures on the Performance of Acquired Firms' (10 papers) [Fallback]
+  → 1990-1994_3: 'Strategic Renewal and the Interaction of Cumulative Stress and Inertia' (8 papers) [Fallback]
+  → 1990-1994_4: 'THE DESIGN SCHOOL: RECONSIDERING THE BASIC PREMISES OF STRATEGIC MANAGEMENT' (5 papers) [Fallback]
+  → 1990-1994_5: 'Industry Variety and Performance' (15 papers) [Fallback]
+  → 1990-1994_6: 'Supplier Relations and Management: A Survey of Japanese, Japanese-Transplant, and U.S. Auto Plants' (6 papers) [Fallback]
+  → 1990-1994_7: 'Board of Director Involvement in Restructuring: The Effects of Board Versus Managerial Controls and Characteristics' (6 papers) [Fallback]
+  ✗ 1990-1994_8: No name (2 papers)
+  → 1990-1994_9: 'A PARADIGM OF ENTREPRENEURSHIP: ENTREPRENEURIAL MANAGEMENT' (4 papers) [Fallback]
+
+📊 1995-1999:
+  → 1995-1999_0: 'ON THE UTILIZATION OF RESOURCES: PERSPECTIVES FROM THE U.S. TELECOMMUNICATIONS INDUSTRY' (1 papers) [Fallback]
+  → 1995-1999_1: 'EVOLUTIONARY PERSPECTIVES ON STRATEGY' (13 papers) [Fallback]
+  → 1995-1999_2: 'FORM OF CONTROL: A CRITICAL DETERMINANT OF ACQUISITION PERFORMANCE AND CEO REWARDS' (11 papers) [Fallback]
+  → 1995-1999_3: 'FIRM AND INDUSTRY EFFECTS WITHIN STRATEGIC MANAGEMENT: AN EMPIRICAL EXAMINATION' (31 papers) [Fallback]
+  → 1995-1999_4: 'The Role of Strategic Alliances in High-Technology New Product Development' (7 papers) [Fallback]
+  → 1995-1999_5: 'BUILDING FIRM-SPECIFIC ADVANTAGES IN MULTINATIONAL CORPORATIONS: THE ROLE OF SUBSIDIARY INITIATIVE' (8 papers) [Fallback]
+  → 1995-1999_6: 'TOP MANAGEMENT TEAM AGREEMENT ABOUT THE STRATEGIC DECISION PROCESS: A TEST OF SOME OF ITS DETERMINANTS AND CONSEQUENCES' (10 papers) [Fallback]
+  → 1995-1999_7: 'COMPETING IN THE NEW ECONOMY: MANAGING OUT OF BOUNDS' (4 papers) [Fallback]
+  → 1995-1999_8: 'RELATIVE ABSORPTIVE CAPACITY AND INTERORGANIZATIONAL LEARNING' (9 papers) [Fallback]
+  → 1995-1999_9: 'CEO Duality and Firm Performance: A Contingency Model' (12 papers) [Fallback]
+
+📊 2000-2004:
+  → 2000-2004_0: 'STRATEGIC GROUPS AND COMPETITIVE ENACTMENT: A STUDY OF DYNAMIC RELATIONSHIPS BETWEEN MENTAL MODELS AND PERFORMANCE' (20 papers) [Fallback]
+  ✗ 2000-2004_1: No name (38 papers)
+  → 2000-2004_2: 'BOARD COMPOSITION, SHARE OWNERSHIP, AND ‘UNDERPRICING’ OF U.K. IPO FIRMS' (8 papers) [Fallback]
+  → 2000-2004_3: 'A RESOURCE-BASED VIEW OF MANUFACTURING STRATEGY AND THE RELATIONSHIP TO MANUFACTURING PERFORMANCE' (12 papers) [Fallback]
+  → 2000-2004_4: 'HOW DO MULTINATIONAL COMPANIES LEVERAGE TECHNOLOGICAL COMPETENCIES? MOVING FROM SINGLE TO INTERDEPENDENT EXPLANATIONS' (11 papers) [Fallback]
+  → 2000-2004_5: 'VARIATIONS IN OWNERSHIP BEHAVIOR AND PROPENSITY TO DIVERSIFY: A STUDY OF THE INDIAN CORPORATE CONTEXT' (5 papers) [Fallback]
+  → 2000-2004_6: 'PRODUCT AND INTERNATIONAL DIVERSIFICATION AMONG JAPANESE MULTINATIONAL FIRMS' (7 papers) [Fallback]
+  → 2000-2004_7: 'Dynamic Capabilities: What Are They?' (10 papers) [Fallback]
+  → 2000-2004_8: 'THE IMPLICATIONS OF STRATEGY AND SOCIAL CONTEXT FOR THE RELATIONSHIP BETWEEN TOP MANAGEMENT TEAM HETEROGENEITY AND FIRM PERFORMANCE' (11 papers) [Fallback]
+  → 2000-2004_9: 'MOMENTUM AND SERENDIPITY: HOW ACQUIRED LEADERS CREATE VALUE IN THE INTEGRATION OF TECHNOLOGY FIRMS' (5 papers) [Fallback]
+
+📊 2005-2009:
+  → 2005-2009_0: 'FACTORS INFLUENCING PARTNER SELECTION IN STRATEGIC ALLIANCES: THE MODERATING ROLE OF ALLIANCE CONTEXT' (8 papers) [Fallback]
+  → 2005-2009_1: 'THE USE OF LIMITED DEPENDENT VARIABLE TECHNIQUES IN STRATEGY RESEARCH: ISSUES AND METHODS' (5 papers) [Fallback]
+  ✗ 2005-2009_2: No name (6 papers)
+  → 2005-2009_3: 'FOREIGN-BASED COMPETITION AND CORPORATE DIVERSIFICATION STRATEGY' (12 papers) [Fallback]
+  → 2005-2009_4: 'DOES PERIPHERAL KNOWLEDGE COMPLEMENT CONTROL? AN EMPIRICAL TEST IN TECHNOLOGY OUTSOURCING ALLIANCES' (15 papers) [Fallback]
+  → 2005-2009_5: 'STRATEGIC RESOURCES AND PERFORMANCE: A META-ANALYSIS' (21 papers) [Fallback]
+  → 2005-2009_6: 'STAKEHOLDER MANAGEMENT AS A PREDICTOR OF CEO COMPENSATION: MAIN EFFECTS AND INTERACTIONS WITH FINANCIAL PERFORMANCE' (12 papers) [Fallback]
+  → 2005-2009_7: 'THE INFLUENCE OF MANAGEMENT JOURNALS IN THE 1980s AND 1990s' (3 papers) [Fallback]
+  → 2005-2009_8: 'THE RELATIONSHIP BETWEEN CORPORATE SOCIAL RESPONSIBILITY AND SHAREHOLDER VALUE: AN EMPIRICAL TEST OF THE RISK MANAGEMENT HYPOTHESIS' (9 papers) [Fallback]
+  → 2005-2009_9: 'THE ADOPTION OF RADICAL MANUFACTURING TECHNOLOGIES AND FIRM SURVIVAL' (8 papers) [Fallback]
+
+📊 2010-2014:
+  → 2010-2014_0: 'HOW FIRMS RESPOND TO BEING RATED' (11 papers) [Fallback]
+  ✗ 2010-2014_1: No name (40 papers)
+  → 2010-2014_2: 'THE USE OF AN INTERIM CEO DURING SUCCESSION EPISODES AND FIRM PERFORMANCE' (22 papers) [Fallback]
+  → 2010-2014_3: 'CHIEF STRATEGY OFFICERS: CONTINGENCY ANALYSIS OF THEIR PRESENCE IN TOP MANAGEMENT TEAMS' (19 papers) [Fallback]
+  → 2010-2014_4: 'LEADERSHIP SUCCESSION AND FIRM PERFORMANCE IN AN EMERGING ECONOMY: SUCCESSOR ORIGIN, RELATIONAL EMBEDDEDNESS, AND LEGITIMACY' (11 papers) [Fallback]
+  → 2010-2014_5: 'WHAT DOESN’T KILL YOU MAKES YOU STRONGER: THE EVOLUTION OF COMPETITION AND ENTRY-ORDER ADVANTAGES IN ECONOMICALLY TURBULENT CONTEXTS' (12 papers) [Fallback]
+  → 2010-2014_6: 'Strategic Change and Termination of Interfirm Partnerships' (14 papers) [Fallback]
+  → 2010-2014_7: 'REWARDING VALUE-CREATING IDEAS IN ORGANIZATIONS: THE POWER OF LOW-POWERED INCENTIVES' (4 papers) [Fallback]
+  → 2010-2014_8: 'A COMPETITION-BASED EXPLANATION OF COLLABORATIVE INVENTION WITHIN THE FIRM' (10 papers) [Fallback]
+  → 2010-2014_9: 'A RESOURCE-BASED PERSPECTIVE ON HUMAN CAPITAL LOSSES, HRM INVESTMENTS, AND ORGANIZATIONAL PERFORMANCE' (6 papers) [Fallback]
+
+📊 2015-2019:
+  → 2015-2019_0: 'THE IMPACT OF CONTEXT AND MODEL CHOICE ON THE DETERMINANTS OF STRATEGIC ALLIANCE FORMATION: EVIDENCE FROM A STAGED REPLICATION STUDY' (29 papers) [Fallback]
+  ✗ 2015-2019_1: No name (34 papers)
+  → 2015-2019_2: 'THE ROLE OF CEO RELATIVE STANDING IN ACQUISITION BEHAVIOR AND CEO PAY' (23 papers) [Fallback]
+  → 2015-2019_3: 'DOES ENGAGEMENT IN CORPORATE SOCIAL RESPONSIBILITY PROVIDE STRATEGIC INSURANCE-LIKE EFFECTS?' (15 papers) [Fallback]
+  → 2015-2019_4: 'THE RIGHT SPEED AND ITS VALUE' (6 papers) [Fallback]
+  → 2015-2019_5: 'SCIENTIFIC APOPHENIA IN STRATEGIC MANAGEMENT RESEARCH: SIGNIFICANCE TESTS & MISTAKEN INFERENCE' (8 papers) [Fallback]
+  → 2015-2019_6: 'INDEPENDENT DIRECTORS’ DISSENT ON BOARDS: EVIDENCE FROM LISTED COMPANIES IN CHINA' (7 papers) [Fallback]
+  → 2015-2019_7: 'STRATEGY TOOLS-IN-USE: A FRAMEWORK FOR UNDERSTANDING “TECHNOLOGIES OF RATIONALITY” IN PRACTICE' (11 papers) [Fallback]
+  → 2015-2019_8: 'HOW MUCH DOES OWNER TYPE MATTER FOR FIRM PERFORMANCE? MANUFACTURING FIRMS IN CHINA 1998–2007' (5 papers) [Fallback]
+  → 2015-2019_9: 'STRUCTURAL INTERDEPENDENCE WITHIN TOP MANAGEMENT TEAMS: A KEY MODERATOR OF UPPER ECHELONS PREDICTIONS' (21 papers) [Fallback]
+
+📊 2020-2024:
+  → 2020-2024_0: 'Revealing the revealed preferences of public firm CEOs and top executives: A new database from credit card spending' (2 papers) [Fallback]
+  ✗ 2020-2024_1: No name (10 papers)
+  → 2020-2024_2: 'The firm as an architect of polycentric governance: Building open institutional infrastructure in emerging markets' (2 papers) [Fallback]
+  → 2020-2024_3: 'Communication frames and beneficiary engagement in corporate social initiatives: Evidence from a randomized controlled trial in France' (1 papers) [Fallback]
+  → 2020-2024_4: 'Changes in persistence of performance over time' (1 papers) [Fallback]
+
+============================================================
+Summary
+============================================================
+Total topics: 68
+Topics with names: 62
+Topics with generated names: 0
+Topics using fallback: 62
+
+============================================================
+Verifying Neo4j Persistence
+============================================================
+✓ Total Topic nodes in Neo4j: 62
+✓ Intervals with topics: 8
+✓ Paper-Topic relationships: 621
+
+✅ Topic name generation and persistence complete!
+
+Next steps:
+1. Restart your backend server to load the new topic names
+2. Go to the 'Topics Proportions' tab in the UI
+3. Pie charts should now show generated topic names
