@@ -2,6 +2,9 @@
 """
 FastAPI server for SMJ Research Chatbot
 Connects React frontend with Neo4j knowledge graph
+
+NOTE: OLLAMA support was completely removed in commit 820d85f.
+This server uses OpenAI API exclusively for LLM features.
 """
 
 import os
