@@ -30,7 +30,7 @@ const AdvancedAnalyticsDashboard = () => {
   const [chatLoading, setChatLoading] = useState(false);
   
   // Tab state for dashboard views
-  const [activeTab, setActiveTab] = useState('charts'); // 'charts', 'theory-proportions', 'topics-proportions', 'betweenness', 'opportunities', 'integration', 'cumulative', 'canonical', 'hhi', 'alignment', 'integrative', 'authors', 'phenomena'
+  const [activeTab, setActiveTab] = useState('charts'); // 'charts', 'theory-proportions', 'topics-proportions', 'topics', 'betweenness', 'opportunities', 'integration', 'cumulative', 'canonical', 'hhi', 'alignment', 'integrative', 'authors', 'phenomena'
 
   useEffect(() => {
     loadAllData();
@@ -2079,6 +2079,169 @@ const AdvancedAnalyticsDashboard = () => {
               <p className="text-gray-600">Integrative Theory Centrality feature is currently unavailable.</p>
               <p className="text-sm text-gray-500 mt-2">Please check back later.</p>
             </div>
+          </div>
+        </div>
+        ) : activeTab === 'topics' ? (
+        <div className="space-y-6">
+          {/* Topics by Period Tab */}
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+            <div className="flex items-center gap-2 mb-6">
+              <Sparkles size={24} className="text-purple-600" />
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900">Topics by Period</h2>
+                <p className="text-gray-600 mt-1">AI-generated topic clusters for each 5-year period</p>
+              </div>
+            </div>
+            
+            {loading ? (
+              <Loading />
+            ) : topicEvolution?.intervals && topicEvolution.intervals.length > 0 ? (
+              <>
+                {/* Summary Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                  <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-6 text-white shadow-lg">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Sparkles size={20} />
+                      <span className="text-purple-100 text-sm font-medium">Total Topics</span>
+                    </div>
+                    <p className="text-3xl font-bold">
+                      {topicEvolution.intervals.reduce((sum, interval) => sum + (interval.topic_count || 0), 0).toLocaleString()}
+                    </p>
+                    <p className="text-purple-100 text-xs mt-1">Across all periods</p>
+                  </div>
+                  
+                  <div className="bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl p-6 text-white shadow-lg">
+                    <div className="flex items-center gap-2 mb-2">
+                      <TrendingUp size={20} />
+                      <span className="text-indigo-100 text-sm font-medium">Avg Topics/Period</span>
+                    </div>
+                    <p className="text-3xl font-bold">
+                      {topicEvolution.intervals.length > 0 
+                        ? Math.round(topicEvolution.intervals.reduce((sum, interval) => sum + (interval.topic_count || 0), 0) / topicEvolution.intervals.length)
+                        : 0}
+                    </p>
+                    <p className="text-indigo-100 text-xs mt-1">5-year periods</p>
+                  </div>
+                  
+                  <div className="bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl p-6 text-white shadow-lg">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Target size={20} />
+                      <span className="text-pink-100 text-sm font-medium">Peak Period</span>
+                    </div>
+                    <p className="text-3xl font-bold">
+                      {topicEvolution.intervals.length > 0 
+                        ? topicEvolution.intervals.reduce((max, interval) => 
+                            (interval.topic_count || 0) > (max.topic_count || 0) ? interval : max, 
+                            topicEvolution.intervals[0]
+                          ).interval
+                        : 'N/A'}
+                    </p>
+                    <p className="text-pink-100 text-xs mt-1">
+                      {topicEvolution.intervals.length > 0 
+                        ? `${topicEvolution.intervals.reduce((max, interval) => 
+                            (interval.topic_count || 0) > (max.topic_count || 0) ? interval : max, 
+                            topicEvolution.intervals[0]
+                          ).topic_count || 0} topics`
+                        : ''}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Topics by Period Chart */}
+                <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mb-8">
+                  <div className="flex items-center gap-2 mb-4">
+                    <BarChart3 size={20} className="text-purple-600" />
+                    <h3 className="text-lg font-bold text-gray-900">Topics & Papers by Period</h3>
+                  </div>
+                  <ResponsiveContainer width="100%" height={350}>
+                    <BarChart data={topicEvolution.intervals.map(interval => ({
+                      interval: interval.interval,
+                      topics: interval.topic_count || 0,
+                      papers: interval.total_papers || 0
+                    }))} margin={{ top: 10, right: 50, left: 0, bottom: 60 }}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                      <XAxis 
+                        dataKey="interval" 
+                        angle={-45} 
+                        textAnchor="end" 
+                        height={80}
+                        tick={{ fill: '#6b7280', fontSize: 11 }}
+                      />
+                      <YAxis 
+                        yAxisId="left"
+                        label={{ value: 'Number of Topics', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle', fill: '#8B5CF6', fontSize: 11 } }}
+                        tick={{ fill: '#8B5CF6', fontSize: 11 }}
+                      />
+                      <YAxis 
+                        yAxisId="right"
+                        orientation="right"
+                        label={{ value: 'Total Papers', angle: 90, position: 'insideRight', style: { textAnchor: 'middle', fill: '#EC4899', fontSize: 11 } }}
+                        tick={{ fill: '#EC4899', fontSize: 11 }}
+                      />
+                      <Tooltip 
+                        contentStyle={{ 
+                          backgroundColor: '#fff', 
+                          border: '1px solid #e5e7eb',
+                          borderRadius: '8px',
+                          boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+                        }}
+                      />
+                      <Legend wrapperStyle={{ paddingTop: '10px', fontSize: '12px' }} />
+                      <Bar yAxisId="left" dataKey="topics" fill="#8B5CF6" name="Topics" radius={[6, 6, 0, 0]} />
+                      <Bar yAxisId="right" dataKey="papers" fill="#EC4899" name="Papers" radius={[6, 6, 0, 0]} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+
+                {/* Detailed Topic Lists */}
+                <div className="mt-8">
+                  <h3 className="text-lg font-bold text-gray-900 mb-4">Topics by Period</h3>
+                  <div className="space-y-4">
+                    {topicEvolution.intervals.map((intervalData) => (
+                      <div key={intervalData.interval} className="bg-gray-50 rounded-lg border border-gray-200 p-4">
+                        <h4 className="font-semibold text-gray-900 text-md mb-3">
+                          {intervalData.interval} ({intervalData.topic_count || 0} Topics, {intervalData.total_papers || 0} Papers)
+                        </h4>
+                        {intervalData.topics && intervalData.topics.length > 0 ? (
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {intervalData.topics.map((topic, idx) => {
+                              const topicName = topic.name || topic.representative_paper?.title || `Topic ${topic.cluster_id + 1}`;
+                              const TOPIC_COLORS = [
+                                '#8B5CF6', '#3B82F6', '#10B981', '#F59E0B', '#EF4444',
+                                '#EC4899', '#06B6D4', '#84CC16', '#F97316', '#6366F1'
+                              ];
+                              return (
+                                <div key={idx} className="p-3 bg-white rounded-md shadow-sm border border-gray-100" style={{ borderLeft: `4px solid ${TOPIC_COLORS[idx % TOPIC_COLORS.length]}` }}>
+                                  <p className="text-sm font-medium text-gray-800 mb-1">
+                                    {topicName}
+                                  </p>
+                                  <p className="text-xs text-gray-600">Papers: {topic.paper_count || 0}</p>
+                                  <p className="text-xs text-gray-500 mt-1">
+                                    Coherence: {((topic.coherence || 0) * 100).toFixed(1)}%
+                                  </p>
+                                  {topic.representative_paper && (
+                                    <p className="text-xs text-gray-400 mt-1 italic truncate" title={topic.representative_paper.title}>
+                                      Rep: {topic.representative_paper.title}
+                                    </p>
+                                  )}
+                                </div>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <p className="text-sm text-gray-500">No topics found for this period.</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-gray-600">No topic data available.</p>
+                <p className="text-sm text-gray-500 mt-2">Topic data will appear here once available.</p>
+              </div>
+            )}
           </div>
         </div>
         ) : activeTab === 'authors' ? (
