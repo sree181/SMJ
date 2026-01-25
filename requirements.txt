@@ -1,0 +1,27 @@
+# Backend API Server Dependencies (for Railway deployment)
+# Excludes PyMuPDF which is only needed for PDF ingestion pipeline
+
+# LLM Integration
+openai==1.3.0
+
+# Knowledge Graph
+neo4j==5.14.1
+
+# Data Processing
+pandas==2.1.3
+numpy>=1.26.0,<2.0.0  # Python 3.12/3.13 compatible, satisfies pandas requirement
+
+# Web API
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+
+# Additional utilities
+python-dotenv==1.0.0
+tqdm==4.66.1
+scikit-learn
+networkx
+scipy
+joblib
+threadpoolctl
+sentence-transformers
