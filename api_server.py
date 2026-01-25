@@ -1297,12 +1297,26 @@ async def process_query(request: QueryRequest):
                 
                 # Generate answer using Graph RAG context
                 persona = request.persona if hasattr(request, 'persona') else None
+                
+                # Verify OpenAI API key is available before generating answer
+                api_key_check = os.getenv("OPENAI_API_KEY")
+                if not api_key_check:
+                    logger.warning("OPENAI_API_KEY not found in environment - Graph RAG will use summary mode")
+                    logger.warning("Please set OPENAI_API_KEY in Railway environment variables")
+                else:
+                    logger.info(f"OPENAI_API_KEY found (length: {len(api_key_check)}) - using LLM for answer generation")
+                
                 logger.info("Generating answer with Graph RAG and LLM...")
                 answer = graphrag.generate_answer(graphrag_result, use_llm=True)
                 
-                # Check if answer is valid
+                # Check if answer is valid and not just a summary
                 if not answer:
                     raise ValueError("Graph RAG generate_answer returned None or empty")
+                
+                # Check if answer is just a basic summary (indicates LLM wasn't used)
+                if answer.startswith("Found") and "relevant papers" in answer:
+                    logger.warning("Graph RAG returned summary instead of LLM answer - OpenAI API may not be working")
+                    raise ValueError("Graph RAG returned summary instead of LLM-generated answer")
                 
                 # Prepare sources from Graph RAG results
                 sources = []
@@ -1377,11 +1391,24 @@ async def process_query(request: QueryRequest):
         # Fallback to standard method
         if not use_graphrag:
             logger.info(f"Using standard query method for: '{request.query[:50]}...'")
+            
+            # Re-check API key at runtime (in case it was set after server startup)
+            current_api_key = os.getenv("OPENAI_API_KEY")
+            if not current_api_key:
+                logger.warning("OPENAI_API_KEY not set in environment - LLM features disabled")
+                logger.warning("Please set OPENAI_API_KEY in Railway environment variables")
+            else:
+                logger.info(f"OPENAI_API_KEY found (length: {len(current_api_key)}) - using OpenAI for answer generation")
+                # Update LLMClient with current API key if it wasn't set at startup
+                if not llm_client.api_key:
+                    logger.info("Updating LLMClient with API key from environment")
+                    llm_client.api_key = current_api_key
+            
             # Check if OpenAI API key is available
             if not llm_client.api_key:
-                logger.warning("OPENAI_API_KEY not set - LLM features disabled. Please set OPENAI_API_KEY in environment variables.")
+                logger.warning("OPENAI_API_KEY not available in LLMClient - will use fallback answer")
             else:
-                logger.info("OPENAI_API_KEY found - using OpenAI for answer generation")
+                logger.info("LLMClient has API key - using OpenAI for answer generation")
             
             # Get research data
             research_data = neo4j_service.get_all_research_data()
