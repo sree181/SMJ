@@ -212,9 +212,9 @@ class ApiService {
   /**
    * Advanced Analytics - Paper counts by 5-year intervals
    * @param {number} startYear - Start year (default: 1985)
-   * @param {number} endYear - End year (default: 2025)
+   * @param {number} endYear - End year (default: 2026)
    */
-  async getPaperCountsByInterval(startYear = 1985, endYear = 2025) {
+  async getPaperCountsByInterval(startYear = 1985, endYear = 2026) {
     return this.fetch(`/analytics/papers/by-interval?start_year=${startYear}&end_year=${endYear}`);
   }
 

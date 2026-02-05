@@ -66,7 +66,7 @@ class AdvancedAnalytics:
         self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
         logger.info("✓ Embedding model loaded")
     
-    def get_paper_counts_by_interval(self, start_year: int = 1985, end_year: int = 2025) -> List[Dict]:
+    def get_paper_counts_by_interval(self, start_year: int = 1985, end_year: int = 2026) -> List[Dict]:
         """
         Get paper counts by 5-year intervals
         
@@ -1787,7 +1787,7 @@ def get_analytics():
     return _analytics_instance
 
 @router.get("/papers/by-interval")
-async def get_paper_counts_by_interval(start_year: int = 1985, end_year: int = 2025):
+async def get_paper_counts_by_interval(start_year: int = 1985, end_year: int = 2026):
     """Get paper counts by 5-year intervals"""
     try:
         analytics = get_analytics()
