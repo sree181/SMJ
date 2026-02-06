@@ -105,7 +105,7 @@ class AdvancedAnalytics:
         
         return intervals
     
-    def get_author_counts_by_interval(self, start_year: int = 1985, end_year: int = 2025) -> List[Dict]:
+    def get_author_counts_by_interval(self, start_year: int = 1985, end_year: int = 2026) -> List[Dict]:
         """
         Get author counts by 5-year intervals
         
@@ -360,7 +360,7 @@ Respond with ONLY the topic name, nothing else. Do not include explanations, quo
             logger.error(f"Error persisting topic to Neo4j: {e}")
             return False
     
-    def get_phenomenon_counts_by_interval(self, start_year: int = 1985, end_year: int = 2025, top_n: int = 20) -> List[Dict]:
+    def get_phenomenon_counts_by_interval(self, start_year: int = 1985, end_year: int = 2026, top_n: int = 20) -> List[Dict]:
         """
         Get phenomenon counts by 5-year intervals with top N phenomena per period
         
@@ -439,7 +439,7 @@ Respond with ONLY the topic name, nothing else. Do not include explanations, quo
         
         return intervals
     
-    def calculate_topic_evolution(self, start_year: int = 1985, end_year: int = 2025) -> Dict[str, Any]:
+    def calculate_topic_evolution(self, start_year: int = 1985, end_year: int = 2026) -> Dict[str, Any]:
         """
         Calculate topic evolution using embeddings and clustering
         
@@ -717,7 +717,7 @@ Respond with ONLY the topic name, nothing else. Do not include explanations, quo
         
         return results
     
-    def calculate_theoretical_evolution_divergence(self, start_year: int = 1985, end_year: int = 2025) -> Dict[str, Any]:
+    def calculate_theoretical_evolution_divergence(self, start_year: int = 1985, end_year: int = 2026) -> Dict[str, Any]:
         """
         Calculate theoretical evolution and divergence using sophisticated metrics
         
@@ -1104,7 +1104,7 @@ Respond with ONLY the topic name, nothing else. Do not include explanations, quo
                 }
             }
     
-    def calculate_integration_mechanism(self, start_year: int = 1985, end_year: int = 2025) -> Dict[str, Any]:
+    def calculate_integration_mechanism(self, start_year: int = 1985, end_year: int = 2026) -> Dict[str, Any]:
         """
         Calculate integration mechanism metrics
         
@@ -1232,7 +1232,7 @@ Respond with ONLY the topic name, nothing else. Do not include explanations, quo
             }
         }
     
-    def calculate_cumulative_theory(self, start_year: int = 1985, end_year: int = 2025) -> Dict[str, Any]:
+    def calculate_cumulative_theory(self, start_year: int = 1985, end_year: int = 2026) -> Dict[str, Any]:
         """
         Calculate lack of cumulative theory metrics
         
@@ -1329,7 +1329,7 @@ Respond with ONLY the topic name, nothing else. Do not include explanations, quo
             }
         }
     
-    def calculate_canonical_coverage_ratio(self, start_year: int = 1985, end_year: int = 2025, min_citations: int = 5) -> Dict[str, Any]:
+    def calculate_canonical_coverage_ratio(self, start_year: int = 1985, end_year: int = 2026, min_citations: int = 5) -> Dict[str, Any]:
         """
         Calculate Canonical Coverage Ratio
         
@@ -1533,7 +1533,7 @@ Respond with ONLY the topic name, nothing else. Do not include explanations, quo
             }
         }
     
-    def calculate_theoretical_concentration_index(self, start_year: int = 1985, end_year: int = 2025) -> Dict[str, Any]:
+    def calculate_theoretical_concentration_index(self, start_year: int = 1985, end_year: int = 2026) -> Dict[str, Any]:
         """
         Calculate Theoretical Concentration Index (HHI - Herfindahl-Hirschman Index)
         
@@ -1798,7 +1798,7 @@ async def get_paper_counts_by_interval(start_year: int = 1985, end_year: int = 2
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/authors/by-interval")
-async def get_author_counts_by_interval(start_year: int = 1985, end_year: int = 2025):
+async def get_author_counts_by_interval(start_year: int = 1985, end_year: int = 2026):
     """Get author counts by 5-year intervals"""
     try:
         analytics = get_analytics()
@@ -1809,7 +1809,7 @@ async def get_author_counts_by_interval(start_year: int = 1985, end_year: int = 
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/phenomena/by-interval")
-async def get_phenomenon_counts_by_interval(start_year: int = 1985, end_year: int = 2025, top_n: int = 20):
+async def get_phenomenon_counts_by_interval(start_year: int = 1985, end_year: int = 2026, top_n: int = 20):
     """Get phenomenon counts by 5-year intervals with top N phenomena per period"""
     try:
         analytics = get_analytics()
@@ -1820,7 +1820,7 @@ async def get_phenomenon_counts_by_interval(start_year: int = 1985, end_year: in
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/topics/evolution")
-async def get_topic_evolution(start_year: int = 1985, end_year: int = 2025):
+async def get_topic_evolution(start_year: int = 1985, end_year: int = 2026):
     """Get topic evolution metrics"""
     try:
         analytics = get_analytics()
@@ -1831,7 +1831,7 @@ async def get_topic_evolution(start_year: int = 1985, end_year: int = 2025):
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/theories/evolution-divergence")
-async def get_theory_evolution_divergence(start_year: int = 1985, end_year: int = 2025):
+async def get_theory_evolution_divergence(start_year: int = 1985, end_year: int = 2026):
     """Get theoretical evolution and divergence metrics"""
     try:
         analytics = get_analytics()
@@ -1876,7 +1876,7 @@ async def get_opportunity_gaps(max_theories: int = 2):
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/integration/mechanism")
-async def get_integration_mechanism(start_year: int = 1985, end_year: int = 2025):
+async def get_integration_mechanism(start_year: int = 1985, end_year: int = 2026):
     """Get integration mechanism metrics (theory co-usage, integration scores)"""
     try:
         analytics = get_analytics()
@@ -1887,7 +1887,7 @@ async def get_integration_mechanism(start_year: int = 1985, end_year: int = 2025
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/theories/cumulative")
-async def get_cumulative_theory(start_year: int = 1985, end_year: int = 2025):
+async def get_cumulative_theory(start_year: int = 1985, end_year: int = 2026):
     """Get cumulative theory metrics (knowledge accumulation, theory persistence)"""
     try:
         analytics = get_analytics()
@@ -1898,7 +1898,7 @@ async def get_cumulative_theory(start_year: int = 1985, end_year: int = 2025):
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/canonical/coverage")
-async def get_canonical_coverage(start_year: int = 1985, end_year: int = 2025):
+async def get_canonical_coverage(start_year: int = 1985, end_year: int = 2026):
     """Get canonical coverage ratio by year"""
     try:
         analytics = get_analytics()

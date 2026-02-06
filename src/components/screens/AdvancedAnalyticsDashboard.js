@@ -543,6 +543,7 @@ const AdvancedAnalyticsDashboard = () => {
                 <Calendar size={20} className="text-blue-600" />
                 <h2 className="text-lg font-bold text-gray-900">Research Volume Evolution</h2>
               </div>
+              <p className="text-xs text-gray-500 mb-3">Paper counts by 5-year period from Neo4j; year assigned from document filename (e.g. YYYY_*.pdf) where available.</p>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={paperCountsChartData} margin={{ top: 10, right: 10, left: 0, bottom: 60 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
