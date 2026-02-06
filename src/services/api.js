@@ -221,37 +221,37 @@ class ApiService {
   /**
    * Advanced Analytics - Author counts by 5-year intervals
    * @param {number} startYear - Start year (default: 1985)
-   * @param {number} endYear - End year (default: 2025)
+   * @param {number} endYear - End year (default: 2026)
    */
-  async getAuthorCountsByInterval(startYear = 1985, endYear = 2025) {
+  async getAuthorCountsByInterval(startYear = 1985, endYear = 2026) {
     return this.fetch(`/analytics/authors/by-interval?start_year=${startYear}&end_year=${endYear}`);
   }
 
   /**
    * Advanced Analytics - Phenomenon counts by 5-year intervals
    * @param {number} startYear - Start year (default: 1985)
-   * @param {number} endYear - End year (default: 2025)
+   * @param {number} endYear - End year (default: 2026)
    * @param {number} topN - Top N phenomena to return (default: 20)
    */
-  async getPhenomenonCountsByInterval(startYear = 1985, endYear = 2025, topN = 20) {
+  async getPhenomenonCountsByInterval(startYear = 1985, endYear = 2026, topN = 20) {
     return this.fetch(`/analytics/phenomena/by-interval?start_year=${startYear}&end_year=${endYear}&top_n=${topN}`);
   }
 
   /**
    * Advanced Analytics - Topic evolution
    * @param {number} startYear - Start year (default: 1985)
-   * @param {number} endYear - End year (default: 2025)
+   * @param {number} endYear - End year (default: 2026)
    */
-  async getTopicEvolution(startYear = 1985, endYear = 2025) {
+  async getTopicEvolution(startYear = 1985, endYear = 2026) {
     return this.fetch(`/analytics/topics/evolution?start_year=${startYear}&end_year=${endYear}`);
   }
 
   /**
    * Advanced Analytics - Theory evolution and divergence
    * @param {number} startYear - Start year (default: 1985)
-   * @param {number} endYear - End year (default: 2025)
+   * @param {number} endYear - End year (default: 2026)
    */
-  async getTheoryEvolutionDivergence(startYear = 1985, endYear = 2025) {
+  async getTheoryEvolutionDivergence(startYear = 1985, endYear = 2026) {
     return this.fetch(`/analytics/theories/evolution-divergence?start_year=${startYear}&end_year=${endYear}`);
   }
 
@@ -274,27 +274,27 @@ class ApiService {
   /**
    * Advanced Analytics - Integration mechanism (theory co-usage)
    * @param {number} startYear - Start year (default: 1985)
-   * @param {number} endYear - End year (default: 2025)
+   * @param {number} endYear - End year (default: 2026)
    */
-  async getIntegrationMechanism(startYear = 1985, endYear = 2025) {
+  async getIntegrationMechanism(startYear = 1985, endYear = 2026) {
     return this.fetch(`/analytics/integration/mechanism?start_year=${startYear}&end_year=${endYear}`);
   }
 
   /**
    * Advanced Analytics - Cumulative theory (knowledge accumulation)
    * @param {number} startYear - Start year (default: 1985)
-   * @param {number} endYear - End year (default: 2025)
+   * @param {number} endYear - End year (default: 2026)
    */
-  async getCumulativeTheory(startYear = 1985, endYear = 2025) {
+  async getCumulativeTheory(startYear = 1985, endYear = 2026) {
     return this.fetch(`/analytics/theories/cumulative?start_year=${startYear}&end_year=${endYear}`);
   }
 
   /**
    * Canonical Coverage Ratio - ratio of canonical papers by year
    * @param {number} startYear - Start year (default: 1985)
-   * @param {number} endYear - End year (default: 2025)
+   * @param {number} endYear - End year (default: 2026)
    */
-  async getCanonicalCoverage(startYear = 1985, endYear = 2025) {
+  async getCanonicalCoverage(startYear = 1985, endYear = 2026) {
     return this.fetch(`/analytics/canonical/coverage?start_year=${startYear}&end_year=${endYear}`);
   }
 
@@ -308,9 +308,9 @@ class ApiService {
   /**
    * Theoretical Concentration Index (HHI)
    * @param {number} startYear - Start year (default: 1985)
-   * @param {number} endYear - End year (default: 2025)
+   * @param {number} endYear - End year (default: 2026)
    */
-  async getTheoreticalConcentration(startYear = 1985, endYear = 2025) {
+  async getTheoreticalConcentration(startYear = 1985, endYear = 2026) {
     return this.fetch(`/analytics/theories/concentration-index?start_year=${startYear}&end_year=${endYear}`);
   }
 
