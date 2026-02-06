@@ -1,0 +1,14 @@
+# Nixpacks configuration for Railway
+# This file tells Railway to use Node.js for frontend builds
+
+[phases.setup]
+nixPkgs = ["nodejs-18_x", "npm-9_x"]
+
+[phases.install]
+cmds = ["npm ci"]
+
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+cmd = "npx serve -s build -l $PORT --single"
