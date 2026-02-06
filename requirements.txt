@@ -15,6 +15,7 @@ numpy>=1.26.0,<2.0.0  # Python 3.12/3.13 compatible, satisfies pandas requiremen
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
 pydantic==2.5.0
+requests>=2.31.0
 
 # Additional utilities
 python-dotenv==1.0.0
