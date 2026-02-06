@@ -1,0 +1,11 @@
+Knowledge Graph Export Summary (Graphviz)
+======================================================================
+Export Date: 2026-02-03 19:28:08
+Data Source: Neo4j Knowledge Graph
+Visualization: Graphviz (Clear, Non-Overlapping Layout)
+======================================================================
+
+Exported Files:
+----------------------------------------------------------------------
+graph_1_paper_theory: knowledge_graph_exports/graph_1_paper_theory_20260203_192756.png
+graph_2_theory_phenomenon: knowledge_graph_exports/graph_2_theory_phenomenon_20260203_192756.png

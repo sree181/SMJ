@@ -1,0 +1,61 @@
+// Knowledge Graph: Papers and Theories
+digraph {
+	dpi=1200 rankdir=LR size="40,24"
+	node [fontname=Arial fontsize=14 shape=box style="rounded,filled"]
+	edge [color=gray50 penwidth=2]
+	fontname="Arial Bold" fontsize=24 label="Knowledge Graph: Papers and Theories"
+	labeljust=c labelloc=t
+	"2024_4360" [label="2024
+Investing in general human capital as a ..." fillcolor="#333333" fontcolor=white shape=box style="rounded,filled"]
+	"2023_4564" [label="2023
+The “CEO in context” technique revisited..." fillcolor="#333333" fontcolor=white shape=box style="rounded,filled"]
+	"2023_4194" [label="2023
+The firm as an architect of polycentric ..." fillcolor="#333333" fontcolor=white shape=box style="rounded,filled"]
+	"2022_4387" [label="2022
+Communication frames and beneficiary eng..." fillcolor="#333333" fontcolor=white shape=box style="rounded,filled"]
+	"2022_4235" [label="2022
+Revealing the revealed preferences of pu..." fillcolor="#333333" fontcolor=white shape=box style="rounded,filled"]
+	"2020_4286" [label="2020
+Changes in persistence of performance ov..." fillcolor="#333333" fontcolor=white shape=box style="rounded,filled"]
+	"Relational Framing" [label="Relational Framing" fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	"Investment In General Human Capital" [label="Investment In General Human Capital" fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	"Commitment-Based Mechanisms" [label="Commitment-Based Mechanisms" fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	"Instrumental Mechanisms" [label="Instrumental Mechanisms" fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	"Institutional Theory" [label="Institutional Theory" fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	"CEO In Context (Cic) Technique" [label="CEO In Context (Cic) Technique" fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	"Elinor Ostrom'S Principles Of Polycentric Governance" [label="Elinor Ostrom'S Principles Of Polycentric Governance" fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	"Organizational Ecology" [label="Organizational Ecology" fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	"Variance Partitioning Methods" [label="Variance Partitioning Methods" fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	"Institutional Economics" [label="Institutional Economics" fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	"Managerial Discretion" [label="Managerial Discretion" fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	"Strategic Management" [label="Strategic Management" fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	"Psychology And Behavioral Economics" [label="Psychology And Behavioral Economics" fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	Categorization [label=Categorization fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	"Emphasis Framing" [label="Emphasis Framing" fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	"Upper Echelons Theory" [label="Upper Echelons Theory" fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	"Rank Friction" [label="Rank Friction" fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	"Mueller Persistence" [label="Mueller Persistence" fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	"Entrenchment And Increased Inequality" [label="Entrenchment And Increased Inequality" fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	Hypercompetition [label=Hypercompetition fillcolor="#666666" fontcolor=white shape=ellipse style=filled]
+	"2024_4360" -> "Relational Framing"
+	"2024_4360" -> "Investment In General Human Capital"
+	"2024_4360" -> "Commitment-Based Mechanisms"
+	"2024_4360" -> "Instrumental Mechanisms"
+	"2023_4564" -> "Institutional Theory"
+	"2023_4564" -> "CEO In Context (Cic) Technique"
+	"2023_4194" -> "Elinor Ostrom'S Principles Of Polycentric Governance"
+	"2023_4564" -> "Organizational Ecology"
+	"2023_4564" -> "Variance Partitioning Methods"
+	"2023_4194" -> "Institutional Economics"
+	"2023_4564" -> "Managerial Discretion"
+	"2023_4194" -> "Strategic Management"
+	"2022_4387" -> "Psychology And Behavioral Economics"
+	"2022_4387" -> Categorization
+	"2022_4387" -> "Emphasis Framing"
+	"2022_4235" -> "Upper Echelons Theory"
+	"2020_4286" -> "Rank Friction"
+	"2020_4286" -> "Mueller Persistence"
+	"2020_4286" -> "Entrenchment And Increased Inequality"
+	"2020_4286" -> Hypercompetition
+	fontname="Arial Italic" fontsize=16
+}

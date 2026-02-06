@@ -1,0 +1,16 @@
+Chart Export Summary (Plotly)
+======================================================================
+Export Date: 2026-02-03 19:06:49
+Time Range: 1985-2025
+Resolution: 4080px wide, 1200 DPI
+Color: Black & White (Grayscale)
+Library: Plotly
+======================================================================
+
+Exported Files:
+----------------------------------------------------------------------
+chart_1_paper_counts: chart_exports/chart_1_paper_counts_20260203_190618.png
+chart_3_authors: chart_exports/chart_3_authors_by_period_20260203_190618.png
+chart_4_phenomena: chart_exports/chart_4_phenomena_by_period_20260203_190618.png
+chart_2_topic_evolution: chart_exports/chart_2_topic_evolution_20260203_190618.png
+chart_5_theory_evolution: chart_exports/chart_5_theory_evolution_20260203_190618.png

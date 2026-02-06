@@ -1,0 +1,16 @@
+Dashboard Tabs Export Summary
+======================================================================
+Export Date: 2026-02-03 18:20:04
+Time Range: 1985-2025
+======================================================================
+
+Exported Files:
+----------------------------------------------------------------------
+tab_1_papers: analytics_exports/tab_1_papers_by_timeframe_20260203_181952.csv
+tab_2_authors: analytics_exports/tab_2_authors_by_period_20260203_181952.csv
+tab_3_topics: analytics_exports/tab_3_topics_by_period_20260203_181952.csv
+tab_4_phenomena: analytics_exports/tab_4_phenomena_by_period_20260203_181952.csv
+tab_5_theory_evolution: FAILED
+tab_6_theory_betweenness: analytics_exports/tab_6_theory_betweenness_20260203_181952.csv
+tab_7_opportunity_gaps: analytics_exports/tab_7_opportunity_gaps_20260203_181952.csv
+tab_8_integration_mechanism: analytics_exports/tab_8_integration_mechanism_20260203_181952.csv

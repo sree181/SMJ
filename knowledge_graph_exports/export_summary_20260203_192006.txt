@@ -1,0 +1,14 @@
+Knowledge Graph Export Summary
+======================================================================
+Export Date: 2026-02-03 19:20:09
+Data Source: Neo4j Knowledge Graph
+Resolution: 4080px wide, 1200 DPI
+Color: Black & White (Grayscale)
+======================================================================
+
+Exported Files:
+----------------------------------------------------------------------
+graph_1_paper_theory: knowledge_graph_exports/graph_1_paper_theory_20260203_192006.png
+graph_2_theory_phenomenon: knowledge_graph_exports/graph_2_theory_phenomenon_20260203_192006.png
+graph_3_author_paper: FAILED
+graph_4_overview: knowledge_graph_exports/graph_4_overview_20260203_192006.png
